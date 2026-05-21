@@ -1,0 +1,88 @@
+{%- liquid
+  assign heading = section.settings.heading | default: 'The science behind the ritual'
+  assign eyebrow = section.settings.eyebrow | default: 'CLINICAL PROOF'
+-%}
+
+<section class="section section--alt clinical-proof-section">
+  <div class="container container--narrow">
+    <header class="clinical__header">
+      <span class="clinical__eyebrow">{{ eyebrow }}</span>
+      <h2 class="clinical__heading">{{ heading }}</h2>
+      {%- if section.settings.sub != blank -%}
+        <p class="clinical__sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="clinical__stats">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stat' -%}
+          <div class="clinical-stat" {{ block.shopify_attributes }}>
+            <span class="clinical-stat__number">{{ block.settings.number }}</span>
+            <span class="clinical-stat__label">{{ block.settings.label }}</span>
+            {%- if block.settings.source != blank -%}
+              <span class="clinical-stat__source">{{ block.settings.source }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="clinical__accordion">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'fact' -%}
+          <details class="clinical-fact" {{ block.shopify_attributes }}>
+            <summary class="clinical-fact__summary">
+              <span>{{ block.settings.title }}</span>
+              <span class="clinical-fact__toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="clinical-fact__body">
+              <p>{{ block.settings.body }}</p>
+              {%- if block.settings.citation != blank -%}
+                <cite class="clinical-fact__cite">{{ block.settings.citation }}</cite>
+              {%- endif -%}
+            </div>
+          </details>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="clinical__footnote">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Clinical Proof",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CLINICAL PROOF" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The science behind the ritual" },
+    { "type": "textarea", "id": "sub", "label": "Subheading", "default": "Red light therapy is one of the most studied non-invasive skin treatments — peer-reviewed across multiple journals, and the wavelengths we use are the ones with the strongest evidence behind them." },
+    { "type": "textarea", "id": "footnote", "label": "Footnote", "default": "The Quiet Hour is a consumer wellness device. Not a registered medical device. Not intended to diagnose, treat, or cure any medical condition. Citations available on request." }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "+200%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "increase in collagen production observed in vitro under 830nm exposure" },
+        { "type": "text", "id": "source", "label": "Source", "default": "Hamblin et al., 2017" }
+      ]
+    },
+    {
+      "type": "fact",
+      "name": "Fact (accordion)",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Question / claim", "default": "Why 635nm + 830nm?" },
+        { "type": "textarea", "id": "body", "label": "Answer / detail", "default": "635nm penetrates the upper dermis where it stimulates fibroblast activity; 830nm penetrates deeper, where it supports mitochondrial energy production in the cells that build collagen. These are the two most-cited wavelengths in skin-rejuvenation literature." },
+        { "type": "text", "id": "citation", "label": "Citation / source" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Clinical Proof" }
+  ]
+}
+{% endschema %}

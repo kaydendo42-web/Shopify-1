@@ -11,8 +11,8 @@
     <h1 class="about-hero__title">{{ hero_title }}</h1>
     <p class="about-hero__tagline">{{ hero_tagline }}</p>
 
-    {%- if hero_image != blank -%}
-      <div class="about-hero__media">
+    <div class="about-hero__media">
+      {%- if hero_image != blank -%}
         {{ hero_image | image_url: width: 1200 | image_tag:
           class: 'about-hero__img',
           loading: 'eager',
@@ -20,8 +20,10 @@
           sizes: '(min-width: 990px) 80vw, 100vw',
           alt: hero_title
         }}
-      </div>
-    {%- endif -%}
+      {%- else -%}
+        <img class="about-hero__img" src="{{ 'lifestyle-chaise.jpg' | asset_url }}" width="1600" height="900" loading="eager" alt="{{ hero_title }}">
+      {%- endif -%}
+    </div>
   </div>
 </section>
 
@@ -68,15 +70,17 @@
 <!-- FOUNDER NOTE -->
 <section class="about-founder section">
   <div class="container container--narrow about-founder__inner">
-    {%- if section.settings.founder_image != blank -%}
-      <div class="about-founder__avatar">
+    <div class="about-founder__avatar">
+      {%- if section.settings.founder_image != blank -%}
         {{ section.settings.founder_image | image_url: width: 320 | image_tag:
           class: 'about-founder__img',
           loading: 'lazy',
           alt: section.settings.founder_name | default: 'Founder'
         }}
-      </div>
-    {%- endif -%}
+      {%- else -%}
+        <img class="about-founder__img" src="{{ 'woman-mirror-2.jpg' | asset_url }}" width="320" height="320" loading="lazy" alt="Founder, The Quiet Hour">
+      {%- endif -%}
+    </div>
 
     <div class="about-founder__body">
       <span class="about-founder__eyebrow">A NOTE FROM THE FOUNDER</span>

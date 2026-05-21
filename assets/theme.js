@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEmailPopup();
   initCollectionSort();
   initCollectionAtc();
+  initBeforeAfter();
 });
 
 /**
@@ -393,5 +394,56 @@ function initCollectionAtc() {
           setTimeout(() => { if (label) label.textContent = originalText; }, 2000);
         });
     });
+  });
+}
+
+/**
+ * Before/After comparison sliders
+ * - Drag handle or click anywhere on the slider to move
+ * - Pointer + touch supported
+ */
+function initBeforeAfter() {
+  const sliders = document.querySelectorAll('[data-ba-slider]');
+  if (!sliders.length) return;
+
+  sliders.forEach(slider => {
+    const after = slider.querySelector('[data-ba-after]');
+    const handle = slider.querySelector('[data-ba-handle]');
+    if (!after || !handle) return;
+
+    let dragging = false;
+
+    const move = (clientX) => {
+      const rect = slider.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      after.style.width = `${pct}%`;
+      handle.style.left = `${pct}%`;
+    };
+
+    const onDown = (e) => {
+      dragging = true;
+      e.preventDefault();
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      move(x);
+    };
+
+    const onMove = (e) => {
+      if (!dragging) return;
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      move(x);
+    };
+
+    const onUp = () => { dragging = false; };
+
+    handle.addEventListener('mousedown', onDown);
+    handle.addEventListener('touchstart', onDown, { passive: false });
+    slider.addEventListener('mousedown', onDown);
+    slider.addEventListener('touchstart', onDown, { passive: false });
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onUp);
   });
 }

@@ -9,8 +9,10 @@
   {% render 'star-rating', rating: 4.8, count: 37259, show_count: true %}
 {% endcomment %}
 
-{%- assign rating_value = rating | default: 5.0 -%}
-{%- assign total_stars = 5 -%}
+{%- liquid
+  assign rating_value = rating | default: 5.0 | plus: 0.0
+  assign total_stars = 5
+-%}
 
 <div class="star-rating" aria-label="{{ rating_value }} out of 5 stars">
   {%- for i in (1..total_stars) -%}

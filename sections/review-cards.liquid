@@ -1,0 +1,85 @@
+{%- liquid
+  assign heading = section.settings.heading | default: 'What women in the phase are saying'
+  assign eyebrow = section.settings.eyebrow | default: 'REAL WOMEN · REAL RESULTS'
+-%}
+
+<section class="section review-cards-section">
+  <div class="container">
+    <header class="review-cards__header">
+      <span class="review-cards__eyebrow">{{ eyebrow }}</span>
+      <h2 class="review-cards__heading">{{ heading }}</h2>
+      {%- if section.settings.sub != blank -%}
+        <p class="review-cards__sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="review-cards__grid" data-review-grid>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          <article class="review-card" {{ block.shopify_attributes }}>
+            <div class="review-card__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 600 | image_tag:
+                  class: 'review-card__img',
+                  loading: 'lazy',
+                  widths: '300, 400, 600, 800',
+                  sizes: '(min-width: 990px) 25vw, 50vw',
+                  alt: block.settings.name
+                }}
+              {%- else -%}
+                {%- assign fallback_imgs = 'woman-mirror-1.jpg,woman-mirror-2.jpg,lifestyle-chaise.jpg,clinic-vs-bedroom.jpg' | split: ',' -%}
+                {%- assign fb_idx = forloop.index0 | modulo: fallback_imgs.size -%}
+                <img class="review-card__img" src="{{ fallback_imgs[fb_idx] | asset_url }}" width="600" height="600" loading="lazy" alt="{{ block.settings.name }}">
+              {%- endif -%}
+            </div>
+
+            <div class="review-card__body">
+              {%- render 'star-rating', rating: block.settings.rating | default: 5, count: blank, show_count: false -%}
+
+              <h3 class="review-card__headline">"{{ block.settings.headline }}"</h3>
+              <p class="review-card__quote">{{ block.settings.quote }}</p>
+
+              <footer class="review-card__footer">
+                <span class="review-card__name">{{ block.settings.name }}</span>
+                {%- if block.settings.verified -%}
+                  <span class="review-card__verified">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3.5 6.5v5C3.5 16.8 7.3 21.5 12 22.5c4.7-1 8.5-5.7 8.5-11v-5L12 2z"/><path d="M10.5 14.5l-3-3 1.4-1.4 1.6 1.6 4.6-4.6L16.5 8.5l-6 6z" fill="#fff"/></svg>
+                    Verified
+                  </span>
+                {%- endif -%}
+              </footer>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Review Cards (UGC)",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "REAL WOMEN · REAL RESULTS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What women in the phase are saying" },
+    { "type": "textarea", "id": "sub", "label": "Subheading" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Review Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Customer photo" },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Anna K., 47" },
+        { "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "headline", "label": "Review headline", "default": "Best $179 I've spent all year." },
+        { "type": "textarea", "id": "quote", "label": "Review quote", "default": "Three weeks of consistent use and my husband asked if I'd had something done. I hadn't." },
+        { "type": "checkbox", "id": "verified", "label": "Verified customer", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Review Cards" }
+  ]
+}
+{% endschema %}

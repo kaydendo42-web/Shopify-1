@@ -2025,3 +2025,517 @@
   color: var(--color-text-muted);
   text-transform: uppercase;
 }
+
+/* ============================================================
+   Payment pills (replace broken external badges)
+   ============================================================ */
+.payment-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+  align-items: center;
+}
+
+.payment-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+}
+
+.payment-badge {
+  width: 38px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   Before / After slider
+   ============================================================ */
+.before-after-section {
+  background-color: var(--color-bg);
+}
+
+.before-after__header {
+  text-align: center;
+  max-width: 56ch;
+  margin: 0 auto var(--sp-12);
+}
+
+.before-after__eyebrow {
+  display: block;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-3);
+}
+
+.before-after__heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-4);
+}
+
+.before-after__sub {
+  color: var(--color-text-muted);
+  font-size: var(--fs-base);
+  margin: 0 auto;
+}
+
+.before-after__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-12);
+}
+
+@media (min-width: 880px) {
+  .before-after__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-16) var(--sp-8);
+  }
+}
+
+.ba-card { margin: 0; }
+
+.ba-slider {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-alt);
+  user-select: none;
+  touch-action: none;
+}
+
+.ba-slider__before,
+.ba-slider__after {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.ba-slider__after {
+  width: 50%; /* default position */
+}
+
+.ba-slider__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ba-slider__after .ba-slider__img {
+  width: 200vw;
+  max-width: none;
+  height: 100%;
+}
+
+.ba-slider__img--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-bg-alt),
+    var(--color-bg-alt) 12px,
+    var(--color-border) 12px,
+    var(--color-border) 24px
+  );
+}
+
+.ba-slider__img--before-ph { background-color: var(--color-bg-alt); }
+.ba-slider__img--after-ph { background-color: #efe6dc; }
+
+.ba-slider__tag {
+  position: absolute;
+  top: var(--sp-3);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  color: var(--color-bg);
+  background-color: rgba(42, 32, 28, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.ba-slider__tag--before { left: var(--sp-3); }
+.ba-slider__tag--after { right: var(--sp-3); }
+
+.ba-slider__handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 44px;
+  transform: translateX(-50%);
+  background: transparent;
+  border: 0;
+  cursor: ew-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.ba-slider__handle-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--color-bg);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  transform: translateX(-50%);
+}
+
+.ba-slider__handle-grip {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  z-index: 4;
+}
+
+.ba-card__caption {
+  margin-top: var(--sp-4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+}
+
+.ba-card__duration {
+  color: var(--color-text-muted);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ba-card__note {
+  width: 100%;
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  font-style: italic;
+  margin-top: var(--sp-1);
+}
+
+.before-after__disclaimer {
+  margin-top: var(--sp-12);
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  max-width: 64ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   Review cards (UGC)
+   ============================================================ */
+.review-cards-section {
+  background-color: var(--color-bg);
+}
+
+.review-cards__header {
+  text-align: center;
+  max-width: 60ch;
+  margin: 0 auto var(--sp-12);
+}
+
+.review-cards__eyebrow {
+  display: block;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-3);
+}
+
+.review-cards__heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+.review-cards__sub {
+  color: var(--color-text-muted);
+  margin: var(--sp-4) auto 0;
+}
+
+.review-cards__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+}
+
+@media (min-width: 640px) {
+  .review-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 990px) {
+  .review-cards__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-4);
+  }
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.review-card__media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+.review-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-card__img--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.review-card__body {
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  flex: 1;
+}
+
+.review-card__headline {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: var(--lh-tight);
+  margin-top: var(--sp-1);
+}
+
+.review-card__quote {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.review-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  margin-top: var(--sp-2);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.review-card__name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.review-card__verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-success);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Clinical proof — stats + accordion
+   ============================================================ */
+.clinical-proof-section .container--narrow { max-width: 880px; }
+
+.clinical__header {
+  text-align: center;
+  max-width: 60ch;
+  margin: 0 auto var(--sp-12);
+}
+
+.clinical__eyebrow {
+  display: block;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-3);
+}
+
+.clinical__heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-4);
+}
+
+.clinical__sub {
+  color: var(--color-text-muted);
+  margin: 0 auto;
+}
+
+.clinical__stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-12);
+  padding: var(--sp-8) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 720px) {
+  .clinical__stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-8);
+  }
+}
+
+.clinical-stat {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.clinical-stat__number {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-accent);
+}
+
+.clinical-stat__label {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  line-height: 1.4;
+  max-width: 36ch;
+  margin: 0 auto;
+}
+
+.clinical-stat__source {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Accordion */
+.clinical__accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.clinical-fact {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+.clinical-fact[open] {
+  border-color: var(--color-accent);
+}
+
+.clinical-fact__summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--sp-4) var(--sp-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  line-height: var(--lh-tight);
+}
+
+.clinical-fact__summary::-webkit-details-marker { display: none; }
+
+.clinical-fact__toggle {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-xl);
+  font-weight: 300;
+  color: var(--color-text-muted);
+  transition: transform var(--t-fast);
+  flex-shrink: 0;
+}
+
+.clinical-fact[open] .clinical-fact__toggle {
+  transform: rotate(45deg);
+  color: var(--color-accent);
+}
+
+.clinical-fact__body {
+  padding: 0 var(--sp-6) var(--sp-4);
+  color: var(--color-text-muted);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+}
+
+.clinical-fact__cite {
+  display: block;
+  margin-top: var(--sp-2);
+  font-size: var(--fs-xs);
+  font-style: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.clinical__footnote {
+  margin-top: var(--sp-8);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 64ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}

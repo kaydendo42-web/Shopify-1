@@ -15,14 +15,12 @@
               alt: featured_image.alt | default: product.title
             }}
           {%- else -%}
-            <!-- Placeholder main image -->
-            <div class="product-gallery__main-img" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: var(--color-bg-alt); color: var(--color-text-muted);">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
-            </div>
+            <!-- Placeholder main image — uses local hero-mask-glow asset -->
+            <img class="product-gallery__main-img"
+                 src="{{ 'hero-mask-glow.jpg' | asset_url }}"
+                 alt="The Quiet Hour mask"
+                 width="800" height="800"
+                 loading="eager">
           {%- endif -%}
         </div>
 
@@ -34,10 +32,11 @@
               </button>
             {%- endfor -%}
           {%- else -%}
-            <!-- Placeholder thumbnails -->
-            {%- for i in (1..4) -%}
-              <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}" data-image-src="">
-                <div style="width: 100%; height: 100%; background-color: var(--color-bg-alt);"></div>
+            <!-- Placeholder thumbnails using local asset library -->
+            {%- assign placeholder_thumbs = 'hero-mask-glow.jpg,hero-mask-side.jpg,woman-mirror-1.jpg,lifestyle-chaise.jpg' | split: ',' -%}
+            {%- for thumb in placeholder_thumbs -%}
+              <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}" data-image-src="{{ thumb | asset_url }}">
+                <img src="{{ thumb | asset_url }}" alt="" width="100" height="100" loading="lazy">
               </button>
             {%- endfor -%}
           {%- endif -%}
@@ -213,14 +212,19 @@
           </div>
         {%- endif -%}
 
-        <!-- Payment Badges -->
+        <!-- Payment Badges (text-coded, no external dep) -->
         <div class="payment-badges-row">
-          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/visa-4e8035cd9256a69062371cfc4c47b51e9121a97d74f386926cfcc97d526fa1d9.svg" alt="Visa" width="38" height="24">
-          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/mastercard-692c1ecc1dae0dcfeecb893cfc09ddfbcd15d421cd3241b7b1ca7b02c016d97c.svg" alt="Mastercard" width="38" height="24">
-          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/american_express-552796e625a66a7b74404fa368aa0ee1403eb54fa02897fa1f22144fa5064c51.svg" alt="Amex" width="38" height="24">
-          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/paypal-712440effee9af58ed7c154378f40778c435fb019623e1e67046cc691f1480f2.svg" alt="PayPal" width="38" height="24">
-          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/apple_pay-50148b59ad6d34e2c0e86b24d100ef1b1c312781b0a8800f12c32cf97cfa9080.svg" alt="Apple Pay" width="38" height="24">
-          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/google_pay-c50a31249b6d859a609d57a224c65e8a609a6332ecf0426cdfd5de38cfdb1b2c.svg" alt="Google Pay" width="38" height="24">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-badge' }}
+          {%- else -%}
+            <span class="payment-pill">Visa</span>
+            <span class="payment-pill">Mastercard</span>
+            <span class="payment-pill">Amex</span>
+            <span class="payment-pill">PayPal</span>
+            <span class="payment-pill">Apple Pay</span>
+            <span class="payment-pill">Afterpay</span>
+            <span class="payment-pill">Klarna</span>
+          {%- endfor -%}
         </div>
 
         <!-- Order timeline -->
