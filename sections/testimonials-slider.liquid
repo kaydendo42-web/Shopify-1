@@ -19,7 +19,7 @@
               {{ block.settings.avatar | image_url: width: 100 | image_tag: class: 'testimonial-card__avatar', alt: block.settings.name }}
             {%- else -%}
               <div class="testimonial-card__avatar" style="display:flex; align-items:center; justify-content:center; background-color: var(--color-bg-alt); font-weight: 700;">
-                {{ block.settings.name | slice: 0, 2 | uppercase }}
+                {{ block.settings.name | slice: 0, 2 | upcase }}
               </div>
             {%- endif -%}
             
