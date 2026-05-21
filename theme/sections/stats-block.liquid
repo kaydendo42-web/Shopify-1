@@ -1,0 +1,79 @@
+<section class="section stats" style="background-color: var(--color-bg-alt);">
+  <div class="container">
+    <div class="stats__layout">
+      {%- for block in section.blocks -%}
+        <div class="stats__item">
+          <div class="stats__number">{{ block.settings.number }}</div>
+          <div class="stats__label">{{ block.settings.label }}</div>
+          {%- if block.settings.text != blank -%}
+            <p class="stats__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <!-- Fallback stats items -->
+        <div class="stats__item">
+          <div class="stats__number">147,432+</div>
+          <div class="stats__label">Happy Customers</div>
+          <p class="stats__text">Units shipped worldwide to satisfied users.</p>
+        </div>
+        <div class="stats__item">
+          <div class="stats__number">94%</div>
+          <div class="stats__label">Improved Outcomes</div>
+          <p class="stats__text">Reported noticeable changes within 4 weeks.*</p>
+        </div>
+        <div class="stats__item">
+          <div class="stats__number">3 of 4</div>
+          <div class="stats__label">Daily Use</div>
+          <p class="stats__text">Use our product as part of their routine.*</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <div class="stats__footnote">* {{ section.settings.footnote }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stats Block",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote Text",
+      "default": "Based on internal studies and customer feedback surveys."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat_item",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Stat Number (e.g. 147,432+)",
+          "default": "100k+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat Label",
+          "default": "Units Sold"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Stat Description",
+          "default": "Customer results from surveys"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

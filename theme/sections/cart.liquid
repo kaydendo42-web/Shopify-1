@@ -1,0 +1,185 @@
+{%- liquid
+  assign free_ship_threshold_cents = section.settings.free_ship_threshold | times: 100
+  assign remaining_cents = free_ship_threshold_cents | minus: cart.total_price
+  if remaining_cents < 0
+    assign remaining_cents = 0
+  endif
+  assign progress_pct = cart.total_price | times: 100 | divided_by: free_ship_threshold_cents
+  if progress_pct > 100
+    assign progress_pct = 100
+  endif
+-%}
+
+<section class="cart-page section">
+  <div class="container container--narrow">
+
+    <header class="cart-page__header">
+      <h1 class="cart-page__title">Your bag</h1>
+      <p class="cart-page__sub">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} · subtotal {{ cart.total_price | money }}</p>
+    </header>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-page__empty">
+        <p>Your bag is empty.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary" style="margin-top: var(--sp-6); max-width: 320px;">Start your ritual</a>
+      </div>
+    {%- else -%}
+
+      {%- if section.settings.show_free_ship_bar -%}
+        <div class="free-ship" data-threshold="{{ free_ship_threshold_cents }}">
+          {%- if remaining_cents > 0 -%}
+            <p class="free-ship__text">
+              <strong>{{ remaining_cents | money_without_trailing_zeros }}</strong> away from free AU-wide shipping.
+            </p>
+          {%- else -%}
+            <p class="free-ship__text"><strong>✓ Free shipping unlocked.</strong> Your bag ships from Sydney in 24 hrs.</p>
+          {%- endif -%}
+          <div class="free-ship__bar"><span class="free-ship__bar-fill" style="width: {{ progress_pct }}%;"></span></div>
+        </div>
+      {%- endif -%}
+
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-form" id="cart-form">
+
+        <ul class="cart-lines">
+          {%- for item in cart.items -%}
+            <li class="cart-line" data-line="{{ forloop.index }}" data-key="{{ item.key }}">
+              <a href="{{ item.url }}" class="cart-line__media">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 200 | image_tag: class: 'cart-line__img', alt: item.product.title }}
+                {%- endif -%}
+              </a>
+
+              <div class="cart-line__body">
+                <a href="{{ item.url }}" class="cart-line__title">{{ item.product.title }}</a>
+                {%- if item.variant.title != 'Default Title' -%}
+                  <span class="cart-line__variant">{{ item.variant.title }}</span>
+                {%- endif -%}
+
+                <div class="cart-line__qty">
+                  <button type="button" class="qty-btn qty-btn--minus" aria-label="Decrease quantity" data-key="{{ item.key }}">−</button>
+                  <input
+                    type="number"
+                    name="updates[]"
+                    min="0"
+                    value="{{ item.quantity }}"
+                    class="qty-input"
+                    data-key="{{ item.key }}"
+                    aria-label="Quantity"
+                  >
+                  <button type="button" class="qty-btn qty-btn--plus" aria-label="Increase quantity" data-key="{{ item.key }}">+</button>
+                </div>
+
+                <a href="{{ item.url_to_remove }}" class="cart-line__remove">Remove</a>
+              </div>
+
+              <div class="cart-line__price">
+                {%- if item.original_line_price != item.final_line_price -%}
+                  <span class="cart-line__price-compare">{{ item.original_line_price | money }}</span>
+                {%- endif -%}
+                <span class="cart-line__price-final">{{ item.final_line_price | money }}</span>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if section.settings.upsell_product != blank -%}
+          {%- assign upsell = section.settings.upsell_product -%}
+          <div class="cart-upsell">
+            <div class="cart-upsell__media">
+              {%- if upsell.featured_image -%}
+                {{ upsell.featured_image | image_url: width: 160 | image_tag: class: 'cart-upsell__img', alt: upsell.title }}
+              {%- endif -%}
+            </div>
+            <div class="cart-upsell__body">
+              <span class="cart-upsell__eyebrow">Pair with your ritual</span>
+              <h3 class="cart-upsell__title">{{ upsell.title }}</h3>
+              <p class="cart-upsell__desc">{{ section.settings.upsell_blurb }}</p>
+            </div>
+            <div class="cart-upsell__action">
+              <span class="cart-upsell__price">{{ upsell.price | money }}</span>
+              <button type="button"
+                class="btn btn--secondary cart-upsell__add"
+                data-add-variant="{{ upsell.selected_or_first_available_variant.id }}">
+                Add to bag
+              </button>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="cart-summary">
+          <div class="cart-summary__row">
+            <span>Subtotal</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <div class="cart-summary__row cart-summary__row--muted">
+            <span>Shipping</span>
+            <span>{% if remaining_cents == 0 %}Free{% else %}Calculated at checkout{% endif %}</span>
+          </div>
+
+          <button type="submit" name="checkout" class="btn btn--primary cart-summary__checkout">
+            CHECKOUT — {{ cart.total_price | money }}
+          </button>
+
+          <div class="cart-summary__pay-badges">
+            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/visa-4e8035cd9256a69062371cfc4c47b51e9121a97d74f386926cfcc97d526fa1d9.svg" alt="Visa" width="38" height="24">
+            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/mastercard-692c1ecc1dae0dcfeecb893cfc09ddfbcd15d421cd3241b7b1ca7b02c016d97c.svg" alt="Mastercard" width="38" height="24">
+            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/american_express-552796e625a66a7b74404fa368aa0ee1403eb54fa02897fa1f22144fa5064c51.svg" alt="Amex" width="38" height="24">
+            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/paypal-712440effee9af58ed7c154378f40778c435fb019623e1e67046cc691f1480f2.svg" alt="PayPal" width="38" height="24">
+            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/apple_pay-50148b59ad6d34e2c0e86b24d100ef1b1c312781b0a8800f12c32cf97cfa9080.svg" alt="Apple Pay" width="38" height="24">
+            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/google_pay-c50a31249b6d859a609d57a224c65e8a609a6332ecf0426cdfd5de38cfdb1b2c.svg" alt="Google Pay" width="38" height="24">
+          </div>
+        </div>
+
+        <ul class="cart-trust">
+          <li>✓ 60-night money-back guarantee</li>
+          <li>✓ Ships from Sydney in 24 hrs</li>
+          <li>✓ 2-year warranty included</li>
+          <li>✓ Afterpay & Klarna at checkout</li>
+        </ul>
+
+        {%- if section.settings.guarantee_text != blank -%}
+          <p class="cart-guarantee">{{ section.settings.guarantee_text }}</p>
+        {%- endif -%}
+
+      </form>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_free_ship_bar",
+      "label": "Show free shipping progress bar",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "free_ship_threshold",
+      "label": "Free shipping threshold (whole dollars, no symbol)",
+      "default": 99
+    },
+    {
+      "type": "product",
+      "id": "upsell_product",
+      "label": "Cross-sell / upsell product"
+    },
+    {
+      "type": "text",
+      "id": "upsell_blurb",
+      "label": "Upsell blurb",
+      "default": "Pair your mask with the neck wrap for full décolleté coverage."
+    },
+    {
+      "type": "textarea",
+      "id": "guarantee_text",
+      "label": "Guarantee restate",
+      "default": "Try The Quiet Hour for 60 nights. Send it back if it didn't earn its place. We pay return shipping."
+    }
+  ]
+}
+{% endschema %}

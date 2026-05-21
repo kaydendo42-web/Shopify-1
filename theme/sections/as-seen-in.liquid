@@ -1,0 +1,80 @@
+<section class="section press-logos text-center section--alt" style="padding-top: var(--sp-8); padding-bottom: var(--sp-8);">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="press-logos__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="press-logos__row">
+      {%- for block in section.blocks -%}
+        <div class="press-logo__item" style="max-width: 150px; display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);">
+          {%- if block.settings.logo != blank -%}
+            {{ block.settings.logo | image_url: height: 40 | image_tag: class: 'press-logo__img', alt: block.settings.press_name }}
+          {%- else -%}
+            <!-- Fallback text for press name -->
+            <span class="press-logo__fallback-name" style="font-weight: 800; font-size: var(--fs-lg); opacity: 0.4; letter-spacing: -0.02em;">{{ block.settings.press_name }}</span>
+          {%- endif -%}
+          
+          {%- if block.settings.quote != blank -%}
+            <blockquote style="font-size: var(--fs-xs); font-style: italic; color: var(--color-text-muted); line-height: 1.3;">
+              "{{ block.settings.quote }}"
+            </blockquote>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <!-- Mock press logos for preview -->
+        {%- assign mock_names = "Forbes,Tastemade,Wired,Allrecipes,BuzzFeed" | split: "," -%}
+        {%- assign mock_quotes = "Game-changing kitchen tech,A must-have for busy families,Outstanding build quality,Blends beautifully,Perfect gift for anyone" | split: "," -%}
+        {%- for name in mock_names -%}
+          {%- assign index = forloop.index0 -%}
+          <div class="press-logo__item" style="max-width: 150px; display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);">
+            <span class="press-logo__fallback-name" style="font-weight: 800; font-size: var(--fs-lg); opacity: 0.4; letter-spacing: -0.02em; text-transform: uppercase;">{{ name }}</span>
+            <blockquote style="font-size: var(--fs-xs); font-style: italic; color: var(--color-text-muted); line-height: 1.3;">
+              "{{ mock_quotes[index] }}"
+            </blockquote>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "As Seen In (Press)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "AS SEEN IN"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "press_item",
+      "name": "Press Publication",
+      "settings": [
+        {
+          "type": "text",
+          "id": "press_name",
+          "label": "Publication Name",
+          "default": "Forbes"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Publication Logo"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Publication Pull Quote",
+          "default": "Game-changing product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

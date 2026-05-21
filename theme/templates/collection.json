@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection",
+      "settings": {
+        "eyebrow": "THE QUIET HOUR™ COLLECTION",
+        "per_page": 12,
+        "empty_text": "We're between drops. Join the list — we'll let you know when the next ritual lands."
+      }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {},
+      "blocks": {
+        "tb1": { "type": "badge", "settings": { "text": "60-night money-back guarantee" } },
+        "tb2": { "type": "badge", "settings": { "text": "Free AU shipping over $99" } },
+        "tb3": { "type": "badge", "settings": { "text": "Designed in Australia" } },
+        "tb4": { "type": "badge", "settings": { "text": "Afterpay & Klarna" } }
+      },
+      "block_order": ["tb1", "tb2", "tb3", "tb4"]
+    }
+  },
+  "order": [
+    "main",
+    "trust"
+  ]
+}

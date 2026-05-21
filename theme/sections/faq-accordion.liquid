@@ -1,0 +1,98 @@
+<section class="section faq" style="background-color: var(--color-bg-alt);">
+  <div class="container container--narrow">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="text-center" style="margin-bottom: var(--sp-6);">
+        {%- if section.settings.subheading != blank -%}
+          <span style="font-size: var(--fs-sm); font-weight: 700; text-transform: uppercase; color: var(--color-accent); letter-spacing: 0.05em;">{{ section.settings.subheading }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 style="margin-top: var(--sp-2);">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="faq__accordion">
+      {%- for block in section.blocks -%}
+        <div class="faq__item" {{ block.shopify_attributes }}>
+          <button class="faq__question" aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq__icon-toggle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="faq__answer">
+            <div class="faq__answer-content">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <!-- Fallback FAQ items -->
+        {%- assign questions = "How long does shipping take?,What is your return policy?,Does it require batteries or charging?,How do I clean the product?,Is there a warranty included?,Can I make changes to my order?" | split: "," -%}
+        {%- assign answers = "We ship packages from our warehouses in 1-3 business days. Delivery typically takes 5-10 business days for the United States, UK, Canada, and Australia.,We offer a risk-free 30-day money-back guarantee. If you are not satisfied with your purchase, contact us at support@example.com for a full refund!,No, it has a built-in 2000mAh rechargeable battery that charges via standard USB-C (cable included). A single full charge lasts up to 30 days of daily use!,It is extremely easy to clean. Simply fill it with warm water and a drop of dish soap, run it for 15 seconds, and then rinse it thoroughly. It is also dishwasher-safe!,Yes, every purchase includes a complimentary 1-year product warranty. You can upgrade this to a lifetime warranty by selecting the warranty options above.,Once an order is placed, our automated warehouse fulfills it immediately. If you need to make changes, please contact us via email within 1 hour of placing the order." | split: "," -%}
+        {%- for q in questions -%}
+          {%- assign index = forloop.index0 -%}
+          <div class="faq__item">
+            <button class="faq__question">
+              <span>{{ q }}</span>
+              <span class="faq__icon-toggle">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="faq__answer">
+              <div class="faq__answer-content">
+                {{ answers[index] }}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "PRE-HANDLE OBJECTIONS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the shipping time?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Shipping takes 5-10 business days."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

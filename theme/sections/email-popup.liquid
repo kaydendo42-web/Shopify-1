@@ -1,0 +1,107 @@
+{%- if section.settings.enabled -%}
+<div class="email-popup" id="email-popup" hidden
+     data-trigger="{{ section.settings.trigger }}"
+     data-delay="{{ section.settings.delay_seconds | default: 25 }}"
+     data-cookie-days="{{ section.settings.cookie_days | default: 14 }}">
+  <div class="email-popup__backdrop" data-close></div>
+  <div class="email-popup__card" role="dialog" aria-modal="true" aria-labelledby="email-popup-title">
+    <button type="button" class="email-popup__close" aria-label="Close" data-close>×</button>
+
+    <div class="email-popup__media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 600 | image_tag: class: 'email-popup__img', alt: 'The Quiet Hour' }}
+      {%- endif -%}
+    </div>
+
+    <div class="email-popup__body">
+      <span class="email-popup__eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 id="email-popup-title" class="email-popup__title">{{ section.settings.title }}</h2>
+      <p class="email-popup__sub">{{ section.settings.subtitle }}</p>
+
+      {%- form 'customer', class: 'email-popup__form', id: 'email-popup-form' -%}
+        <input type="hidden" name="contact[tags]" value="popup,perimenopause">
+        <input type="email" name="contact[email]" class="email-popup__input"
+               placeholder="your email" aria-label="Email address" required>
+        <button type="submit" class="btn btn--primary email-popup__btn">{{ section.settings.cta }}</button>
+      {%- endform -%}
+
+      <p class="email-popup__fine">{{ section.settings.fine_print }}</p>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Email Popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "trigger",
+      "label": "Trigger",
+      "default": "exit",
+      "options": [
+        { "value": "exit", "label": "Exit intent (desktop) + delay (mobile)" },
+        { "value": "delay", "label": "Time delay only" },
+        { "value": "scroll", "label": "Scroll depth (50%)" }
+      ]
+    },
+    {
+      "type": "number",
+      "id": "delay_seconds",
+      "label": "Delay seconds (for delay/mobile fallback)",
+      "default": 25
+    },
+    {
+      "type": "number",
+      "id": "cookie_days",
+      "label": "Cookie days (don't show again for X days)",
+      "default": 14
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Side image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "BEFORE YOU GO"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Get $20 off your Quiet Hour."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Drop your email — we'll send the code, plus the founder's note on why we built this."
+    },
+    {
+      "type": "text",
+      "id": "cta",
+      "label": "Button label",
+      "default": "Send my code"
+    },
+    {
+      "type": "textarea",
+      "id": "fine_print",
+      "label": "Fine print",
+      "default": "Single email. No spam. Unsubscribe anytime."
+    }
+  ],
+  "presets": [
+    { "name": "Email Popup" }
+  ]
+}
+{% endschema %}

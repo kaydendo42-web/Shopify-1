@@ -1,0 +1,25 @@
+.DS_Store
+node_modules/
+.env
+.env.*
+*.log
+
+# Shopify CLI
+.shopify/
+.theme-check.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sensitive
+*.key
+*.pem
+credentials*
+secrets*
+
+# OS
+Thumbs.db
+ehthumbs.db

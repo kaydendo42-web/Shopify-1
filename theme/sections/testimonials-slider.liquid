@@ -1,0 +1,178 @@
+<section class="section testimonials" style="background-color: var(--color-bg);">
+  <div class="container">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="text-center" style="margin-bottom: var(--sp-6);">
+        {%- if section.settings.subheading != blank -%}
+          <span style="font-size: var(--fs-sm); font-weight: 700; text-transform: uppercase; color: var(--color-accent); letter-spacing: 0.05em;">{{ section.settings.subheading }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 style="margin-top: var(--sp-2);">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="testimonials__slider">
+      {%- for block in section.blocks -%}
+        <div class="testimonial-card">
+          <div class="testimonial-card__header">
+            {%- if block.settings.avatar != blank -%}
+              {{ block.settings.avatar | image_url: width: 100 | image_tag: class: 'testimonial-card__avatar', alt: block.settings.name }}
+            {%- else -%}
+              <div class="testimonial-card__avatar" style="display:flex; align-items:center; justify-content:center; background-color: var(--color-bg-alt); font-weight: 700;">
+                {{ block.settings.name | slice: 0, 2 | uppercase }}
+              </div>
+            {%- endif -%}
+            
+            <div>
+              <div class="testimonial-card__name">{{ block.settings.name }}</div>
+              {%- if block.settings.verified -%}
+                <div class="testimonial-card__verified">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                    <path d="M12 6C12 9.31371 9.31371 12 6 12C2.68629 12 0 9.31371 0 6C0 2.68629 2.68629 0 6 0C9.31371 0 12 2.68629 12 6ZM5.4 8.7L9.6 4.5L8.76 3.66L5.4 7.02L3.84 5.46L3 6.3L5.4 8.7Z"></path>
+                  </svg>
+                  <span>Verified Buyer</span>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="star-rating">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/></svg>
+            {%- endfor -%}
+          </div>
+
+          {%- if block.settings.headline != blank -%}
+            <h4 class="testimonial-card__quote">"{{ block.settings.headline }}"</h4>
+          {%- endif -%}
+
+          <p class="testimonial-card__body">{{ block.settings.text }}</p>
+          
+          {%- if block.settings.date != blank -%}
+            <span class="testimonial-card__date">{{ block.settings.date }}</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <!-- Fallback 3 cards for preview -->
+        <div class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="testimonial-card__avatar" style="display:flex; align-items:center; justify-content:center; background-color: var(--color-bg-alt); font-weight:700;">JS</div>
+            <div>
+              <div class="testimonial-card__name">Jessica S.</div>
+              <div class="testimonial-card__verified">✓ Verified Buyer</div>
+            </div>
+          </div>
+          <div class="star-rating">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/></svg>
+            {%- endfor -%}
+          </div>
+          <h4 class="testimonial-card__quote">"Absolute Game Changer!"</h4>
+          <p class="testimonial-card__body">Honestly, this was the best purchase I made this entire year. It feels super high quality and works exactly as described. Highly recommend it to anyone on the fence!</p>
+          <span class="testimonial-card__date">May 12, 2026</span>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="testimonial-card__avatar" style="display:flex; align-items:center; justify-content:center; background-color: var(--color-bg-alt); font-weight:700;">MK</div>
+            <div>
+              <div class="testimonial-card__name">Marcus K.</div>
+              <div class="testimonial-card__verified">✓ Verified Buyer</div>
+            </div>
+          </div>
+          <div class="star-rating">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/></svg>
+            {%- endfor -%}
+          </div>
+          <h4 class="testimonial-card__quote">"Exceeded my expectations"</h4>
+          <p class="testimonial-card__body">Very sturdy structure and very simple operation. Fast delivery, arrived in 2 days. The customer service team was also helpful when I had questions about cleaning.</p>
+          <span class="testimonial-card__date">May 10, 2026</span>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="testimonial-card__avatar" style="display:flex; align-items:center; justify-content:center; background-color: var(--color-bg-alt); font-weight:700;">LA</div>
+            <div>
+              <div class="testimonial-card__name">Laura A.</div>
+              <div class="testimonial-card__verified">✓ Verified Buyer</div>
+            </div>
+          </div>
+          <div class="star-rating">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/></svg>
+            {%- endfor -%}
+          </div>
+          <h4 class="testimonial-card__quote">"Super easy to use & clean!"</h4>
+          <p class="testimonial-card__body">I use this every single day now. It saves me so much time. Literally took 20 seconds to clean. The bundle deal makes it so cheap compared to local store prices!</p>
+          <span class="testimonial-card__date">May 09, 2026</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved By 147,000+ Customers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "UGC TESTIMONIALS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "User Avatar"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "User Name",
+          "default": "Jessica S."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified buyer badge",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Review Headline",
+          "default": "Best purchase ever!"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Body",
+          "default": "It works exactly as described and saves me so much time."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Review Date",
+          "default": "May 12, 2026"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

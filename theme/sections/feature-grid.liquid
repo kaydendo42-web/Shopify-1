@@ -1,0 +1,106 @@
+<section class="section feature-grid" style="background-color: var(--color-bg);">
+  <div class="container">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="text-center" style="margin-bottom: var(--sp-8);">
+        {%- if section.settings.subheading != blank -%}
+          <span style="font-size: var(--fs-sm); font-weight: 700; text-transform: uppercase; color: var(--color-accent); letter-spacing: 0.05em;">{{ section.settings.subheading }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 style="margin-top: var(--sp-2);">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="feature-grid__layout">
+      {%- for block in section.blocks -%}
+        <div class="feature-grid__item">
+          <div class="feature-grid__icon">
+            {%- if block.settings.custom_emoji != blank -%}
+              {{ block.settings.custom_emoji }}
+            {%- else -%}
+              ⚡
+            {%- endif -%}
+          </div>
+          <h3 class="feature-grid__heading">{{ block.settings.title }}</h3>
+          <p class="feature-grid__text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <!-- Fallback standard features list -->
+        <div class="feature-grid__item">
+          <div class="feature-grid__icon">☝️</div>
+          <h3 class="feature-grid__heading">One-Touch Control</h3>
+          <p class="feature-grid__text">Start and stop with a single intuitive tap.</p>
+        </div>
+        <div class="feature-grid__item">
+          <div class="feature-grid__icon">🚀</div>
+          <h3 class="feature-grid__heading">High-Speed Motor</h3>
+          <p class="feature-grid__text">Crushes ice and frozen fruit in 15 seconds.</p>
+        </div>
+        <div class="feature-grid__item">
+          <div class="feature-grid__icon">🕸️</div>
+          <h3 class="feature-grid__heading">Dual Mesh Filter</h3>
+          <p class="feature-grid__text">Ensures perfectly smooth, pulp-free results.</p>
+        </div>
+        <div class="feature-grid__item">
+          <div class="feature-grid__icon">✨</div>
+          <h3 class="feature-grid__heading">Self-Cleaning Mode</h3>
+          <p class="feature-grid__text">Add water and soap, spin, rinse and you are done.</p>
+        </div>
+        <div class="feature-grid__item">
+          <div class="feature-grid__icon">🎒</div>
+          <h3 class="feature-grid__heading">Compact & Portable</h3>
+          <p class="feature-grid__text">Perfect size for travel, office, or gym bags.</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature Grid",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Engineered For Daily Excellence"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "PREMIUM FEATURES"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "custom_emoji",
+          "label": "Emoji Icon",
+          "default": "⚡"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "High-Speed Blending"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Feature Description",
+          "default": "Crushes ice and frozen foods in under 15 seconds."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

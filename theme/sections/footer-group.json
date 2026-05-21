@@ -1,0 +1,24 @@
+{
+  "type": "footer",
+  "name": "t:general.footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "menu": "",
+        "show_payment_icons": true,
+        "about_text": "The Quiet Hour™ — ten minutes. three nights. just you. Designed and supported in Australia for women in the phase.",
+        "contact_email": "hello@thequiethour.com.au",
+        "show_contact_email": true
+      }
+    },
+    "email_popup": {
+      "type": "email-popup",
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer",
+    "email_popup"
+  ]
+}

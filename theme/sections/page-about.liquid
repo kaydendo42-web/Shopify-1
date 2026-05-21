@@ -1,0 +1,124 @@
+{%- liquid
+  assign hero_tagline = section.settings.hero_tagline | default: 'ten minutes. three nights. just you.'
+  assign hero_title = section.settings.hero_title | default: 'The Quiet Hour'
+  assign hero_image = section.settings.hero_image
+-%}
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="container container--narrow about-hero__inner">
+    <span class="about-hero__mark">the quiet hour ™</span>
+    <h1 class="about-hero__title">{{ hero_title }}</h1>
+    <p class="about-hero__tagline">{{ hero_tagline }}</p>
+
+    {%- if hero_image != blank -%}
+      <div class="about-hero__media">
+        {{ hero_image | image_url: width: 1200 | image_tag:
+          class: 'about-hero__img',
+          loading: 'eager',
+          widths: '600, 900, 1200, 1600',
+          sizes: '(min-width: 990px) 80vw, 100vw',
+          alt: hero_title
+        }}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="about-story section">
+  <div class="container container--narrow">
+    <span class="about-story__eyebrow">{{ section.settings.story_eyebrow | default: 'WHY WE BUILT THIS' }}</span>
+    <h2 class="about-story__heading">{{ section.settings.story_heading | default: 'A ritual for the phase the rest of the industry pretends isn’t happening.' }}</h2>
+
+    <div class="about-story__body">
+      <p>{{ section.settings.story_p1 | default: "Somewhere between 38 and 50, the rules quietly change. Your skin used to bounce back. Now it holds light differently. Your usual products sit on the surface where ageing isn't actually happening, and the conversation everywhere is either aggressive intervention or aggressive acceptance — neither of which feels like you." }}</p>
+
+      <p>{{ section.settings.story_p2 | default: "The Quiet Hour exists for a third option. A ten-minute window where you're not needed by anyone, doing one thing that genuinely supports your skin at the layer where it matters. Clinical 635nm and 830nm red light, designed for skin in the phase, priced so you don't have to think twice." }}</p>
+
+      <p>{{ section.settings.story_p3 | default: "We're not anti-ageing. We're pro you, on your best day. Built and supported in Australia. Tested on women who look like you — not 22-year-olds with filters." }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES GRID -->
+<section class="about-values section section--alt">
+  <div class="container">
+    <span class="about-values__eyebrow">WHAT WE STAND FOR</span>
+    <div class="about-values__grid">
+      <div class="about-value">
+        <div class="about-value__mark">◐</div>
+        <h3 class="about-value__title">{{ section.settings.value_1_title | default: 'Designed for your phase' }}</h3>
+        <p class="about-value__text">{{ section.settings.value_1_text | default: 'Built explicitly for skin in the 38–55 phase. Tested with women who recognise themselves in the mirror, not glossy stock images.' }}</p>
+      </div>
+      <div class="about-value">
+        <div class="about-value__mark">✦</div>
+        <h3 class="about-value__title">{{ section.settings.value_2_title | default: 'Clinically considered' }}</h3>
+        <p class="about-value__text">{{ section.settings.value_2_text | default: '635nm red + 830nm near-infrared — the two wavelengths with the strongest evidence for collagen support. Heat-free. UV-free. Eye-safe.' }}</p>
+      </div>
+      <div class="about-value">
+        <div class="about-value__mark">○</div>
+        <h3 class="about-value__title">{{ section.settings.value_3_title | default: '60-night guarantee' }}</h3>
+        <p class="about-value__text">{{ section.settings.value_3_text | default: 'Try it for 60 nights. If your skin isn\'t visibly firmer, we refund every dollar and pay return shipping. No forms. No video evidence.' }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER NOTE -->
+<section class="about-founder section">
+  <div class="container container--narrow about-founder__inner">
+    {%- if section.settings.founder_image != blank -%}
+      <div class="about-founder__avatar">
+        {{ section.settings.founder_image | image_url: width: 320 | image_tag:
+          class: 'about-founder__img',
+          loading: 'lazy',
+          alt: section.settings.founder_name | default: 'Founder'
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="about-founder__body">
+      <span class="about-founder__eyebrow">A NOTE FROM THE FOUNDER</span>
+      <blockquote class="about-founder__quote">
+        {{ section.settings.founder_quote | default: "I'm 47. I built this because nothing in the chemist worked anymore. I'd spent over $4,000 on serums in two years and watched my face change anyway. I started reading the actual research on red light, found the wavelengths that mattered, and built a mask designed for the phase the rest of the industry pretends isn't happening. — Welcome to your quiet hour." }}
+      </blockquote>
+      <p class="about-founder__signature">
+        — {{ section.settings.founder_name | default: 'The Founder' }}{% if section.settings.founder_role != blank %}, {{ section.settings.founder_role }}{% endif %}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Page",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "The Quiet Hour" },
+    { "type": "text", "id": "hero_tagline", "label": "Hero tagline", "default": "ten minutes. three nights. just you." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+
+    { "type": "header", "content": "Origin Story" },
+    { "type": "text", "id": "story_eyebrow", "label": "Story eyebrow", "default": "WHY WE BUILT THIS" },
+    { "type": "text", "id": "story_heading", "label": "Story heading", "default": "A ritual for the phase the rest of the industry pretends isn't happening." },
+    { "type": "textarea", "id": "story_p1", "label": "Story paragraph 1" },
+    { "type": "textarea", "id": "story_p2", "label": "Story paragraph 2" },
+    { "type": "textarea", "id": "story_p3", "label": "Story paragraph 3" },
+
+    { "type": "header", "content": "Values" },
+    { "type": "text", "id": "value_1_title", "label": "Value 1 title", "default": "Designed for your phase" },
+    { "type": "textarea", "id": "value_1_text", "label": "Value 1 text" },
+    { "type": "text", "id": "value_2_title", "label": "Value 2 title", "default": "Clinically considered" },
+    { "type": "textarea", "id": "value_2_text", "label": "Value 2 text" },
+    { "type": "text", "id": "value_3_title", "label": "Value 3 title", "default": "60-night guarantee" },
+    { "type": "textarea", "id": "value_3_text", "label": "Value 3 text" },
+
+    { "type": "header", "content": "Founder Note" },
+    { "type": "image_picker", "id": "founder_image", "label": "Founder portrait" },
+    { "type": "text", "id": "founder_name", "label": "Founder name", "default": "The Founder" },
+    { "type": "text", "id": "founder_role", "label": "Founder role", "default": "Founder, The Quiet Hour" },
+    { "type": "textarea", "id": "founder_quote", "label": "Founder quote" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-about",
+      "settings": {
+        "hero_title": "The Quiet Hour",
+        "hero_tagline": "ten minutes. three nights. just you."
+      }
+    },
+    "founder_press": {
+      "type": "as-seen-in",
+      "settings": { "title": "AS FEATURED IN" },
+      "blocks": {
+        "p1": { "type": "press_item", "settings": { "press_name": "Body+Soul", "quote": "The LED mask Australian women in their 40s won't shut up about." } },
+        "p2": { "type": "press_item", "settings": { "press_name": "Mamamia", "quote": "A 10-minute ritual that's quietly replacing the $400 facial." } },
+        "p3": { "type": "press_item", "settings": { "press_name": "Marie Claire AU", "quote": "Where premium red-light therapy meets a price that respects you." } }
+      },
+      "block_order": ["p1", "p2", "p3"]
+    },
+    "guarantee": {
+      "type": "guarantee-block",
+      "settings": {
+        "heading": "60 nights. Refund if it didn't earn its place.",
+        "text": "Try The Quiet Hour for 60 nights — about 25 sessions. If your skin isn't visibly firmer, send it back. We pay return shipping. No forms. No video evidence. Just email and we handle it in 48 hours.",
+        "button_text": "START THE 60-NIGHT TRIAL"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "founder_press",
+    "guarantee"
+  ]
+}

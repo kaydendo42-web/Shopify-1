@@ -1,0 +1,23 @@
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_announcement": true,
+        "text": "✦ Mother's Day pre-sale — save up to $160 on the 2-mask bundle. Ships from Sydney in 24 hrs.",
+        "color_bg": "#2a201c",
+        "color_text": "#faf7f4"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header"
+  ]
+}

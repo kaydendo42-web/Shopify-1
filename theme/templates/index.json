@@ -1,0 +1,127 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-product",
+      "settings": {
+        "fallback_title": "The Quiet Hour™",
+        "ribbon_text": "Designed for women in the phase",
+        "subheadline": "You don't want to look younger. You want to look like yourself — on your best day.",
+        "atc_button_text": "SHOP THE RITUAL",
+        "use_bundle_selector": false,
+        "rating_value": "4.8",
+        "review_count": "2,847",
+        "testimonial_name": "Anna K., 47 — Sydney",
+        "testimonial_text": "My husband asked if I'd had something done. I hadn't — just three weeks of this, three nights a week, while my book was on my chest. That's it."
+      },
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "text": "Clinical-grade 635nm + 830nm red light wavelengths" } },
+        "b2": { "type": "benefit", "settings": { "text": "Designed for skin in the perimenopause phase" } },
+        "b3": { "type": "benefit", "settings": { "text": "10 minutes. Three nights a week. Cordless." } },
+        "b4": { "type": "benefit", "settings": { "text": "60-night trial. Send it back if it doesn't earn its place." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+
+    "trust": {
+      "type": "trust-bar",
+      "settings": {},
+      "blocks": {
+        "tb1": { "type": "badge", "settings": { "text": "60-Night Trial" } },
+        "tb2": { "type": "badge", "settings": { "text": "Free AU Shipping over $99" } },
+        "tb3": { "type": "badge", "settings": { "text": "Designed in Australia" } },
+        "tb4": { "type": "badge", "settings": { "text": "Eye-Safe · No UV · No Heat" } }
+      },
+      "block_order": ["tb1", "tb2", "tb3", "tb4"]
+    },
+
+    "as_seen_in": {
+      "type": "as-seen-in",
+      "settings": { "title": "AS FEATURED IN" },
+      "blocks": {
+        "p1": { "type": "press_item", "settings": { "press_name": "Body+Soul", "quote": "The LED mask Australian women in their 40s won't shut up about." } },
+        "p2": { "type": "press_item", "settings": { "press_name": "Mamamia", "quote": "A 10-minute ritual that's quietly replacing the $400 facial." } },
+        "p3": { "type": "press_item", "settings": { "press_name": "Marie Claire AU", "quote": "Where premium red-light therapy meets a price that respects you." } }
+      },
+      "block_order": ["p1", "p2", "p3"]
+    },
+
+    "features": {
+      "type": "feature-grid",
+      "settings": {
+        "subheading": "WHY LUMEN RITUAL",
+        "heading": "Built for the decade your skin changes"
+      },
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "custom_emoji": "✦", "title": "Clinical wavelengths", "text": "635nm Red + 830nm Near-Infrared — the two wavelengths with the strongest collagen evidence." } },
+        "f2": { "type": "feature", "settings": { "custom_emoji": "◐", "title": "240 LEDs", "text": "Full forehead-to-jawline coverage. Calibrated output. No cheap flicker." } },
+        "f3": { "type": "feature", "settings": { "custom_emoji": "○", "title": "Cordless, light, quiet", "text": "Wear it while you read. While you fold washing. While you watch your show." } },
+        "f4": { "type": "feature", "settings": { "custom_emoji": "◊", "title": "10-minute ritual", "text": "Three nights a week. Auto-shutoff. The only thing that asks nothing of you." } },
+        "f5": { "type": "feature", "settings": { "custom_emoji": "✓", "title": "Sensitive-skin safe", "text": "Heat-free, UV-free, eye-safe. Tested with rosacea-prone and sensitive skin." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5"]
+    },
+
+    "how_it_works": {
+      "type": "how-it-works",
+      "settings": {
+        "subheading": "THE RITUAL",
+        "heading": "Ten minutes. Three nights a week."
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "1. Cleanse + dry", "text": "Clean, dry skin. No serums underneath." } },
+        "s2": { "type": "step", "settings": { "title": "2. Wear for 10 minutes", "text": "Eyes closed. Auto-shutoff when done." } },
+        "s3": { "type": "step", "settings": { "title": "3. Layer your evening serums", "text": "Skin is primed. Routine works harder." } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+
+    "testimonials": {
+      "type": "testimonials-slider",
+      "settings": {
+        "subheading": "REAL WOMEN · REAL PHASE",
+        "heading": "What women 42–54 are saying"
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "name": "Anna K., 47", "verified": true, "headline": "He asked if I'd had something done.", "text": "Three weeks in, my husband asked if I'd had something done. I hadn't.", "date": "March 2026" } },
+        "t2": { "type": "testimonial", "settings": { "name": "Bec T., 43", "verified": true, "headline": "First thing that's worked since 41", "text": "Tried everything. La Mer, microneedling. This is the first thing that made my skin look like me again. Not younger — rested.", "date": "April 2026" } },
+        "t3": { "type": "testimonial", "settings": { "name": "Renée D., 51", "verified": true, "headline": "I cancelled my Botox appointment", "text": "I'd been doing Botox twice a year. My skin looks like itself in a way the Botox never made it look.", "date": "February 2026" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "subheading": "QUICK ANSWERS",
+        "heading": "Frequently asked questions"
+      },
+      "blocks": {
+        "q1": { "type": "faq_item", "settings": { "question": "How long until I see a difference?", "answer": "Most women see firmer-looking skin by week 4. We give you 60 nights to be sure." } },
+        "q2": { "type": "faq_item", "settings": { "question": "Is it safe with sensitive skin / retinol / Botox?", "answer": "Yes to all three. No UV, no heat, no abrasion. Safe alongside retinol (alternate nights) and 24 hours after Botox." } },
+        "q3": { "type": "faq_item", "settings": { "question": "What if it doesn't work for me?", "answer": "Send it back inside 60 nights. We pay return shipping. No forms, no video, no shipping to China." } },
+        "q4": { "type": "faq_item", "settings": { "question": "How does it compare to Omnilux / CurrentBody?", "answer": "Same proven wavelengths. Designed for skin in the phase. AU-based support. Roughly a third of the price." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    },
+
+    "guarantee": {
+      "type": "guarantee-block",
+      "settings": {
+        "heading": "60 nights. Refund if it didn't earn its place.",
+        "text": "We built this for women who've been burned by beauty marketing before. Try The Quiet Hour for 60 nights — about 25 sessions. If your skin isn't visibly firmer, send it back. We pay return shipping. No forms. No video evidence. Just email and we handle it in 48 hours.",
+        "button_text": "START THE 60-NIGHT TRIAL"
+      }
+    }
+  },
+
+  "order": [
+    "hero",
+    "trust",
+    "as_seen_in",
+    "features",
+    "how_it_works",
+    "testimonials",
+    "faq",
+    "guarantee"
+  ]
+}

@@ -1,0 +1,47 @@
+{% comment %}
+  Renders a star rating component based on a value.
+  Accepts:
+  - rating: {Number} Decimal value (e.g. 4.8)
+  - count: {Number} Optional review count (e.g. 37259)
+  - show_count: {Boolean} Show the review count text next to the stars
+
+  Usage:
+  {% render 'star-rating', rating: 4.8, count: 37259, show_count: true %}
+{% endcomment %}
+
+{%- assign rating_value = rating | default: 5.0 -%}
+{%- assign total_stars = 5 -%}
+
+<div class="star-rating" aria-label="{{ rating_value }} out of 5 stars">
+  {%- for i in (1..total_stars) -%}
+    {%- assign star_limit = i | minus: 0.25 -%}
+    {%- assign half_star_limit = i | minus: 0.75 -%}
+    
+    {%- if rating_value >= i -%}
+      {% comment %} Full Star {% endcomment %}
+      <svg class="star star--full" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+      </svg>
+    {%- elsif rating_value >= half_star_limit and rating_value < star_limit -%}
+      {% comment %} Half Star {% endcomment %}
+      <svg class="star star--half" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="halfStarGrad-{{ rating | replace: '.', '-' }}">
+            <stop offset="50%" stop-color="currentColor"/>
+            <stop offset="50%" stop-color="#e5e7eb"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#halfStarGrad-{{ rating | replace: '.', '-' }})" d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+      </svg>
+    {%- else -%}
+      {% comment %} Empty Star {% endcomment %}
+      <svg class="star star--empty" width="16" height="16" viewBox="0 0 24 24" fill="#e5e7eb" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+      </svg>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if show_count and count != blank -%}
+    <span class="star-rating__count">({{ count | number_with_delimiter }} reviews)</span>
+  {%- endif -%}
+</div>

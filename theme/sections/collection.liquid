@@ -1,0 +1,177 @@
+{%- liquid
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  assign per_page = section.settings.per_page | default: 12
+-%}
+
+<section class="collection-page section">
+  <div class="container">
+
+    <!-- HERO -->
+    <header class="collection-hero">
+      <span class="collection-hero__eyebrow">{{ section.settings.eyebrow | default: 'THE QUIET HOUR™ COLLECTION' }}</span>
+      <h1 class="collection-hero__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="collection-hero__desc">{{ collection.description }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- paginate collection.products by per_page -%}
+
+      <!-- SORT BAR -->
+      {%- if collection.products.size > 0 -%}
+        <div class="collection-toolbar">
+          <span class="collection-toolbar__count">
+            {{ collection.products_count | default: collection.products.size }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %}
+          </span>
+
+          <form class="collection-sort" method="get">
+            <label for="sort-by" class="collection-sort__label">Sort</label>
+            <select id="sort-by" name="sort_by" class="collection-sort__select" data-sort>
+              <option value="manual" {% if sort_by == 'manual' %}selected{% endif %}>Featured</option>
+              <option value="price-ascending" {% if sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+              <option value="price-descending" {% if sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+              <option value="created-descending" {% if sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+              <option value="best-selling" {% if sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+            </select>
+          </form>
+        </div>
+      {%- endif -%}
+
+      <!-- PRODUCT GRID -->
+      {%- if collection.products.size > 0 -%}
+        <ul class="product-grid" role="list">
+          {%- for product in collection.products -%}
+            {%- assign variant = product.selected_or_first_available_variant -%}
+            {%- assign on_sale = false -%}
+            {%- if product.compare_at_price > product.price -%}{%- assign on_sale = true -%}{%- endif -%}
+
+            <li class="product-card">
+              <a href="{{ product.url }}" class="product-card__media" aria-label="{{ product.title | escape }}">
+                {%- if product.featured_image -%}
+                  {{ product.featured_image | image_url: width: 600 | image_tag:
+                    class: 'product-card__img',
+                    loading: 'lazy',
+                    widths: '300, 400, 600, 800',
+                    sizes: '(min-width: 990px) 33vw, 50vw',
+                    alt: product.featured_image.alt | default: product.title
+                  }}
+                  {%- if product.images[1] -%}
+                    {{ product.images[1] | image_url: width: 600 | image_tag:
+                      class: 'product-card__img product-card__img--hover',
+                      loading: 'lazy',
+                      alt: ''
+                    }}
+                  {%- endif -%}
+                {%- else -%}
+                  <div class="product-card__img product-card__img--placeholder"></div>
+                {%- endif -%}
+
+                <!-- Badges from tags + sale -->
+                <div class="product-card__badges">
+                  {%- if product.tags contains 'Bestseller' or product.tags contains 'bestseller' -%}
+                    <span class="badge badge--bestseller">Bestseller</span>
+                  {%- endif -%}
+                  {%- if product.tags contains 'New' or product.tags contains 'new' -%}
+                    <span class="badge badge--new">New</span>
+                  {%- endif -%}
+                  {%- if on_sale -%}
+                    {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                    <span class="badge badge--sale">Save {{ savings }}%</span>
+                  {%- endif -%}
+                </div>
+              </a>
+
+              <div class="product-card__body">
+                <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+
+                <div class="product-card__price">
+                  {%- if on_sale -%}
+                    <span class="product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                  <span class="product-card__price-final">{{ product.price | money }}</span>
+                </div>
+
+                {%- if product.available -%}
+                  <button type="button"
+                    class="btn btn--secondary product-card__atc"
+                    data-atc
+                    data-variant-id="{{ variant.id }}"
+                    data-product-url="{{ product.url }}"
+                    {% if product.has_only_default_variant == false %}data-needs-options="true"{% endif %}>
+                    <span class="atc-label">{% if product.has_only_default_variant %}Add to bag{% else %}Choose options{% endif %}</span>
+                    <span class="atc-spinner" aria-hidden="true"></span>
+                  </button>
+                {%- else -%}
+                  <button type="button" class="btn btn--secondary product-card__atc" disabled>Sold out</button>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <!-- PAGINATION -->
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="pagination__link pagination__link--prev" rel="prev">← Previous</a>
+            {%- endif -%}
+
+            <ul class="pagination__pages">
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <li><a href="{{ part.url }}" class="pagination__page">{{ part.title }}</a></li>
+                {%- else -%}
+                  {%- if part.title == paginate.current_page -%}
+                    <li><span class="pagination__page is-current" aria-current="page">{{ part.title }}</span></li>
+                  {%- else -%}
+                    <li><span class="pagination__page pagination__page--gap">{{ part.title }}</span></li>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="pagination__link pagination__link--next" rel="next">Next →</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+
+      {%- else -%}
+        <!-- EMPTY STATE -->
+        <div class="collection-empty">
+          <p class="collection-empty__title">Nothing here yet.</p>
+          <p class="collection-empty__sub">{{ section.settings.empty_text | default: "We're between drops. Join the list — we'll let you know when the next ritual lands." }}</p>
+          <a href="{{ routes.root_url }}" class="btn btn--primary" style="max-width: 280px; margin-top: var(--sp-6);">Back to home</a>
+        </div>
+      {%- endif -%}
+
+    {%- endpaginate -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text (above collection title)",
+      "default": "THE QUIET HOUR™ COLLECTION"
+    },
+    {
+      "type": "number",
+      "id": "per_page",
+      "label": "Products per page",
+      "default": 12
+    },
+    {
+      "type": "textarea",
+      "id": "empty_text",
+      "label": "Empty state copy",
+      "default": "We're between drops. Join the list — we'll let you know when the next ritual lands."
+    }
+  ]
+}
+{% endschema %}

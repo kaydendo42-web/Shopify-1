@@ -1,0 +1,425 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+<section class="section hero-product" style="padding-top: var(--sp-6);">
+  <div class="container">
+    <div class="hero-product__grid">
+      
+      <!-- LEFT: Media Gallery -->
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          {%- if featured_image != blank -%}
+            {{ featured_image | image_url: width: 800 | image_tag: 
+              class: 'product-gallery__main-img',
+              loading: 'eager',
+              alt: featured_image.alt | default: product.title
+            }}
+          {%- else -%}
+            <!-- Placeholder main image -->
+            <div class="product-gallery__main-img" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: var(--color-bg-alt); color: var(--color-text-muted);">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="product-gallery__thumbnails">
+          {%- if product.images.size > 0 -%}
+            {%- for image in product.images -%}
+              <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}" data-image-src="{{ image | image_url: width: 800 }}">
+                {{ image | image_url: width: 100 | image_tag: alt: image.alt }}
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            <!-- Placeholder thumbnails -->
+            {%- for i in (1..4) -%}
+              <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}" data-image-src="">
+                <div style="width: 100%; height: 100%; background-color: var(--color-bg-alt);"></div>
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- RIGHT: Buy Box Form -->
+      <div class="product-buybox">
+        {%- if section.settings.ribbon_text != blank -%}
+          <span class="buybox__ribbon">{{ section.settings.ribbon_text }}</span>
+        {%- endif -%}
+
+        {%- render 'star-rating', rating: section.settings.rating_value, count: section.settings.review_count, show_count: true -%}
+
+        <h1 class="buybox__title">{{ product.title | default: section.settings.fallback_title }}</h1>
+
+        {%- if section.settings.subheadline != blank -%}
+          <p class="buybox__subheadline">{{ section.settings.subheadline }}</p>
+        {%- endif -%}
+
+        <!-- Price Block -->
+        <div class="buybox__price-wrapper">
+          {%- if product != blank -%}
+            {%- render 'price', product: product, use_variant: true -%}
+          {%- else -%}
+            <!-- Fallback price block for preview -->
+            <span class="price--compare">$99.99</span>
+            <span class="price--current">$49.99</span>
+            <span class="price__badge">Save 50%</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Outcome / Benefit Bullets -->
+        <ul class="buybox__bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'benefit' -%}
+              <li class="buybox__bullet-item">
+                <span class="bullet-item__check">✓</span>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+          
+          {%- if section.blocks.size == 0 -%}
+            <!-- Fallback bullets -->
+            <li class="buybox__bullet-item"><span class="bullet-item__check">✓</span> <span>Saves up to 12x time on daily chores</span></li>
+            <li class="buybox__bullet-item"><span class="bullet-item__check">✓</span> <span>Ultra-compact, space-saving design</span></li>
+            <li class="buybox__bullet-item"><span class="bullet-item__check">✓</span> <span>Engineered with premium, long-lasting materials</span></li>
+          {%- endif -%}
+        </ul>
+
+        <!-- Shopify Form -->
+        {%- form 'product', product, id: 'product-form' -%}
+          <!-- Hidden Variant Input -->
+          <input type="hidden" name="id" value="{{ current_variant.id | default: 12345678 }}">
+
+          <!-- Variant Selector (if product has real variants and bundle selector is NOT used) -->
+          {%- unless section.settings.use_bundle_selector -%}
+            {%- if product.variants.size > 1 -%}
+              <div class="product-form__variants" style="margin-bottom: var(--sp-4);">
+                <label for="variant-select" style="font-weight: 700; font-size: var(--fs-sm); display: block; margin-bottom: var(--sp-2);">Select Option</label>
+                <select id="variant-select" class="footer__input" style="background-color:#ffffff; color:#000000; border:1px solid var(--color-border); width:100%; height:44px;">
+                  {%- for variant in product.variants -%}
+                    <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %}>
+                      {{ variant.title }} - {{ variant.price | money }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endif -%}
+          {%- endunless -%}
+
+          <!-- Bundle Selector (If enabled) -->
+          {%- if section.settings.use_bundle_selector -%}
+            <div class="bundle-selector">
+              <span style="font-weight: 700; font-size: var(--fs-sm); display: block; margin-bottom: var(--sp-1);">Select Package:</span>
+              
+              {%- assign bundle_count = 0 -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'bundle_tier' -%}
+                  {%- assign bundle_count = bundle_count | plus: 1 -%}
+                  <div class="bundle-card {% if block.settings.default_selected %}is-selected{% endif %}"
+                    data-price="{{ block.settings.price }}"
+                    data-compare-price="{{ block.settings.compare_price }}"
+                    data-discount-badge="{{ block.settings.badge_text }}"
+                    data-variant-id="{{ block.settings.variant_id | default: current_variant.id }}">
+                    
+                    {%- if block.settings.tag_text != blank -%}
+                      <span class="bundle-card__badge">{{ block.settings.tag_text }}</span>
+                    {%- endif -%}
+
+                    <div class="bundle-card__meta">
+                      <input type="radio" name="bundle_selection" class="bundle-card__radio" {% if block.settings.default_selected %}checked{% endif %}>
+                      <div class="bundle-card__info">
+                        <div class="bundle-card__info-title">{{ block.settings.title }}</div>
+                        <div class="bundle-card__info-sub">{{ block.settings.subtitle }}</div>
+                      </div>
+                    </div>
+
+                    <div class="bundle-card__pricing">
+                      <div class="bundle-card__price">{{ block.settings.price }}</div>
+                      {%- if block.settings.compare_price != blank -%}
+                        <div class="bundle-card__compare">{{ block.settings.compare_price }}</div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if bundle_count == 0 -%}
+                <!-- Mock bundle cards for preview -->
+                <div class="bundle-card" data-price="$49.99" data-compare-price="$99.99" data-discount-badge="Save 50%">
+                  <div class="bundle-card__meta">
+                    <input type="radio" name="bundle_selection" class="bundle-card__radio">
+                    <div class="bundle-card__info">
+                      <div class="bundle-card__info-title">1x Starter Pack</div>
+                      <div class="bundle-card__info-sub">Single unit for personal use</div>
+                    </div>
+                  </div>
+                  <div class="bundle-card__pricing">
+                    <div class="bundle-card__price">$49.99</div>
+                    <div class="bundle-card__compare">$99.99</div>
+                  </div>
+                </div>
+
+                <div class="bundle-card is-selected" data-price="$79.98" data-compare-price="$199.98" data-discount-badge="Save 60%">
+                  <span class="bundle-card__badge">Most Popular</span>
+                  <div class="bundle-card__meta">
+                    <input type="radio" name="bundle_selection" class="bundle-card__radio" checked>
+                    <div class="bundle-card__info">
+                      <div class="bundle-card__info-title">2x Family Pack</div>
+                      <div class="bundle-card__info-sub">Free Shipping included</div>
+                    </div>
+                  </div>
+                  <div class="bundle-card__pricing">
+                    <div class="bundle-card__price">$79.98</div>
+                    <div class="bundle-card__compare">$199.98</div>
+                  </div>
+                </div>
+
+                <div class="bundle-card" data-price="$99.97" data-compare-price="$299.97" data-discount-badge="Save 67%">
+                  <span class="bundle-card__badge">Best Value</span>
+                  <div class="bundle-card__meta">
+                    <input type="radio" name="bundle_selection" class="bundle-card__radio">
+                    <div class="bundle-card__info">
+                      <div class="bundle-card__info-title">3x Ultimate Pack</div>
+                      <div class="bundle-card__info-sub">Max savings + lifetime warranty</div>
+                    </div>
+                  </div>
+                  <div class="bundle-card__pricing">
+                    <div class="bundle-card__price">$99.97</div>
+                    <div class="bundle-card__compare">$299.97</div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <!-- Add to Cart CTA -->
+          <div style="margin-top: var(--sp-4);">
+            <button type="submit" name="add" class="btn btn--primary btn--atc">
+              {{ section.settings.atc_button_text }}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <!-- Payment Badges -->
+        <div class="payment-badges-row">
+          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/visa-4e8035cd9256a69062371cfc4c47b51e9121a97d74f386926cfcc97d526fa1d9.svg" alt="Visa" width="38" height="24">
+          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/mastercard-692c1ecc1dae0dcfeecb893cfc09ddfbcd15d421cd3241b7b1ca7b02c016d97c.svg" alt="Mastercard" width="38" height="24">
+          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/american_express-552796e625a66a7b74404fa368aa0ee1403eb54fa02897fa1f22144fa5064c51.svg" alt="Amex" width="38" height="24">
+          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/paypal-712440effee9af58ed7c154378f40778c435fb019623e1e67046cc691f1480f2.svg" alt="PayPal" width="38" height="24">
+          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/apple_pay-50148b59ad6d34e2c0e86b24d100ef1b1c312781b0a8800f12c32cf97cfa9080.svg" alt="Apple Pay" width="38" height="24">
+          <img class="payment-badge" src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment-icons/google_pay-c50a31249b6d859a609d57a224c65e8a609a6332ecf0426cdfd5de38cfdb1b2c.svg" alt="Google Pay" width="38" height="24">
+        </div>
+
+        <!-- Order timeline -->
+        <div class="order-timeline">
+          <div class="order-timeline__step is-active">
+            <span class="order-timeline__dot"></span>
+            <span>Ordered</span>
+          </div>
+          <div class="order-timeline__step">
+            <span class="order-timeline__dot"></span>
+            <span>Shipped</span>
+          </div>
+          <div class="order-timeline__step">
+            <span class="order-timeline__dot"></span>
+            <span>In Transit</span>
+          </div>
+          <div class="order-timeline__step">
+            <span class="order-timeline__dot"></span>
+            <span>Delivered</span>
+          </div>
+        </div>
+
+        <!-- Mini Testimonial -->
+        {%- if section.settings.testimonial_text != blank -%}
+          <div class="testimonial-card" style="margin-top: var(--sp-4); padding: var(--sp-4);">
+            <div class="testimonial-card__header">
+              {%- if section.settings.testimonial_img != blank -%}
+                {{ section.settings.testimonial_img | image_url: width: 80 | image_tag: class: 'testimonial-card__avatar' }}
+              {%- else -%}
+                <div class="testimonial-card__avatar" style="background-color:#eee; display:flex; align-items:center; justify-content:center; font-weight:700;">JD</div>
+              {%- endif -%}
+              <div>
+                <div class="testimonial-card__name">{{ section.settings.testimonial_name }}</div>
+                <div class="testimonial-card__verified">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                    <path d="M12 6C12 9.31371 9.31371 12 6 12C2.68629 12 0 9.31371 0 6C0 2.68629 2.68629 0 6 0C9.31371 0 12 2.68629 12 6ZM5.4 8.7L9.6 4.5L8.76 3.66L5.4 7.02L3.84 5.46L3 6.3L5.4 8.7Z"></path>
+                  </svg>
+                  <span>Verified Customer</span>
+                </div>
+              </div>
+            </div>
+            <div class="star-rating" style="margin-top: var(--sp-1);">
+              {%- for i in (1..5) -%}
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/></svg>
+              {%- endfor -%}
+            </div>
+            <p class="testimonial-card__body" style="font-size: var(--fs-xs); margin-top: var(--sp-1);">"{{ section.settings.testimonial_text }}"</p>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Sticky ATC HTML -->
+<div class="sticky-atc">
+  <div class="sticky-atc__container">
+    <div class="sticky-atc__product">
+      {%- if featured_image != blank -%}
+        {{ featured_image | image_url: width: 80 | image_tag: class: 'sticky-atc__img' }}
+      {%- else -%}
+        <div class="sticky-atc__img" style="background-color: var(--color-bg-alt);"></div>
+      {%- endif -%}
+      <div class="sticky-atc__title-price">
+        <span class="sticky-atc__title">{{ product.title | default: section.settings.fallback_title }}</span>
+        <span class="sticky-atc__price">{{ product.price | money | default: '$49.99' }}</span>
+      </div>
+    </div>
+    <button class="btn btn--primary sticky-atc__btn">Claim Offer</button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Product (Buybox)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Fallback title",
+      "default": "The Multi-Functional Magic Blender"
+    },
+    {
+      "type": "text",
+      "id": "subheadline",
+      "label": "Subheadline / Outcome statement",
+      "default": "Making healthy blending part of 147,000+ daily routines"
+    },
+    {
+      "type": "text",
+      "id": "ribbon_text",
+      "label": "Ribbon text badge",
+      "default": "🏆 2025's Most Loved Kitchen Gadget"
+    },
+    {
+      "type": "text",
+      "id": "atc_button_text",
+      "label": "ATC button text",
+      "default": "GET 50% OFF TODAY"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_bundle_selector",
+      "label": "Use bundle selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "id": "reviews_header",
+      "label": "Reviews summary"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Review rating (0.0 - 5.0)",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "37,259"
+    },
+    {
+      "type": "header",
+      "id": "testimonial_header",
+      "label": "Inline Testimonial"
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_img",
+      "label": "Customer avatar"
+    },
+    {
+      "type": "text",
+      "id": "testimonial_name",
+      "label": "Customer name",
+      "default": "Sarah M."
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_text",
+      "label": "Testimonial comment",
+      "default": "I was skeptical, but this blends my protein shake in 20 seconds flat. Clean up is literally just rinsing it. Best purchase this year!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit Bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Premium outcomes"
+        }
+      ]
+    },
+    {
+      "type": "bundle_tier",
+      "name": "Bundle Tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tier title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Tier subtitle"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Tier price (formatted text, e.g. $49.99)"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Tier compare price (e.g. $99.99)"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Price savings badge (e.g. Save 50%)"
+        },
+        {
+          "type": "text",
+          "id": "tag_text",
+          "label": "Highlight tag (e.g. Most Popular)"
+        },
+        {
+          "type": "text",
+          "id": "variant_id",
+          "label": "Variant ID matching this tier (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_selected",
+          "label": "Default selected",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

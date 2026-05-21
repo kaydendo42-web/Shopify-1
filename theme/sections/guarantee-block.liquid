@@ -1,0 +1,64 @@
+<section class="section guarantee" style="background-color: var(--color-bg);">
+  <div class="container container--narrow">
+    <div class="guarantee-block">
+      <!-- Guarantee Stamp Icon -->
+      <div class="guarantee-block__badge">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" fill="var(--color-bg-alt)" stroke="var(--color-accent)" stroke-width="3" stroke-dasharray="6 4"/>
+          <path d="M50 15L58.2 31.6L76.5 34.3L63.2 47.3L66.4 65.6L50 57L33.6 65.6L36.8 47.3L23.5 34.3L41.8 31.6L50 15Z" fill="var(--color-trust)"/>
+          <circle cx="50" cy="50" r="28" fill="var(--color-accent)"/>
+          <text x="50" y="53" fill="var(--color-accent-contrast)" font-size="10" font-weight="900" text-anchor="middle" letter-spacing="0.05em">30 DAY</text>
+          <text x="50" y="63" fill="var(--color-accent-contrast)" font-size="7" font-weight="700" text-anchor="middle" letter-spacing="0.05em">GUARANTEE</text>
+        </svg>
+      </div>
+
+      <h2 class="guarantee-block__title">{{ section.settings.heading }}</h2>
+      <p class="guarantee-block__text">{{ section.settings.text }}</p>
+
+      <!-- Trust highlights -->
+      <div class="payment-badges-row" style="margin-bottom: var(--sp-6); gap: var(--sp-4);">
+        <div style="display:flex; align-items:center; gap:var(--sp-2); font-weight:700; font-size:var(--fs-sm);">
+          <span style="color:var(--color-success)">✓</span> 100% Satisfaction
+        </div>
+        <div style="display:flex; align-items:center; gap:var(--sp-2); font-weight:700; font-size:var(--fs-sm);">
+          <span style="color:var(--color-success)">✓</span> Fast Delivery
+        </div>
+        <div style="display:flex; align-items:center; gap:var(--sp-2); font-weight:700; font-size:var(--fs-sm);">
+          <span style="color:var(--color-success)">✓</span> Hassle-Free Returns
+        </div>
+      </div>
+
+      {%- if section.settings.button_text != blank -%}
+        <a href="#product-form" class="btn btn--primary" style="display:inline-flex; width:auto; padding:var(--sp-3) var(--sp-12);">
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Guarantee Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Risk-Free 30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Guarantee copy",
+      "default": "We believe in our products and want you to be 100% satisfied. If you aren't absolutely in love with your purchase, return it within 30 days of receipt for a prompt and friendly full refund. No questions asked."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "TRY IT RISK-FREE NOW"
+    }
+  ]
+}
+{% endschema %}

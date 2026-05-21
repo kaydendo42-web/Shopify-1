@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "main": {
+      "type": "cart",
+      "settings": {
+        "show_free_ship_bar": true,
+        "free_ship_threshold": 99,
+        "upsell_blurb": "Pair your mask with the neck wrap for full décolleté coverage. 10% off when added to your bag.",
+        "guarantee_text": "Try The Quiet Hour for 60 nights. Send it back if it didn't earn its place. We pay return shipping. No forms. No video evidence. Just email hello@thequiethour.com.au."
+      }
+    },
+    "guarantee": {
+      "type": "guarantee-block",
+      "settings": {
+        "heading": "60 nights. Refund if it didn't earn its place.",
+        "text": "We built this for women who've been burned by beauty marketing before. Try it for 60 nights — about 25 sessions. Send it back if your skin isn't visibly firmer. We pay return shipping.",
+        "button_text": "BACK TO YOUR BAG"
+      }
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "subheading": "BEFORE YOU CHECK OUT",
+        "heading": "Quick answers"
+      },
+      "blocks": {
+        "q1": { "type": "faq_item", "settings": { "question": "When will it arrive?", "answer": "Ships from our Sydney warehouse within 24 hours. 2–5 business days AU-wide." } },
+        "q2": { "type": "faq_item", "settings": { "question": "What if it doesn't work for me?", "answer": "60-night trial. Send it back inside 60 nights, we pay return shipping. No forms, no video evidence, no shipping to China." } },
+        "q3": { "type": "faq_item", "settings": { "question": "Afterpay / Klarna?", "answer": "Both available at checkout. Four payments. No fees." } }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    }
+  },
+  "order": [
+    "main",
+    "guarantee",
+    "faq"
+  ]
+}
