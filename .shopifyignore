@@ -1,0 +1,22 @@
+# Files excluded from Shopify CLI / GitHub sync.
+# Theme files live at repo root. Non-theme dirs ignored below.
+
+# Brand + research docs
+foundational/
+docs/
+
+# Build briefs (not part of theme)
+Theme.md
+ecom_master_plan.md
+
+# OS + IDE
+.DS_Store
+.vscode/
+.idea/
+.claude/
+
+# Project meta — keep in repo but exclude from theme push
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+LICENSE.md
+README.md

@@ -1,12 +1,28 @@
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 node_modules/
+
+# Shopify CLI files
+.shopify/
+
+# Release files
+release
+*.zip
+
+# Env / secrets
 .env
 .env.*
 *.log
-
-# Shopify CLI
-.shopify/
-.theme-check.json
+*.key
+*.pem
+credentials*
+secrets*
 
 # IDE
 .vscode/
@@ -14,12 +30,5 @@ node_modules/
 *.swp
 *.swo
 
-# Sensitive
-*.key
-*.pem
-credentials*
-secrets*
-
-# OS
-Thumbs.db
-ehthumbs.db
+# Claude / agents
+.claude/
