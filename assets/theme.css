@@ -2539,3 +2539,167 @@
   margin-right: auto;
   line-height: 1.5;
 }
+
+/* Before/After hero pair (single side-by-side image above slider cards) */
+.ba-pair {
+  margin: 0 auto var(--sp-12);
+  max-width: 1100px;
+}
+.ba-pair__img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  display: block;
+  box-shadow: var(--shadow-md);
+}
+.ba-pair__caption {
+  margin-top: var(--sp-3);
+  text-align: center;
+}
+.ba-pair__tag {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 4px 12px;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-pill);
+}
+
+/* ============================================================
+   Lifestyle Hero — full-bleed image w/ overlay copy
+   ============================================================ */
+.lifestyle-hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(520px, 80vh, 760px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--color-bg);
+  isolation: isolate;
+}
+
+.lifestyle-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.lifestyle-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lifestyle-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(42, 32, 28, calc((var(--overlay-pct, 25) + 25) * 1%)) 0%,
+    rgba(42, 32, 28, calc(var(--overlay-pct, 25) * 1%)) 50%,
+    rgba(42, 32, 28, 0) 80%
+  );
+}
+
+.lifestyle-hero--center .lifestyle-hero__overlay {
+  background: rgba(42, 32, 28, calc(var(--overlay-pct, 25) * 1%));
+}
+
+.lifestyle-hero--right .lifestyle-hero__overlay {
+  background: linear-gradient(
+    260deg,
+    rgba(42, 32, 28, calc((var(--overlay-pct, 25) + 25) * 1%)) 0%,
+    rgba(42, 32, 28, calc(var(--overlay-pct, 25) * 1%)) 50%,
+    rgba(42, 32, 28, 0) 80%
+  );
+}
+
+.lifestyle-hero__inner {
+  width: 100%;
+  padding-top: var(--sp-16);
+  padding-bottom: var(--sp-16);
+}
+
+.lifestyle-hero__copy {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.lifestyle-hero--center .lifestyle-hero__copy {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lifestyle-hero--right .lifestyle-hero__copy {
+  margin-left: auto;
+}
+
+.lifestyle-hero__eyebrow {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.lifestyle-hero__headline {
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+.lifestyle-hero__sub {
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height: 1.5;
+  max-width: 50ch;
+  opacity: 0.92;
+}
+
+.lifestyle-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-2);
+}
+
+.lifestyle-hero--center .lifestyle-hero__actions {
+  justify-content: center;
+}
+
+.lifestyle-hero__cta {
+  width: auto;
+  min-width: 220px;
+}
+
+.lifestyle-hero__cta2 {
+  color: var(--color-bg);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lifestyle-hero__cta2:hover { opacity: 0.85; }
+
+.lifestyle-hero__proof {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+  margin-top: var(--sp-2);
+}
+
+@media (max-width: 720px) {
+  .lifestyle-hero { min-height: 560px; }
+  .lifestyle-hero__overlay {
+    background: rgba(42, 32, 28, 0.45) !important;
+  }
+}

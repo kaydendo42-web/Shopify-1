@@ -191,9 +191,10 @@
       "type": "before-after",
       "settings": {
         "eyebrow": "BEFORE / AFTER",
-        "heading": "See the difference at 8 weeks",
+        "heading": "See the difference at 6 weeks",
         "sub": "Real customers. Same time of day. Same lighting. No filters. Drag the slider on any photo to reveal.",
-        "disclaimer": "Individual results vary. All photos taken at week 0 and week 8 of consistent use (10 minutes, three nights a week, ~25 total sessions)."
+        "show_default_pair": true,
+        "disclaimer": "Individual results vary. All photos taken at week 0 and week 6–8 of consistent use (10 minutes, three nights a week, ~25 total sessions)."
       },
       "blocks": {
         "c1": { "type": "comparison", "settings": { "customer_name": "Anna K.", "customer_age": "47, Sydney", "duration": "8 weeks", "note": "Three nights a week, ten minutes, while I read. That was it." } },

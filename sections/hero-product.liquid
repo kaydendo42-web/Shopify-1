@@ -17,7 +17,7 @@
           {%- else -%}
             <!-- Placeholder main image — uses local hero-mask-glow asset -->
             <img class="product-gallery__main-img"
-                 src="{{ 'hero-mask-glow.jpg' | asset_url }}"
+                 src="{{ 'product-packshot.png' | asset_url }}"
                  alt="The Quiet Hour mask"
                  width="800" height="800"
                  loading="eager">
@@ -33,7 +33,7 @@
             {%- endfor -%}
           {%- else -%}
             <!-- Placeholder thumbnails using local asset library -->
-            {%- assign placeholder_thumbs = 'hero-mask-glow.jpg,hero-mask-side.jpg,woman-mirror-1.jpg,lifestyle-chaise.jpg' | split: ',' -%}
+            {%- assign placeholder_thumbs = 'product-packshot.png,lifestyle-sofa.jpg,hero-mask-glow.jpg,hero-mask-side.jpg,woman-mirror-1.jpg,lifestyle-chaise.jpg' | split: ',' -%}
             {%- for thumb in placeholder_thumbs -%}
               <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}" data-image-src="{{ thumb | asset_url }}">
                 <img src="{{ thumb | asset_url }}" alt="" width="100" height="100" loading="lazy">

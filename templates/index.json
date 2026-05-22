@@ -1,5 +1,20 @@
 {
   "sections": {
+    "lifestyle_hero": {
+      "type": "lifestyle-hero",
+      "settings": {
+        "eyebrow": "DESIGNED FOR THE PHASE",
+        "headline": "Ten minutes. Three nights. Just you.",
+        "sub": "A 10-minute ritual where you're not needed by anyone. Clinical red light therapy, designed for skin in the perimenopause phase. Supported in Australia.",
+        "cta_text": "Shop The Quiet Hour",
+        "cta_link": "/products/the-quiet-hour-mask",
+        "cta2_text": "Read the story",
+        "cta2_link": "/pages/about",
+        "proof_text": "★ 4.8/5 from 2,847 women in the phase · 60-night trial · Free AU shipping over $99",
+        "overlay_pct": 30,
+        "align": "left"
+      }
+    },
     "hero": {
       "type": "hero-product",
       "settings": {
@@ -115,6 +130,7 @@
   },
 
   "order": [
+    "lifestyle_hero",
     "hero",
     "trust",
     "as_seen_in",

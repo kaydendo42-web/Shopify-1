@@ -1,0 +1,77 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'DESIGNED FOR THE PHASE'
+  assign headline = section.settings.headline | default: 'Ten minutes. Three nights. Just you.'
+  assign sub = section.settings.sub | default: 'A 10-minute ritual where you are not needed by anyone. Clinical red light therapy, designed for skin in the perimenopause phase, supported in Australia.'
+  assign cta_text = section.settings.cta_text | default: 'Start your ritual'
+  assign cta_link = section.settings.cta_link | default: '/products/the-quiet-hour-mask'
+  assign overlay_pct = section.settings.overlay_pct | default: 25
+  assign align = section.settings.align | default: 'left'
+-%}
+
+<section class="lifestyle-hero lifestyle-hero--{{ align }}">
+  <div class="lifestyle-hero__media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2400 | image_tag:
+        class: 'lifestyle-hero__img',
+        loading: 'eager',
+        widths: '800, 1200, 1600, 2000, 2400',
+        sizes: '100vw',
+        alt: headline
+      }}
+    {%- else -%}
+      <img class="lifestyle-hero__img"
+           src="{{ 'lifestyle-sofa.jpg' | asset_url }}"
+           alt="{{ headline }}"
+           width="1600" height="900"
+           loading="eager">
+    {%- endif -%}
+    <div class="lifestyle-hero__overlay" style="--overlay-pct: {{ overlay_pct }}%;"></div>
+  </div>
+
+  <div class="lifestyle-hero__inner container">
+    <div class="lifestyle-hero__copy">
+      <span class="lifestyle-hero__eyebrow">{{ eyebrow }}</span>
+      <h1 class="lifestyle-hero__headline">{{ headline }}</h1>
+      <p class="lifestyle-hero__sub">{{ sub }}</p>
+
+      <div class="lifestyle-hero__actions">
+        {%- if cta_text != blank -%}
+          <a href="{{ cta_link }}" class="btn btn--primary lifestyle-hero__cta">{{ cta_text }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta2_text != blank -%}
+          <a href="{{ section.settings.cta2_link | default: '/pages/about' }}" class="lifestyle-hero__cta2">{{ section.settings.cta2_text }} →</a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.proof_text != blank -%}
+        <p class="lifestyle-hero__proof">{{ section.settings.proof_text }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image (uses lifestyle-sofa.jpg if blank)" },
+    { "type": "range", "id": "overlay_pct", "label": "Overlay darkness", "min": 0, "max": 60, "step": 5, "unit": "%", "default": 25 },
+    { "type": "select", "id": "align", "label": "Copy alignment", "default": "left", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ]},
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "DESIGNED FOR THE PHASE" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Ten minutes. Three nights. Just you." },
+    { "type": "textarea", "id": "sub", "label": "Sub-headline", "default": "A 10-minute ritual where you are not needed by anyone. Clinical red light therapy, designed for skin in the perimenopause phase, supported in Australia." },
+    { "type": "text", "id": "cta_text", "label": "Primary CTA text", "default": "Start your ritual" },
+    { "type": "url", "id": "cta_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_text", "label": "Secondary CTA text", "default": "Read the story" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary CTA link" },
+    { "type": "text", "id": "proof_text", "label": "Proof line", "default": "⭐ 4.8/5 from 2,847 women in the phase · 60-night trial · Free AU shipping over $99" }
+  ],
+  "presets": [
+    { "name": "Lifestyle Hero" }
+  ]
+}
+{% endschema %}
