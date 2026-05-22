@@ -17,14 +17,19 @@
           {%- if block.settings.image != blank -%}
             {{ block.settings.image | image_url: width: 400 | image_tag: class: 'how-it-works__img', alt: block.settings.title }}
           {%- else -%}
-            <!-- Fallback image block -->
-            <div class="how-it-works__img" style="display:flex; align-items:center; justify-content:center; background-color: var(--color-bg-alt); color: var(--color-text-muted);">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
-            </div>
+            {%- assign ritual_fallbacks = 'ritual-step-1.jpeg,ritual-step-2.jpeg,ritual-step-3.jpeg' | split: ',' -%}
+            {%- assign fallback_src = ritual_fallbacks[forloop.index0] -%}
+            {%- if fallback_src != blank -%}
+              <img src="{{ fallback_src | asset_url }}" class="how-it-works__img" alt="{{ block.settings.title }}" loading="lazy" width="400" height="400">
+            {%- else -%}
+              <div class="how-it-works__img" style="display:flex; align-items:center; justify-content:center; background-color: var(--color-bg-alt); color: var(--color-text-muted);">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </div>
+            {%- endif -%}
           {%- endif -%}
           
           <div class="how-it-works__num">{{ forloop.index }}</div>
