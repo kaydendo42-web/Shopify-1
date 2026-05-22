@@ -1,0 +1,85 @@
+<section class="section expert-endorsement" style="background-color: var(--color-bg);">
+  <div class="container">
+    <div class="expert-endorsement__grid">
+
+      <!-- LEFT: image or video with quote overlay -->
+      <div class="expert-endorsement__media">
+        {%- if section.settings.video_url != blank -%}
+          <div class="expert-endorsement__video-wrap">
+            <iframe
+              src="{{ section.settings.video_url }}"
+              frameborder="0"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              title="{{ section.settings.expert_name | default: 'Expert endorsement' }}"
+            ></iframe>
+          </div>
+        {%- elsif section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 900 | image_tag:
+            class: 'expert-endorsement__img',
+            loading: 'lazy',
+            widths: '450, 700, 900',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            alt: section.settings.expert_name | default: 'Expert'
+          }}
+        {%- else -%}
+          <div class="expert-endorsement__img-ph"></div>
+        {%- endif -%}
+
+        {%- if section.settings.expert_name != blank or section.settings.expert_quote != blank -%}
+          <div class="expert-endorsement__quote-card">
+            {%- if section.settings.expert_name != blank -%}
+              <p class="expert-endorsement__quote-name">{{ section.settings.expert_name }}</p>
+            {%- endif -%}
+            {%- if section.settings.expert_credentials != blank -%}
+              <p class="expert-endorsement__quote-creds">{{ section.settings.expert_credentials }}</p>
+            {%- endif -%}
+            {%- if section.settings.expert_quote != blank -%}
+              <blockquote class="expert-endorsement__quote-text">&ldquo;{{ section.settings.expert_quote }}&rdquo;</blockquote>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- RIGHT: heading + copy -->
+      <div class="expert-endorsement__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="expert-endorsement__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="expert-endorsement__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="expert-endorsement__body">{{ section.settings.body }}</div>
+        {%- endif -%}
+        {%- if section.settings.cta_text != blank and section.settings.cta_link != blank -%}
+          <a href="{{ section.settings.cta_link }}" class="btn btn--primary" style="margin-top: var(--sp-6);">{{ section.settings.cta_text }}</a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Expert Endorsement",
+  "settings": [
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "image", "label": "Expert image" },
+    { "type": "text", "id": "video_url", "label": "YouTube embed URL (overrides image)", "info": "Use the embed URL format: https://www.youtube.com/embed/VIDEO_ID" },
+    { "type": "header", "content": "Expert quote overlay" },
+    { "type": "text", "id": "expert_name", "label": "Expert name", "default": "Dr. Sarah M., MD" },
+    { "type": "text", "id": "expert_credentials", "label": "Credentials", "default": "Board-Certified Dermatologist" },
+    { "type": "textarea", "id": "expert_quote", "label": "Quote", "default": "Red light therapy at these wavelengths has compelling evidence for stimulating collagen synthesis. The Quiet Hour delivers consistent, calibrated output that matches what I recommend to my patients." },
+    { "type": "header", "content": "Copy (right side)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "EXPERT RECOMMENDED" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Dermatologist Recommended" },
+    { "type": "richtext", "id": "body", "label": "Body copy", "default": "<p>Red light therapy at 635nm and 830nm has some of the strongest non-invasive evidence for collagen support. The Quiet Hour delivers these wavelengths consistently, in a format that makes nightly use realistic.</p><p>When treatment is consistent, results follow. The device makes consistency easy.</p>" },
+    { "type": "text", "id": "cta_text", "label": "CTA button text" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link" }
+  ],
+  "presets": [{ "name": "Expert Endorsement" }]
+}
+{% endschema %}

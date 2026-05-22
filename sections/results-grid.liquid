@@ -1,0 +1,120 @@
+<section class="section results-grid-section" style="background-color: var(--color-bg-alt);">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: var(--sp-8);">
+      {%- if section.settings.eyebrow != blank -%}
+        <span style="font-size: var(--fs-sm); font-weight: 700; text-transform: uppercase; color: var(--color-accent); letter-spacing: 0.05em;">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 style="margin-top: var(--sp-2);">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- assign photo_blocks = section.blocks | where: 'type', 'photo_pair' -%}
+    {%- if photo_blocks.size > 0 -%}
+      <div class="results-grid__scroll-wrap">
+        <div class="results-grid__scroll">
+          {%- for block in photo_blocks -%}
+            <figure class="results-pair" {{ block.shopify_attributes }}>
+              <div class="results-pair__images">
+                <div class="results-pair__img-wrap">
+                  {%- if block.settings.before_image != blank -%}
+                    {{ block.settings.before_image | image_url: width: 600 | image_tag: class: 'results-pair__img', loading: 'lazy', alt: 'Before' }}
+                  {%- else -%}
+                    <div class="results-pair__img results-pair__img--ph"></div>
+                  {%- endif -%}
+                  <span class="results-pair__label">Before</span>
+                </div>
+                <div class="results-pair__img-wrap">
+                  {%- if block.settings.after_image != blank -%}
+                    {{ block.settings.after_image | image_url: width: 600 | image_tag: class: 'results-pair__img', loading: 'lazy', alt: 'After' }}
+                  {%- else -%}
+                    <div class="results-pair__img results-pair__img--ph"></div>
+                  {%- endif -%}
+                  <span class="results-pair__label results-pair__label--after">After</span>
+                </div>
+              </div>
+              {%- if block.settings.caption != blank or block.settings.weeks != blank -%}
+                <figcaption class="results-pair__caption">
+                  {%- if block.settings.caption != blank -%}<span>{{ block.settings.caption }}</span>{%- endif -%}
+                  {%- if block.settings.weeks != blank -%}<span class="results-pair__weeks">{{ block.settings.weeks }}</span>{%- endif -%}
+                </figcaption>
+              {%- endif -%}
+            </figure>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- if section.settings.photo_disclaimer != blank -%}
+        <p class="results-grid__disclaimer">{{ section.settings.photo_disclaimer }}</p>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- assign stat_blocks = section.blocks | where: 'type', 'stat' -%}
+    {%- if stat_blocks.size > 0 -%}
+      <div class="results-grid__clinical">
+        <div class="results-grid__clinical-copy">
+          {%- if section.settings.clinical_heading != blank -%}
+            <h3 class="results-grid__clinical-heading">{{ section.settings.clinical_heading }}</h3>
+          {%- endif -%}
+          <div class="results-grid__stats">
+            {%- for block in stat_blocks -%}
+              <div class="rg-stat" {{ block.shopify_attributes }}>
+                <div class="rg-stat__bar-row">
+                  <div class="rg-stat__bar-track">
+                    <div class="rg-stat__bar-fill" style="width: {{ block.settings.bar_fill }}%"></div>
+                  </div>
+                  <span class="rg-stat__number">{{ block.settings.number }}</span>
+                </div>
+                <p class="rg-stat__label">{{ block.settings.label }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.clinical_footnote != blank -%}
+            <p class="results-grid__clinical-footnote">{{ section.settings.clinical_footnote }}</p>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.clinical_image != blank -%}
+          <div class="results-grid__clinical-img-wrap">
+            {{ section.settings.clinical_image | image_url: width: 800 | image_tag: class: 'results-grid__clinical-img', loading: 'lazy', alt: 'Clinical study results' }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Results Grid + Clinical Stats",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "REAL WOMEN · REAL RESULTS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real women, real results" },
+    { "type": "text", "id": "photo_disclaimer", "label": "Photo disclaimer", "default": "Disclaimer — Individual results may vary" },
+    { "type": "header", "content": "Clinical study" },
+    { "type": "text", "id": "clinical_heading", "label": "Clinical heading", "default": "In our 60-day survey, women agreed:" },
+    { "type": "image_picker", "id": "clinical_image", "label": "Clinical study image (optional)" },
+    { "type": "textarea", "id": "clinical_footnote", "label": "Clinical footnote" }
+  ],
+  "blocks": [
+    {
+      "type": "photo_pair",
+      "name": "Before / After Photo Pair",
+      "settings": [
+        { "type": "image_picker", "id": "before_image", "label": "Before image" },
+        { "type": "image_picker", "id": "after_image", "label": "After image" },
+        { "type": "text", "id": "caption", "label": "Customer name / caption" },
+        { "type": "text", "id": "weeks", "label": "Weeks / duration", "default": "8 weeks" }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Clinical Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Percentage / number", "default": "94%" },
+        { "type": "text", "id": "label", "label": "Stat label", "default": "saw firmer-looking skin by week 4" },
+        { "type": "range", "id": "bar_fill", "label": "Bar fill %", "min": 0, "max": 100, "step": 1, "default": 94 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Results Grid + Clinical Stats" }]
+}
+{% endschema %}

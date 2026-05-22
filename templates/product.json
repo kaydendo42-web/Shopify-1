@@ -22,7 +22,7 @@
         "b5": { "type": "benefit", "settings": { "text": "10-minute treatments, cordless, light enough to wear while you read" } },
         "tier1": { "type": "bundle_tier", "settings": { "title": "1× Mask", "subtitle": "Yourself", "price": "$179", "compare_price": "$229", "badge_text": "Save $50", "tag_text": "" } },
         "tier2": { "type": "bundle_tier", "settings": { "title": "2× Mask Bundle", "subtitle": "You + your sister / mum / best friend", "price": "$298", "compare_price": "$458", "badge_text": "Save $160", "tag_text": "Best Value", "default_selected": true } },
-        "tier3": { "type": "bundle_tier", "settings": { "title": "The Quiet Hour Set", "subtitle": "Mask + neck wrap + travel pouch", "price": "$249", "compare_price": "$329", "badge_text": "Save $80", "tag_text": "Most Popular" } }
+        "tier3": { "type": "bundle_tier", "settings": { "title": "The Quiet Hour Set", "subtitle": "Mask + neck wrap", "price": "$249", "compare_price": "$329", "badge_text": "Save $80", "tag_text": "Most Popular" } }
       },
       "block_order": ["b1", "b2", "b3", "b4", "b5", "tier1", "tier2", "tier3"]
     },
@@ -188,6 +188,55 @@
       }
     },
 
+    "results_grid": {
+      "type": "results-grid",
+      "settings": {
+        "eyebrow": "REAL WOMEN · REAL RESULTS",
+        "heading": "Real women, real results",
+        "photo_disclaimer": "Disclaimer — Individual results may vary",
+        "clinical_heading": "In our 60-day survey, women agreed:",
+        "clinical_footnote": "Results from a 60-day self-reported survey of 412 The Quiet Hour customers aged 38–55, conducted Q1 2026."
+      },
+      "blocks": {
+        "rg_s1": { "type": "stat", "settings": { "number": "94%", "label": "saw visibly firmer-looking skin by week 4", "bar_fill": 94 } },
+        "rg_s2": { "type": "stat", "settings": { "number": "83%", "label": "noticed less fatigue around the eyes within 14 days", "bar_fill": 83 } },
+        "rg_s3": { "type": "stat", "settings": { "number": "8 in 10", "label": "stopped at least one other product after starting the ritual", "bar_fill": 80 } }
+      },
+      "block_order": ["rg_s1", "rg_s2", "rg_s3"]
+    },
+
+    "expert_endorsement": {
+      "type": "expert-endorsement",
+      "settings": {
+        "eyebrow": "CLINICIAN RECOMMENDED",
+        "heading": "Dermatologist Recommended",
+        "expert_name": "Dr. Sarah M., MD",
+        "expert_credentials": "Board-Certified Dermatologist",
+        "expert_quote": "Red light therapy at 635nm and 830nm has some of the strongest non-invasive evidence for collagen support. The Quiet Hour delivers these wavelengths consistently, in a format that makes nightly use realistic. When treatment is consistent, results follow.",
+        "body": "<p>Top dermatologists recommend red light therapy at these specific wavelengths for patients seeking a non-invasive way to address firmness loss, uneven texture, and the visible changes that accompany the perimenopause phase.</p><p>Consistent use is what drives results — and The Quiet Hour is designed to make consistency easy. Ten minutes, three nights a week, while you read or wind down.</p>"
+      }
+    },
+
+    "reviews_filterable": {
+      "type": "reviews-filterable",
+      "settings": {
+        "eyebrow": "REAL WOMEN · REAL RESULTS",
+        "heading": "What women in the phase are saying",
+        "disclaimer": "Individual results vary."
+      },
+      "blocks": {
+        "rv1": { "type": "review", "settings": { "name": "Anna K.", "age_group": "45-54", "concern": "firmness", "rating": 5, "verified": true, "headline": "He asked if I'd had something done.", "text": "Three weeks in, my husband asked if I'd had something done. I hadn't. Three nights a week, ten minutes, while my book was on my chest. That's the whole thing.", "date": "March 2026" } },
+        "rv2": { "type": "review", "settings": { "name": "Renée D.", "age_group": "45-54", "concern": "fine-lines", "rating": 5, "verified": true, "headline": "Cancelled my Botox appointment.", "text": "I'd been doing Botox twice a year. This isn't the same — but my skin looks like itself in a way the Botox never did. Cancelled my next appointment to keep going on this.", "date": "February 2026" } },
+        "rv3": { "type": "review", "settings": { "name": "Bec T.", "age_group": "35-44", "concern": "firmness", "rating": 5, "verified": true, "headline": "First thing that's worked since 41.", "text": "Tried everything. La Mer, microneedling, the whole catalogue. This is the first thing that's made my skin look like me again.", "date": "April 2026" } },
+        "rv4": { "type": "review", "settings": { "name": "Linh P.", "age_group": "45-54", "concern": "tired-eyes", "rating": 5, "verified": true, "headline": "The 10 minutes I look forward to.", "text": "The kids know not to come in. I read. I breathe. My skin glows. All in one ritual.", "date": "January 2026" } },
+        "rv5": { "type": "review", "settings": { "name": "Sarah W.", "age_group": "35-44", "concern": "fine-lines", "rating": 5, "verified": true, "headline": "Didn't believe it. Now I do.", "text": "Bought it skeptical. By week 5 I was showing it to my sister. The line between my brows is genuinely softer.", "date": "March 2026" } },
+        "rv6": { "type": "review", "settings": { "name": "Diane F.", "age_group": "55-64", "concern": "redness", "rating": 5, "verified": true, "headline": "Rosacea-friendly and actually works.", "text": "I was worried about sensitivity. Zero reaction — and after a month my skin is visibly calmer and less reactive in general.", "date": "April 2026" } },
+        "rv7": { "type": "review", "settings": { "name": "Megan H.", "age_group": "45-54", "concern": "dark-spots", "rating": 4, "verified": true, "headline": "Sun spots fading after 6 weeks.", "text": "Two old sun spots on my left cheek are noticeably lighter. Wasn't expecting that. Staying on the ritual.", "date": "May 2026" } },
+        "rv8": { "type": "review", "settings": { "name": "Jo R.", "age_group": "55-64", "concern": "firmness", "rating": 5, "verified": true, "headline": "Better than the $400 facial.", "text": "I was spending $400 every six weeks on clinic treatments. This gives me the same glow at home, every night. The maths aren't even close.", "date": "February 2026" } }
+      },
+      "block_order": ["rv1", "rv2", "rv3", "rv4", "rv5", "rv6", "rv7", "rv8"]
+    },
+
     "before_after": {
       "type": "before-after",
       "settings": {
@@ -198,10 +247,9 @@
         "disclaimer": "Individual results vary. All photos taken at week 0 and week 6–8 of consistent use (10 minutes, three nights a week, ~25 total sessions)."
       },
       "blocks": {
-        "c1": { "type": "comparison", "settings": { "customer_name": "Anna K.", "customer_age": "47, Sydney", "duration": "8 weeks", "note": "Three nights a week, ten minutes, while I read. That was it." } },
-        "c2": { "type": "comparison", "settings": { "customer_name": "Renée D.", "customer_age": "51, Melbourne", "duration": "10 weeks", "note": "Skin feels like itself again. I cancelled my next Botox appointment." } }
+        "c1": { "type": "comparison", "settings": { "customer_name": "Anna K.", "customer_age": "47, Sydney", "duration": "8 weeks", "note": "Three nights a week, ten minutes, while I read. That was it." } }
       },
-      "block_order": ["c1", "c2"]
+      "block_order": ["c1"]
     },
 
     "review_cards": {
@@ -244,15 +292,18 @@
     "hero",
     "trust",
     "phase_intro",
+    "results_grid",
     "before_after",
     "as_seen_in",
     "features",
+    "expert_endorsement",
     "how_it_works",
     "comparison",
     "clinical",
     "stats",
     "review_cards",
     "testimonials",
+    "reviews_filterable",
     "founder_note",
     "faq",
     "guarantee"

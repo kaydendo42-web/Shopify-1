@@ -41,8 +41,11 @@
         <div class="product-gallery__thumbnails">
           {%- if product.images.size > 0 -%}
             {%- for image in product.images -%}
-              <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}" data-image-src="{{ image | image_url: width: 800 }}">
-                {{ image | image_url: width: 100 | image_tag: alt: image.alt }}
+              <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}"
+                data-image-src="{{ image | image_url: width: 800 }}"
+                data-image-srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1200 }} 1200w"
+                data-image-sizes="(min-width: 990px) 50vw, 100vw">
+                {{ image | image_url: width: 100 | image_tag: alt: image.alt, loading: 'lazy' }}
               </button>
             {%- endfor -%}
           {%- else -%}

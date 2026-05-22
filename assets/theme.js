@@ -35,7 +35,14 @@ function initGallery() {
       // Update main image source
       const newSrc = thumbnail.getAttribute('data-image-src');
       if (newSrc) {
-        mainImage.setAttribute('src', newSrc);
+        mainImage.src = newSrc;
+        const newSrcset = thumbnail.getAttribute('data-image-srcset');
+        if (newSrcset) {
+          mainImage.srcset = newSrcset;
+          mainImage.sizes = thumbnail.getAttribute('data-image-sizes') || '100vw';
+        } else {
+          mainImage.removeAttribute('srcset');
+        }
       }
     });
   });

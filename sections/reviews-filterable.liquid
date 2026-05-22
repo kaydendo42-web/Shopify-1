@@ -1,0 +1,188 @@
+<section class="section reviews-filterable" style="background-color: var(--color-bg);">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="text-center" style="margin-bottom: var(--sp-8);">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="reviews-filterable__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 style="margin-top: var(--sp-2);">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Filter bar -->
+    <div class="reviews-filterable__filters">
+      <div class="reviews-filterable__filter-group">
+        <span class="reviews-filterable__filter-label">Age</span>
+        <div class="reviews-filterable__pills" data-filter-group="age">
+          <button class="reviews-pill is-active" data-filter="all">All</button>
+          <button class="reviews-pill" data-filter="35-44">35–44</button>
+          <button class="reviews-pill" data-filter="45-54">45–54</button>
+          <button class="reviews-pill" data-filter="55-64">55–64</button>
+          <button class="reviews-pill" data-filter="65+">65+</button>
+        </div>
+      </div>
+      <div class="reviews-filterable__filter-group">
+        <span class="reviews-filterable__filter-label">Concern</span>
+        <div class="reviews-filterable__pills" data-filter-group="concern">
+          <button class="reviews-pill is-active" data-filter="all">All</button>
+          <button class="reviews-pill" data-filter="firmness">Firmness</button>
+          <button class="reviews-pill" data-filter="redness">Redness</button>
+          <button class="reviews-pill" data-filter="dark-spots">Dark Spots</button>
+          <button class="reviews-pill" data-filter="tired-eyes">Tired-looking Eyes</button>
+          <button class="reviews-pill" data-filter="fine-lines">Fine Lines</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Count row -->
+    <div class="reviews-filterable__meta">
+      <span class="reviews-filterable__count" id="rfCount">{{ section.blocks.size }} reviews</span>
+      <div class="reviews-filterable__sort-label">Showing: Highest Rating</div>
+    </div>
+
+    <!-- Review grid -->
+    <div class="reviews-filterable__grid" id="rfGrid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <article class="rf-card"
+            data-age="{{ block.settings.age_group }}"
+            data-concern="{{ block.settings.concern }}"
+            data-index="{{ forloop.index0 }}"
+            {{ block.shopify_attributes }}>
+            <div class="rf-card__header">
+              <div class="rf-card__avatar">{{ block.settings.name | slice: 0 }}</div>
+              <div class="rf-card__reviewer">
+                <strong class="rf-card__name">{{ block.settings.name }}</strong>
+                {%- if block.settings.age_group != blank and block.settings.age_group != 'all' -%}
+                  <span class="rf-card__age">Age {{ block.settings.age_group }}</span>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.verified -%}
+                <span class="rf-card__verified">&#10003; Verified</span>
+              {%- endif -%}
+            </div>
+            <div class="rf-card__stars">
+              {%- assign r = block.settings.rating | default: 5 -%}
+              {%- for i in (1..5) -%}
+                <span class="rf-card__star {% if i <= r %}is-filled{% endif %}">&#9733;</span>
+              {%- endfor -%}
+            </div>
+            <h4 class="rf-card__headline">{{ block.settings.headline }}</h4>
+            <p class="rf-card__text">{{ block.settings.text }}</p>
+            <div class="rf-card__footer">
+              <span class="rf-card__date">{{ block.settings.date }}</span>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.blocks.size > 6 -%}
+      <div class="text-center" style="margin-top: var(--sp-8);">
+        <button class="btn btn--outline" id="rfShowMore">Show More</button>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="reviews-filterable__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function() {
+  const grid = document.getElementById('rfGrid');
+  const countEl = document.getElementById('rfCount');
+  const showMoreBtn = document.getElementById('rfShowMore');
+  if (!grid) return;
+
+  const INITIAL_SHOW = 6;
+  let activeAge = 'all';
+  let activeConcern = 'all';
+  let showAll = false;
+
+  function applyFilters() {
+    const cards = Array.from(grid.querySelectorAll('.rf-card'));
+    let visible = 0;
+    cards.forEach((card, i) => {
+      const ageMatch = activeAge === 'all' || card.dataset.age === activeAge;
+      const concernMatch = activeConcern === 'all' || card.dataset.concern === activeConcern;
+      const withinLimit = showAll || visible < INITIAL_SHOW;
+      if (ageMatch && concernMatch) {
+        if (withinLimit) { card.style.display = ''; visible++; }
+        else { card.style.display = 'none'; }
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    const total = cards.filter(c => {
+      const a = activeAge === 'all' || c.dataset.age === activeAge;
+      const cn = activeConcern === 'all' || c.dataset.concern === activeConcern;
+      return a && cn;
+    }).length;
+    if (countEl) countEl.textContent = total + ' review' + (total !== 1 ? 's' : '');
+    if (showMoreBtn) showMoreBtn.style.display = (!showAll && total > INITIAL_SHOW) ? '' : 'none';
+  }
+
+  document.querySelectorAll('.reviews-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('[data-filter-group]').dataset.filterGroup;
+      btn.closest('[data-filter-group]').querySelectorAll('.reviews-pill').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      if (group === 'age') activeAge = btn.dataset.filter;
+      if (group === 'concern') activeConcern = btn.dataset.filter;
+      showAll = false;
+      applyFilters();
+    });
+  });
+
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => { showAll = true; applyFilters(); });
+  }
+
+  applyFilters();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Reviews — Filterable",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "REAL WOMEN · REAL RESULTS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What women in the phase are saying" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer footnote", "default": "Individual results vary." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Reviewer name", "default": "Anna K." },
+        { "type": "select", "id": "age_group", "label": "Age group", "options": [
+          { "value": "all", "label": "Not specified" },
+          { "value": "35-44", "label": "35–44" },
+          { "value": "45-54", "label": "45–54" },
+          { "value": "55-64", "label": "55–64" },
+          { "value": "65+", "label": "65+" }
+        ], "default": "45-54" },
+        { "type": "select", "id": "concern", "label": "Primary concern", "options": [
+          { "value": "all", "label": "General" },
+          { "value": "firmness", "label": "Firmness" },
+          { "value": "redness", "label": "Redness" },
+          { "value": "dark-spots", "label": "Dark Spots" },
+          { "value": "tired-eyes", "label": "Tired-looking Eyes" },
+          { "value": "fine-lines", "label": "Fine Lines" }
+        ], "default": "firmness" },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "checkbox", "id": "verified", "label": "Verified purchase", "default": true },
+        { "type": "text", "id": "headline", "label": "Review headline", "default": "This actually worked." },
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "Three weeks in and I noticed a real difference in my skin." },
+        { "type": "text", "id": "date", "label": "Date", "default": "April 2026" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Reviews — Filterable" }]
+}
+{% endschema %}
