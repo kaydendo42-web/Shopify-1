@@ -1,0 +1,88 @@
+<section class="section whats-included" style="background-color: var(--color-bg-alt);">
+  <div class="container">
+    <div class="whats-included__inner">
+
+      <div class="whats-included__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="whats-included__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="whats-included__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.sub != blank -%}
+          <p class="whats-included__sub">{{ section.settings.sub }}</p>
+        {%- endif -%}
+
+        <ul class="whats-included__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'item' -%}
+              <li class="wi-item" {{ block.shopify_attributes }}>
+                <span class="wi-item__icon" aria-hidden="true">
+                  {%- if block.settings.icon != blank -%}
+                    {{ block.settings.icon }}
+                  {%- else -%}
+                    &#10003;
+                  {%- endif -%}
+                </span>
+                <div class="wi-item__text">
+                  <strong class="wi-item__name">{{ block.settings.name }}</strong>
+                  {%- if block.settings.note != blank -%}
+                    <span class="wi-item__note">{{ block.settings.note }}</span>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        {%- if section.settings.footnote != blank -%}
+          <p class="whats-included__footnote">{{ section.settings.footnote }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="whats-included__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 900 | image_tag:
+            class: 'whats-included__img',
+            loading: 'lazy',
+            widths: '450, 700, 900',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            alt: section.settings.heading | default: 'What is included'
+          }}
+        {%- else -%}
+          <img class="whats-included__img"
+            src="{{ 'mask-shot-1.png' | asset_url }}"
+            alt="What's in the box"
+            loading="lazy"
+            width="900" height="900">
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "What's Included",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHAT'S IN THE BOX" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything for your ritual, nothing you don't need." },
+    { "type": "textarea", "id": "sub", "label": "Sub copy", "default": "Designed to land complete. Open the box, charge once, and your first session is tonight." },
+    { "type": "image_picker", "id": "image", "label": "Unboxing image (overrides default)" },
+    { "type": "textarea", "id": "footnote", "label": "Footnote" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Included Item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon / emoji / symbol", "default": "✦" },
+        { "type": "text", "id": "name", "label": "Item name", "default": "The Quiet Hour mask" },
+        { "type": "text", "id": "note", "label": "Short note (optional)", "default": "Medical-grade silicone, 240 LEDs" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "What's Included" }]
+}
+{% endschema %}

@@ -22,6 +22,12 @@
       <!-- LEFT: Media Gallery -->
       <div class="product-gallery">
         <div class="product-gallery__main">
+          {%- if section.settings.show_bestseller_badge -%}
+            <span class="product-gallery__badge">
+              <span class="product-gallery__badge-icon" aria-hidden="true">&#9733;</span>
+              <span class="product-gallery__badge-text">{{ section.settings.bestseller_text | default: 'MOST LOVED · 2,847 REVIEWS' }}</span>
+            </span>
+          {%- endif -%}
           {%- if featured_image != blank -%}
             {{ featured_image | image_url: width: 800 | image_tag: 
               class: 'product-gallery__main-img',
@@ -388,6 +394,18 @@
       "id": "use_bundle_selector",
       "label": "Use bundle selector",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bestseller_badge",
+      "label": "Show bestseller badge on hero image",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bestseller_text",
+      "label": "Bestseller badge text",
+      "default": "MOST LOVED · 2,847 REVIEWS"
     },
     {
       "type": "header",

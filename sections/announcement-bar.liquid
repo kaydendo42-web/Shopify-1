@@ -1,11 +1,25 @@
 {%- if section.settings.show_announcement -%}
+  {%- assign message_blocks = section.blocks | where: 'type', 'message' -%}
   <div class="announcement-bar" style="background-color: {{ section.settings.color_bg }}; color: {{ section.settings.color_text }};">
-    {%- if section.settings.link != blank -%}
-      <a href="{{ section.settings.link }}" class="announcement-bar__link">
-    {%- endif -%}
-      <span class="announcement-bar__text">{{ section.settings.text }}</span>
-    {%- if section.settings.link != blank -%}
-      </a>
+    {%- if message_blocks.size > 1 -%}
+      <div class="announcement-bar__rotator" data-msg-count="{{ message_blocks.size }}" style="--msg-count: {{ message_blocks.size }}; --msg-duration: {{ section.settings.rotate_seconds | default: 4 }}s;">
+        {%- for block in message_blocks -%}
+          <span class="announcement-bar__message" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="announcement-bar__link">{%- endif -%}
+            {{ block.settings.text }}
+            {%- if block.settings.link != blank -%}</a>{%- endif -%}
+          </span>
+        {%- endfor -%}
+      </div>
+    {%- elsif message_blocks.size == 1 -%}
+      {%- assign single = message_blocks[0] -%}
+      {%- if single.settings.link != blank -%}<a href="{{ single.settings.link }}" class="announcement-bar__link">{%- endif -%}
+        <span class="announcement-bar__text">{{ single.settings.text }}</span>
+      {%- if single.settings.link != blank -%}</a>{%- endif -%}
+    {%- elsif section.settings.text != blank -%}
+      {%- if section.settings.link != blank -%}<a href="{{ section.settings.link }}" class="announcement-bar__link">{%- endif -%}
+        <span class="announcement-bar__text">{{ section.settings.text }}</span>
+      {%- if section.settings.link != blank -%}</a>{%- endif -%}
     {%- endif -%}
   </div>
 {%- endif -%}
@@ -14,34 +28,31 @@
 {
   "name": "Announcement Bar",
   "settings": [
+    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement", "default": true },
+    { "type": "text", "id": "text", "label": "Fallback text (used only if no message blocks added)", "default": "" },
+    { "type": "url", "id": "link", "label": "Fallback link" },
+    { "type": "range", "id": "rotate_seconds", "label": "Seconds per message", "min": 2, "max": 10, "step": 1, "default": 4, "unit": "s" },
+    { "type": "color", "id": "color_bg", "label": "Background color", "default": "#2a201c" },
+    { "type": "color", "id": "color_text", "label": "Text color", "default": "#faf7f4" }
+  ],
+  "blocks": [
     {
-      "type": "checkbox",
-      "id": "show_announcement",
-      "label": "Show announcement",
-      "default": true
-    },
+      "type": "message",
+      "name": "Rotating Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Message", "default": "Free AU shipping over $99" },
+        { "type": "url", "id": "link", "label": "Optional link" }
+      ]
+    }
+  ],
+  "presets": [
     {
-      "type": "text",
-      "id": "text",
-      "label": "Announcement text",
-      "default": "🔥 FLASH SALE — UP TO 48% OFF + FREE SHIPPING TODAY"
-    },
-    {
-      "type": "url",
-      "id": "link",
-      "label": "Announcement link"
-    },
-    {
-      "type": "color",
-      "id": "color_bg",
-      "label": "Background color",
-      "default": "#111111"
-    },
-    {
-      "type": "color",
-      "id": "color_text",
-      "label": "Text color",
-      "default": "#ffffff"
+      "name": "Announcement Bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Free AU shipping over $99" } },
+        { "type": "message", "settings": { "text": "60-night trial · send it back if it doesn't earn its place" } },
+        { "type": "message", "settings": { "text": "2-year warranty on every mask" } }
+      ]
     }
   ]
 }

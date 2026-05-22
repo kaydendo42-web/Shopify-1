@@ -1,0 +1,131 @@
+<section class="section wavelength-diagram" style="background-color: var(--color-bg);">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: var(--sp-8);">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="wld__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 style="margin-top: var(--sp-2);">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.sub != blank -%}
+        <p class="wld__sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="wld__layout">
+
+      <!-- SVG cross-section -->
+      <div class="wld__diagram-wrap">
+        <svg class="wld__diagram" viewBox="0 0 520 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="635nm and 830nm penetration through skin layers">
+          <!-- Background skin gradient -->
+          <defs>
+            <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f6e4d4"/>
+              <stop offset="50%" stop-color="#e9c8a8"/>
+              <stop offset="100%" stop-color="#c79974"/>
+            </linearGradient>
+            <linearGradient id="red635" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#cf3f2a" stop-opacity="0.85"/>
+              <stop offset="70%" stop-color="#cf3f2a" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#cf3f2a" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="nir830" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#7a2a1c" stop-opacity="0.8"/>
+              <stop offset="80%" stop-color="#7a2a1c" stop-opacity="0.45"/>
+              <stop offset="100%" stop-color="#7a2a1c" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Skin block -->
+          <rect x="100" y="40" width="320" height="400" fill="url(#skinGrad)" rx="6"/>
+
+          <!-- Layer separators -->
+          <line x1="100" y1="120" x2="420" y2="120" stroke="#a87752" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+          <line x1="100" y1="300" x2="420" y2="300" stroke="#a87752" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+
+          <!-- 635nm beam (shorter penetration, into dermis) -->
+          <path d="M 175 40 L 235 320 L 215 320 L 195 40 Z" fill="url(#red635)" opacity="0.9"/>
+
+          <!-- 830nm beam (deeper, into hypodermis) -->
+          <path d="M 305 40 L 365 440 L 345 440 L 325 40 Z" fill="url(#nir830)" opacity="0.85"/>
+
+          <!-- Wavelength labels -->
+          <g font-family="Inter, sans-serif" font-weight="700" font-size="14" fill="#2a201c">
+            <text x="185" y="28" text-anchor="middle">635 nm</text>
+            <text x="335" y="28" text-anchor="middle">830 nm</text>
+          </g>
+          <g font-family="Inter, sans-serif" font-size="11" fill="#7a6b62">
+            <text x="185" y="448" text-anchor="middle">Red light</text>
+            <text x="335" y="458" text-anchor="middle">Near-infrared</text>
+          </g>
+
+          <!-- Layer labels -->
+          <g font-family="Inter, sans-serif" font-size="12" fill="#2a201c" font-weight="600">
+            <text x="430" y="84">Epidermis</text>
+            <text x="430" y="210">Dermis</text>
+            <text x="430" y="370">Hypodermis</text>
+          </g>
+          <g font-family="Inter, sans-serif" font-size="10" fill="#7a6b62">
+            <text x="430" y="100">surface</text>
+            <text x="430" y="226">collagen + elastin</text>
+            <text x="430" y="386">deeper tissue</text>
+          </g>
+
+          <!-- Depth tick labels -->
+          <g font-family="Inter, sans-serif" font-size="10" fill="#7a6b62" text-anchor="end">
+            <text x="92" y="62">0 mm</text>
+            <text x="92" y="124">0.1 mm</text>
+            <text x="92" y="304">2 mm</text>
+            <text x="92" y="444">~5 mm</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Right column: per-wavelength explainers -->
+      <div class="wld__columns">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'wavelength' -%}
+            <div class="wld-card" {{ block.shopify_attributes }}>
+              <div class="wld-card__chip" style="background-color: {{ block.settings.swatch_color }};"></div>
+              <div class="wld-card__body">
+                <h3 class="wld-card__title">{{ block.settings.title }}</h3>
+                <p class="wld-card__depth">{{ block.settings.depth_label }}</p>
+                <p class="wld-card__text">{{ block.settings.text }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="wld__footnote">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wavelength Diagram",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE SCIENCE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Two wavelengths. Two layers. One ritual." },
+    { "type": "textarea", "id": "sub", "label": "Sub copy", "default": "635nm reaches the dermis — where collagen lives. 830nm goes deeper, into the hypodermis, supporting cell energy at the layer below." },
+    { "type": "textarea", "id": "footnote", "label": "Footnote", "default": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and individual tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device." }
+  ],
+  "blocks": [
+    {
+      "type": "wavelength",
+      "name": "Wavelength card",
+      "settings": [
+        { "type": "color", "id": "swatch_color", "label": "Swatch colour", "default": "#cf3f2a" },
+        { "type": "text", "id": "title", "label": "Title", "default": "635 nm — Visible Red" },
+        { "type": "text", "id": "depth_label", "label": "Depth label", "default": "Penetrates to the dermis (~1–2 mm)" },
+        { "type": "textarea", "id": "text", "label": "Body text", "default": "Stimulates fibroblast activity — the cells that produce collagen and elastin. Supports firmness, brightness, and the visible quality of the skin's surface." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Wavelength Diagram" }]
+}
+{% endschema %}

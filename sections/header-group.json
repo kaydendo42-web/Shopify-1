@@ -6,10 +6,17 @@
       "type": "announcement-bar",
       "settings": {
         "show_announcement": true,
-        "text": "✦ Mother's Day pre-sale — save up to $160 on the 2-mask bundle. Ships from Sydney in 24 hrs.",
+        "rotate_seconds": 4,
         "color_bg": "#2a201c",
         "color_text": "#faf7f4"
-      }
+      },
+      "blocks": {
+        "m1": { "type": "message", "settings": { "text": "Free AU shipping over $99" } },
+        "m2": { "type": "message", "settings": { "text": "60-night trial — send it back if it doesn't earn its place" } },
+        "m3": { "type": "message", "settings": { "text": "2-year warranty on every mask" } },
+        "m4": { "type": "message", "settings": { "text": "Ships from Sydney in 24 hrs" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"]
     },
     "header": {
       "type": "header",

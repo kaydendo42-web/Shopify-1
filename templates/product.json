@@ -188,6 +188,55 @@
       }
     },
 
+    "whats_included": {
+      "type": "whats-included",
+      "settings": {
+        "eyebrow": "WHAT'S IN THE BOX",
+        "heading": "Everything for your ritual, nothing you don't need.",
+        "sub": "Designed to land complete. Open the box, charge once, and your first session is tonight.",
+        "footnote": "Each Quiet Hour ships in recycled paper packaging from Sydney."
+      },
+      "blocks": {
+        "wi1": { "type": "item", "settings": { "icon": "✦", "name": "The Quiet Hour mask", "note": "Medical-grade silicone · 240 LEDs · dual 635 + 830nm" } },
+        "wi2": { "type": "item", "settings": { "icon": "⌁", "name": "USB-C charging cable", "note": "4 sessions per full charge" } },
+        "wi3": { "type": "item", "settings": { "icon": "◐", "name": "Eye-safety strap", "note": "Lightweight, sits comfortably with eyes closed" } },
+        "wi4": { "type": "item", "settings": { "icon": "❑", "name": "The Ritual Guide", "note": "Printed walkthrough — how to build the habit in week 1" } },
+        "wi5": { "type": "item", "settings": { "icon": "◊", "name": "Linen travel pouch", "note": "Soft-shell storage, fits in a handbag" } }
+      },
+      "block_order": ["wi1", "wi2", "wi3", "wi4", "wi5"]
+    },
+
+    "wavelengths": {
+      "type": "wavelength-diagram",
+      "settings": {
+        "eyebrow": "THE SCIENCE",
+        "heading": "Two wavelengths. Two layers. One ritual.",
+        "sub": "635nm reaches the dermis — where collagen lives. 830nm goes deeper, into the hypodermis, supporting cell energy at the layer below.",
+        "footnote": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and individual tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device."
+      },
+      "blocks": {
+        "wl1": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#cf3f2a",
+            "title": "635 nm — Visible Red",
+            "depth_label": "Penetrates to the dermis (~1–2 mm)",
+            "text": "Stimulates fibroblast activity — the cells that produce collagen and elastin. Supports firmness, brightness, and the visible quality of the skin's surface."
+          }
+        },
+        "wl2": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#7a2a1c",
+            "title": "830 nm — Near-Infrared",
+            "depth_label": "Penetrates deeper, into the hypodermis (~5 mm)",
+            "text": "Invisible to the eye but reaches the layer below the dermis. Supports mitochondrial energy in deeper cells — the engine behind tissue repair and collagen synthesis."
+          }
+        }
+      },
+      "block_order": ["wl1", "wl2"]
+    },
+
     "results_grid": {
       "type": "results-grid",
       "settings": {
@@ -291,7 +340,9 @@
   "order": [
     "hero",
     "trust",
+    "whats_included",
     "phase_intro",
+    "wavelengths",
     "results_grid",
     "before_after",
     "as_seen_in",
