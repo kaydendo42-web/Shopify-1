@@ -517,3 +517,68 @@ function initCartDrawer() {
     submitCartChange(key, next);
   });
 }
+
+/**
+ * Cart Drawer — fetch /cart.js and update drawer DOM nodes
+ */
+function refreshCartDrawer() {
+  fetch('/cart.js')
+    .then(r => r.json())
+    .then(cart => {
+      const countEl     = document.getElementById('cart-drawer-count');
+      const subtotalEl  = document.getElementById('cart-drawer-subtotal');
+      const linesEl     = document.getElementById('cart-drawer-lines');
+      const shipTextEl  = document.getElementById('cart-drawer-ship-text');
+      const shipFillEl  = document.getElementById('cart-drawer-ship-fill');
+      const freeShipEl  = document.querySelector('.cart-drawer__freeship');
+
+      if (countEl) countEl.textContent = cart.item_count;
+      if (subtotalEl) subtotalEl.textContent = formatMoney(cart.total_price);
+
+      // Free shipping bar
+      if (freeShipEl && shipTextEl && shipFillEl) {
+        const threshold = parseInt(freeShipEl.dataset.threshold, 10);
+        const remaining = Math.max(0, threshold - cart.total_price);
+        const pct = Math.min(100, (cart.total_price / threshold) * 100);
+        shipFillEl.style.width = `${pct}%`;
+        shipTextEl.innerHTML = remaining > 0
+          ? `<strong>${formatMoney(remaining)}</strong> away from free AU-wide shipping.`
+          : `<strong>✓ Free shipping unlocked.</strong> Your bag ships from Sydney in 24 hrs.`;
+      }
+
+      // Global cart icon count (header bubble)
+      updateCartCount(cart.item_count);
+
+      // Render line items
+      if (linesEl) {
+        if (cart.item_count === 0) {
+          linesEl.innerHTML = '<p class="cart-drawer__empty">Your bag is empty.</p>';
+        } else {
+          linesEl.innerHTML = cart.items.map(item => `
+            <div class="cart-drawer__line">
+              ${item.image
+                ? `<img class="cart-drawer__line-img" src="${item.image}" alt="${item.product_title}" width="80" height="80" loading="lazy">`
+                : '<div class="cart-drawer__line-img"></div>'
+              }
+              <div class="cart-drawer__line-body">
+                <p class="cart-drawer__line-title">${item.product_title}</p>
+                ${item.variant_title && item.variant_title !== 'Default Title'
+                  ? `<p class="cart-drawer__line-variant">${item.variant_title}</p>`
+                  : ''
+                }
+                <div class="cart-drawer__line-row">
+                  <div class="cart-drawer__line-qty">
+                    <button type="button" class="qty-btn qty-btn--minus" data-key="${item.key}" aria-label="Decrease quantity">−</button>
+                    <input type="text" class="qty-input" value="${item.quantity}" data-key="${item.key}" readonly aria-label="Quantity">
+                    <button type="button" class="qty-btn qty-btn--plus" data-key="${item.key}" aria-label="Increase quantity">+</button>
+                  </div>
+                  <span class="cart-drawer__line-price">${formatMoney(item.line_price)}</span>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    })
+    .catch(err => console.error('[Cart drawer] refresh failed:', err));
+}
