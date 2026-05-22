@@ -10,7 +10,9 @@
 {% endcomment %}
 
 {%- liquid
-  if use_variant
+  if override_variant != blank
+    assign target = override_variant
+  elsif use_variant
     assign target = product.selected_or_first_available_variant
   else
     assign target = product
