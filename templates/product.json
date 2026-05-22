@@ -271,7 +271,9 @@
       "settings": {
         "eyebrow": "REAL WOMEN · REAL RESULTS",
         "heading": "What women in the phase are saying",
-        "disclaimer": "Individual results vary."
+        "disclaimer": "Individual results vary.",
+        "show_photo_strip": true,
+        "photo_strip_caption": "Photos shared by women using the ritual"
       },
       "blocks": {
         "rv1": { "type": "review", "settings": { "name": "Anna K.", "age_group": "45-54", "concern": "firmness", "rating": 5, "verified": true, "headline": "He asked if I'd had something done.", "text": "Three weeks in, my husband asked if I'd had something done. I hadn't. Three nights a week, ten minutes, while my book was on my chest. That's the whole thing.", "date": "March 2026" } },

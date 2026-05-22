@@ -11,6 +11,35 @@
       </div>
     {%- endif -%}
 
+    <!-- Customer photos strip -->
+    {%- if section.settings.show_photo_strip -%}
+      <div class="rf-photo-strip">
+        {%- if section.settings.photo_strip_caption != blank -%}
+          <p class="rf-photo-strip__caption">{{ section.settings.photo_strip_caption }}</p>
+        {%- endif -%}
+        <div class="rf-photo-strip__grid">
+          {%- if section.settings.customer_photo_1 != blank -%}
+            {{ section.settings.customer_photo_1 | image_url: width: 500 | image_tag: class: 'rf-photo-strip__img', loading: 'lazy', alt: 'Customer photo' }}
+          {%- else -%}
+            <img src="{{ 'review-photo-1.png' | asset_url }}" class="rf-photo-strip__img" loading="lazy" alt="Customer photo" width="500" height="500">
+          {%- endif -%}
+          {%- if section.settings.customer_photo_2 != blank -%}
+            {{ section.settings.customer_photo_2 | image_url: width: 500 | image_tag: class: 'rf-photo-strip__img', loading: 'lazy', alt: 'Customer photo' }}
+          {%- else -%}
+            <img src="{{ 'review-photo-2.png' | asset_url }}" class="rf-photo-strip__img" loading="lazy" alt="Customer photo" width="500" height="500">
+          {%- endif -%}
+          {%- if section.settings.customer_photo_3 != blank -%}
+            {{ section.settings.customer_photo_3 | image_url: width: 500 | image_tag: class: 'rf-photo-strip__img', loading: 'lazy', alt: 'Customer photo' }}
+          {%- else -%}
+            <img src="{{ 'review-photo-3.png' | asset_url }}" class="rf-photo-strip__img" loading="lazy" alt="Customer photo" width="500" height="500">
+          {%- endif -%}
+          {%- if section.settings.customer_photo_4 != blank -%}
+            {{ section.settings.customer_photo_4 | image_url: width: 500 | image_tag: class: 'rf-photo-strip__img', loading: 'lazy', alt: 'Customer photo' }}
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
     <!-- Filter bar -->
     <div class="reviews-filterable__filters">
       <div class="reviews-filterable__filter-group">
@@ -152,7 +181,14 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "REAL WOMEN · REAL RESULTS" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "What women in the phase are saying" },
-    { "type": "text", "id": "disclaimer", "label": "Disclaimer footnote", "default": "Individual results vary." }
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer footnote", "default": "Individual results vary." },
+    { "type": "header", "content": "Customer photo strip" },
+    { "type": "checkbox", "id": "show_photo_strip", "label": "Show customer photo strip", "default": true },
+    { "type": "text", "id": "photo_strip_caption", "label": "Strip caption", "default": "Photos shared by women using the ritual" },
+    { "type": "image_picker", "id": "customer_photo_1", "label": "Customer photo 1" },
+    { "type": "image_picker", "id": "customer_photo_2", "label": "Customer photo 2" },
+    { "type": "image_picker", "id": "customer_photo_3", "label": "Customer photo 3" },
+    { "type": "image_picker", "id": "customer_photo_4", "label": "Customer photo 4 (optional)" }
   ],
   "blocks": [
     {

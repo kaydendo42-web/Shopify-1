@@ -29,6 +29,8 @@
 | `lifestyle-sofa.jpg`, `lifestyle-chaise.jpg`, `hero-mask-glow.jpg`, `hero-mask-side.jpg` | Brand-generated lifestyle | Hero, lifestyle sections |
 | `woman-mirror-1.jpg` | Brand-generated lifestyle | Lifestyle sections |
 | `ritual-step-1.jpeg`, `ritual-step-2.jpeg`, `ritual-step-3.jpeg` | Brand-generated (sourced via brand content folder 2026-05-22) | How-It-Works ritual section |
+| `review-photo-1.png`, `review-photo-2.png`, `review-photo-3.png` | AliExpress public reviews of same Foreverlily OEM mask (same physical product as ours) | Reviews — customer photo strip (no name attribution) |
+| `neckcare-product.png` | AliExpress Foreverlily listing — "neck care" colour variant | Combo deal section (pending build) |
 
 ### Pending / staging (not committed)
 
