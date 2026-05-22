@@ -21,8 +21,8 @@
         "b4": { "type": "benefit", "settings": { "text": "Eye-safe, heat-free, no UV — gentle on rosacea-prone & sensitive skin" } },
         "b5": { "type": "benefit", "settings": { "text": "10-minute treatments, cordless, light enough to wear while you read" } },
         "tier1": { "type": "bundle_tier", "settings": { "title": "1× Mask", "subtitle": "Yourself", "price": "$179", "compare_price": "$229", "badge_text": "Save $50", "tag_text": "" } },
-        "tier2": { "type": "bundle_tier", "settings": { "title": "2× Mask Bundle", "subtitle": "You + your sister / mum / best friend", "price": "$298", "compare_price": "$458", "badge_text": "Save $160", "tag_text": "Most Popular", "default_selected": true } },
-        "tier3": { "type": "bundle_tier", "settings": { "title": "The Quiet Hour Set", "subtitle": "Mask + neck wrap + travel pouch", "price": "$249", "compare_price": "$329", "badge_text": "Save $80", "tag_text": "Best Value" } }
+        "tier2": { "type": "bundle_tier", "settings": { "title": "2× Mask Bundle", "subtitle": "You + your sister / mum / best friend", "price": "$298", "compare_price": "$458", "badge_text": "Save $160", "tag_text": "Best Value", "default_selected": true } },
+        "tier3": { "type": "bundle_tier", "settings": { "title": "The Quiet Hour Set", "subtitle": "Mask + neck wrap + travel pouch", "price": "$249", "compare_price": "$329", "badge_text": "Save $80", "tag_text": "Most Popular" } }
       },
       "block_order": ["b1", "b2", "b3", "b4", "b5", "tier1", "tier2", "tier3"]
     },

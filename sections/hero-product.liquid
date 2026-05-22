@@ -333,10 +333,15 @@
       {%- endif -%}
       <div class="sticky-atc__title-price">
         <span class="sticky-atc__title">{{ product.title | default: section.settings.fallback_title }}</span>
-        <span class="sticky-atc__price">{{ product.price | money | default: '$49.99' }}</span>
+        <span class="sticky-atc__price">
+          {{- default_form_variant.price | money -}}
+          {%- if default_form_variant.compare_at_price > default_form_variant.price -%}
+            <span class="sticky-atc__price-compare">{{ default_form_variant.compare_at_price | money }}</span>
+          {%- endif -%}
+        </span>
       </div>
     </div>
-    <button class="btn btn--primary sticky-atc__btn">Claim Offer</button>
+    <button class="btn btn--primary sticky-atc__btn">{{ section.settings.atc_button_text | default: 'START YOUR RITUAL' }}</button>
   </div>
 </div>
 
