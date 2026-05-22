@@ -138,25 +138,30 @@ function initStickyAtc() {
 
   if (!stickyBar || !mainAtcBtn) return;
 
-  // Use Intersection Observer for smooth, performance-optimized visibility toggling
+  let stickyPulsed = false;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Main button is visible, hide sticky bar
         stickyBar.classList.remove('is-visible');
       } else {
-        // Main button scrolled off screen, show sticky bar
         stickyBar.classList.add('is-visible');
+        if (!stickyPulsed) {
+          stickyPulsed = true;
+          stickyBar.classList.add('is-pulsing');
+          stickyBar.addEventListener('animationend', () => {
+            stickyBar.classList.remove('is-pulsing');
+          }, { once: true });
+        }
       }
     });
   }, {
-    root: null, // viewport
-    threshold: 0, // trigger as soon as it leaves viewport
+    root: null,
+    threshold: 0,
   });
 
   observer.observe(mainAtcBtn);
 
-  // Sync sticky button action to submit main form or trigger main button click
   const stickyBtn = stickyBar.querySelector('.sticky-atc__btn');
   if (stickyBtn) {
     stickyBtn.addEventListener('click', (e) => {
