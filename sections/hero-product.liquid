@@ -1,6 +1,19 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
+{%- comment -%} Find which variant should be pre-selected based on the default_selected bundle_tier block {%- endcomment -%}
+{%- assign default_form_variant = current_variant -%}
+{%- assign _dv_idx = 0 -%}
+{%- for _block in section.blocks -%}
+  {%- if _block.type == 'bundle_tier' -%}
+    {%- if _block.settings.default_selected -%}
+      {%- assign _dv_candidate = product.variants[_dv_idx] -%}
+      {%- if _dv_candidate != blank -%}{%- assign default_form_variant = _dv_candidate -%}{%- endif -%}
+    {%- endif -%}
+    {%- assign _dv_idx = _dv_idx | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <section class="section hero-product" style="padding-top: var(--sp-6);">
   <div class="container">
     <div class="hero-product__grid">
@@ -60,7 +73,7 @@
         <!-- Price Block -->
         <div class="buybox__price-wrapper">
           {%- if product != blank -%}
-            {%- render 'price', product: product, use_variant: true -%}
+            {%- render 'price', product: product, use_variant: true, override_variant: default_form_variant -%}
           {%- else -%}
             <!-- Fallback price block for preview -->
             <span class="price--compare">$99.99</span>
@@ -92,7 +105,7 @@
         {%- if product != blank -%}
         {%- form 'product', product, id: 'product-form' -%}
           <!-- Hidden Variant Input -->
-          <input type="hidden" name="id" value="{{ current_variant.id | default: 12345678 }}">
+          <input type="hidden" name="id" value="{{ default_form_variant.id }}">
 
           <!-- Variant Selector (if product has real variants and bundle selector is NOT used) -->
           {%- unless section.settings.use_bundle_selector -%}
@@ -114,17 +127,39 @@
           {%- if section.settings.use_bundle_selector -%}
             <div class="bundle-selector">
               <span style="font-weight: 700; font-size: var(--fs-sm); display: block; margin-bottom: var(--sp-1);">Select Package:</span>
-              
+
               {%- assign bundle_count = 0 -%}
+              {%- assign variant_index = 0 -%}
               {%- for block in section.blocks -%}
                 {%- if block.type == 'bundle_tier' -%}
                   {%- assign bundle_count = bundle_count | plus: 1 -%}
+                  {%- assign tier_variant = product.variants[variant_index] -%}
+                  {%- assign variant_index = variant_index | plus: 1 -%}
+
+                  {%- if tier_variant != blank -%}
+                    {%- assign display_price = tier_variant.price | money -%}
+                    {%- assign actual_variant_id = tier_variant.id -%}
+                    {%- if tier_variant.compare_at_price > tier_variant.price -%}
+                      {%- assign display_compare = tier_variant.compare_at_price | money -%}
+                      {%- assign savings_pct = tier_variant.compare_at_price | minus: tier_variant.price | times: 100 | divided_by: tier_variant.compare_at_price -%}
+                      {%- assign display_badge = 'Save ' | append: savings_pct | append: '%' -%}
+                    {%- else -%}
+                      {%- assign display_compare = '' -%}
+                      {%- assign display_badge = block.settings.badge_text -%}
+                    {%- endif -%}
+                  {%- else -%}
+                    {%- assign display_price = block.settings.price -%}
+                    {%- assign display_compare = block.settings.compare_price -%}
+                    {%- assign display_badge = block.settings.badge_text -%}
+                    {%- assign actual_variant_id = current_variant.id -%}
+                  {%- endif -%}
+
                   <div class="bundle-card {% if block.settings.default_selected %}is-selected{% endif %}"
-                    data-price="{{ block.settings.price }}"
-                    data-compare-price="{{ block.settings.compare_price }}"
-                    data-discount-badge="{{ block.settings.badge_text }}"
-                    data-variant-id="{{ block.settings.variant_id | default: current_variant.id }}">
-                    
+                    data-price="{{ display_price }}"
+                    data-compare-price="{{ display_compare }}"
+                    data-discount-badge="{{ display_badge }}"
+                    data-variant-id="{{ actual_variant_id }}">
+
                     {%- if block.settings.tag_text != blank -%}
                       <span class="bundle-card__badge">{{ block.settings.tag_text }}</span>
                     {%- endif -%}
@@ -138,9 +173,9 @@
                     </div>
 
                     <div class="bundle-card__pricing">
-                      <div class="bundle-card__price">{{ block.settings.price }}</div>
-                      {%- if block.settings.compare_price != blank -%}
-                        <div class="bundle-card__compare">{{ block.settings.compare_price }}</div>
+                      <div class="bundle-card__price">{{ display_price }}</div>
+                      {%- if display_compare != blank and display_compare != '' -%}
+                        <div class="bundle-card__compare">{{ display_compare }}</div>
                       {%- endif -%}
                     </div>
                   </div>
@@ -201,6 +236,12 @@
             <button type="submit" name="add" class="btn btn--primary btn--atc">
               {{ section.settings.atc_button_text }}
             </button>
+            {%- if section.settings.social_proof_count != blank -%}
+              <div class="social-proof-badge">
+                <span class="social-proof-badge__dot" aria-hidden="true"></span>
+                <span>{{ section.settings.social_proof_count }} women started their ritual this week&nbsp;·&nbsp;Ships in 24 hrs</span>
+              </div>
+            {%- endif -%}
           </div>
         {%- endform -%}
         {%- else -%}
@@ -326,6 +367,12 @@
       "id": "atc_button_text",
       "label": "ATC button text",
       "default": "GET 50% OFF TODAY"
+    },
+    {
+      "type": "text",
+      "id": "social_proof_count",
+      "label": "Social proof count (e.g. 143)",
+      "default": "143"
     },
     {
       "type": "checkbox",
