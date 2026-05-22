@@ -1,6 +1,7 @@
 /* theme.js — core interactions */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initCartDrawer();
   initGallery();
   initBundleSelector();
   initFaqAccordion();
@@ -445,5 +446,74 @@ function initBeforeAfter() {
     window.addEventListener('touchmove', onMove, { passive: true });
     window.addEventListener('mouseup', onUp);
     window.addEventListener('touchend', onUp);
+  });
+}
+
+/**
+ * Money formatter — converts Shopify cents integer to display string
+ * e.g. 10500 → "$105", 10550 → "$105.50"
+ */
+function formatMoney(cents) {
+  const dollars = cents / 100;
+  return '$' + (dollars % 1 === 0 ? dollars.toFixed(0) : dollars.toFixed(2));
+}
+
+/**
+ * Cart Drawer — open
+ */
+function openCartDrawer() {
+  const drawer = document.getElementById('cart-drawer');
+  const overlay = document.getElementById('cart-drawer-overlay');
+  if (!drawer || !overlay) return;
+  drawer.classList.add('is-open');
+  overlay.classList.add('is-open');
+  drawer.setAttribute('aria-hidden', 'false');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Cart Drawer — close
+ */
+function closeCartDrawer() {
+  const drawer = document.getElementById('cart-drawer');
+  const overlay = document.getElementById('cart-drawer-overlay');
+  if (!drawer || !overlay) return;
+  drawer.classList.remove('is-open');
+  overlay.classList.remove('is-open');
+  drawer.setAttribute('aria-hidden', 'true');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+/**
+ * Cart Drawer — wire up close triggers and drawer qty buttons
+ */
+function initCartDrawer() {
+  const drawer = document.getElementById('cart-drawer');
+  const overlay = document.getElementById('cart-drawer-overlay');
+  if (!drawer || !overlay) return;
+
+  overlay.addEventListener('click', closeCartDrawer);
+
+  drawer.querySelectorAll('[data-close-drawer]').forEach(el => {
+    el.addEventListener('click', closeCartDrawer);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeCartDrawer();
+  });
+
+  // Qty buttons inside drawer (event delegation — buttons are added dynamically)
+  drawer.addEventListener('click', (e) => {
+    const btn = e.target.closest('.qty-btn');
+    if (!btn) return;
+    const key = btn.dataset.key;
+    const input = drawer.querySelector(`.qty-input[data-key="${key}"]`);
+    if (!input) return;
+    const current = parseInt(input.value, 10) || 0;
+    const next = btn.classList.contains('qty-btn--plus') ? current + 1 : Math.max(0, current - 1);
+    input.value = next;
+    submitCartChange(key, next);
   });
 }
