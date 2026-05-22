@@ -37,5 +37,42 @@
     {{ content_for_layout }}
 
     {% sections 'footer-group' %}
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer-overlay" class="cart-drawer-overlay" aria-hidden="true"></div>
+
+    <div id="cart-drawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-label="Your bag">
+      <div class="cart-drawer__inner">
+
+        <div class="cart-drawer__header">
+          <h2 class="cart-drawer__title">Your bag (<span id="cart-drawer-count">0</span>)</h2>
+          <button class="cart-drawer__close" aria-label="Close bag" data-close-drawer>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 4l12 12M16 4L4 16"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="free-ship cart-drawer__freeship" data-threshold="{{ 99 | times: 100 }}">
+          <p class="free-ship__text" id="cart-drawer-ship-text">Add items to unlock free shipping.</p>
+          <div class="free-ship__bar"><span class="free-ship__bar-fill" id="cart-drawer-ship-fill" style="width:0%"></span></div>
+        </div>
+
+        <div class="cart-drawer__lines" id="cart-drawer-lines">
+          <p class="cart-drawer__empty">Your bag is empty.</p>
+        </div>
+
+        <div class="cart-drawer__footer">
+          <div class="cart-drawer__subtotal">
+            <span>Subtotal</span>
+            <span id="cart-drawer-subtotal"></span>
+          </div>
+          <a href="/checkout" class="btn btn--primary cart-drawer__checkout">CHECKOUT — CLAIM YOUR OFFER</a>
+          <button class="cart-drawer__continue" data-close-drawer>Continue shopping →</button>
+        </div>
+
+      </div>
+    </div>
+
   </body>
 </html>
