@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCartDrawer();
+  initAtcIntercept();
   initGallery();
   initBundleSelector();
   initFaqAccordion();
@@ -581,4 +582,99 @@ function refreshCartDrawer() {
       }
     })
     .catch(err => console.error('[Cart drawer] refresh failed:', err));
+}
+
+/**
+ * ATC Intercept — replaces native form submit with AJAX add-to-cart
+ * Opens cart drawer on success with button loading/success/revert states
+ */
+function initAtcIntercept() {
+  const form = document.getElementById('product-form');
+  if (!form) return;
+
+  const mainBtn = form.querySelector('.btn--atc');
+  const originalLabel = mainBtn ? mainBtn.textContent.trim() : '';
+
+  function setAtcState(state) {
+    const stickyBtn = document.querySelector('.sticky-atc__btn');
+
+    if (state === 'loading') {
+      if (mainBtn) {
+        mainBtn.textContent = '◌ Adding...';
+        mainBtn.classList.add('is-loading');
+      }
+      if (stickyBtn) {
+        stickyBtn.textContent = '◌ Adding...';
+        stickyBtn.classList.add('is-loading');
+      }
+    } else if (state === 'success') {
+      if (mainBtn) {
+        mainBtn.textContent = '✓ Added to your ritual';
+        mainBtn.classList.remove('is-loading');
+        mainBtn.classList.add('is-success');
+      }
+      if (stickyBtn) {
+        stickyBtn.textContent = '✓ Added';
+        stickyBtn.classList.remove('is-loading');
+        stickyBtn.classList.add('is-success');
+      }
+    } else {
+      // revert
+      if (mainBtn) {
+        mainBtn.textContent = originalLabel;
+        mainBtn.classList.remove('is-loading', 'is-success');
+      }
+      if (stickyBtn) {
+        stickyBtn.textContent = stickyBtn.dataset.originalLabel || 'Claim Offer';
+        stickyBtn.classList.remove('is-loading', 'is-success');
+      }
+    }
+  }
+
+  function showAtcError(msg) {
+    setAtcState('default');
+    let errEl = form.querySelector('.atc-error');
+    if (!errEl) {
+      errEl = document.createElement('p');
+      errEl.className = 'atc-error';
+      errEl.style.cssText = 'color:red;font-size:var(--fs-xs);margin-top:var(--sp-2);text-align:center;';
+      const btn = form.querySelector('.btn--atc');
+      if (btn) btn.insertAdjacentElement('afterend', errEl);
+    }
+    errEl.textContent = msg;
+    setTimeout(() => { if (errEl.parentNode) errEl.remove(); }, 4000);
+  }
+
+  // Store sticky button's original label before it ever changes
+  const stickyBtn = document.querySelector('.sticky-atc__btn');
+  if (stickyBtn && !stickyBtn.dataset.originalLabel) {
+    stickyBtn.dataset.originalLabel = stickyBtn.textContent.trim();
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    setAtcState('loading');
+
+    const formData = new FormData(form);
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: formData,
+    })
+      .then(r => {
+        if (!r.ok) return r.json().then(err => Promise.reject(err));
+        return r.json();
+      })
+      .then(() => {
+        setAtcState('success');
+        refreshCartDrawer();
+        openCartDrawer();
+        setTimeout(() => setAtcState('default'), 2000);
+      })
+      .catch(err => {
+        const msg = (err && err.description) ? err.description : 'Something went wrong — please try again.';
+        showAtcError(msg);
+      });
+  });
 }
