@@ -56,7 +56,7 @@
             {%- endfor -%}
           {%- else -%}
             <!-- Placeholder thumbnails using local asset library -->
-            {%- assign placeholder_thumbs = 'product-packshot.png,lifestyle-sofa.jpg,hero-mask-glow.jpg,hero-mask-side.jpg,woman-mirror-1.jpg,lifestyle-chaise.jpg' | split: ',' -%}
+            {%- assign placeholder_thumbs = 'mask-shot-1.png,mask-shot-2.png,mask-shot-3.png,mask-shot-4.jpg,mask-shot-5.jpg,mask-shot-6.jpg,product-packshot.png,hero-mask-glow.jpg,hero-mask-side.jpg,ritual-step-1.jpeg,ritual-step-2.jpeg,lifestyle-chaise.jpg' | split: ',' -%}
             {%- for thumb in placeholder_thumbs -%}
               <button class="product-gallery__thumbnail {% if forloop.first %}is-active{% endif %}" data-image-src="{{ thumb | asset_url }}">
                 <img src="{{ thumb | asset_url }}" alt="" width="100" height="100" loading="lazy">
@@ -90,6 +90,22 @@
             <span class="price--current">$49.99</span>
             <span class="price__badge">Save 50%</span>
           {%- endif -%}
+        </div>
+
+        <!-- Afterpay / Klarna installment line -->
+        <div class="buybox__installments" aria-label="Pay in 4 interest-free installments">
+          {%- if default_form_variant != blank and default_form_variant.price > 0 -%}
+            {%- assign installment_amount = default_form_variant.price | divided_by: 4.0 | money -%}
+          {%- else -%}
+            {%- assign installment_amount = '$44.75' -%}
+          {%- endif -%}
+          <span class="buybox__installments-text">
+            or <strong>4 interest-free payments</strong> of {{ installment_amount }} with
+          </span>
+          <span class="buybox__installments-brands">
+            <span class="buybox__installment-pill buybox__installment-pill--afterpay">Afterpay</span>
+            <span class="buybox__installment-pill buybox__installment-pill--klarna">Klarna</span>
+          </span>
         </div>
 
         <!-- Outcome / Benefit Bullets -->
@@ -277,6 +293,37 @@
             <span class="payment-pill">Klarna</span>
           {%- endfor -%}
         </div>
+
+        <!-- Trust mini-stack: ship + trial + warranty -->
+        <ul class="trust-mini-stack" aria-label="Order assurances">
+          <li class="trust-mini-stack__item">
+            <svg class="trust-mini-stack__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/>
+            </svg>
+            <div class="trust-mini-stack__text">
+              <strong>Ships in 24 hrs</strong>
+              <span>From Sydney warehouse</span>
+            </div>
+          </li>
+          <li class="trust-mini-stack__item">
+            <svg class="trust-mini-stack__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 9 8 9"/>
+            </svg>
+            <div class="trust-mini-stack__text">
+              <strong>60-night trial</strong>
+              <span>Full refund. We pay return shipping.</span>
+            </div>
+          </li>
+          <li class="trust-mini-stack__item">
+            <svg class="trust-mini-stack__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>
+            </svg>
+            <div class="trust-mini-stack__text">
+              <strong>2-year warranty</strong>
+              <span>Faulty units replaced at no cost</span>
+            </div>
+          </li>
+        </ul>
 
         <!-- Order timeline -->
         <div class="order-timeline">

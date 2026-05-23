@@ -147,15 +147,16 @@
     },
 
     "founder_note": {
-      "type": "feature-grid",
+      "type": "founder-note",
       "settings": {
-        "subheading": "A NOTE FROM THE FOUNDER",
-        "heading": "Built by a woman in the same phase as you."
-      },
-      "blocks": {
-        "fn1": { "type": "feature", "settings": { "custom_emoji": "—", "title": "I'm 47. I built this because nothing in the chemist worked anymore.", "text": "I'd spent over $4,000 on serums in two years and watched my face change anyway. I started reading the actual research on red light, found the wavelengths that mattered, and built a mask designed for the phase the rest of the industry pretends isn't happening. — Founder, The Quiet Hour" } }
-      },
-      "block_order": ["fn1"]
+        "eyebrow": "A NOTE FROM THE FOUNDER",
+        "heading": "Built by a woman in the same phase as you.",
+        "caption": "The Quiet Hour HQ · Sydney",
+        "lead": "I'm 47. I built this because nothing in the chemist worked anymore.",
+        "quote": "<p>I'd spent over $4,000 on serums in two years and watched my face change anyway. I started reading the actual research on red light, found the wavelengths that mattered, and built a mask designed for the phase the rest of the industry pretends isn't happening.</p><p>This is for any woman who's tired of being marketed to like she's 22 — or like she's done.</p>",
+        "founder_name": "Founder, The Quiet Hour",
+        "founder_role": "Sydney, Australia"
+      }
     },
 
     "faq": {
@@ -293,14 +294,12 @@
       "settings": {
         "eyebrow": "BEFORE / AFTER",
         "heading": "See the difference at 6 weeks",
-        "sub": "Real customers. Same time of day. Same lighting. No filters. Drag the slider on any photo to reveal.",
+        "sub": "Real customer. Same time of day. Same lighting. No filters.",
         "show_default_pair": true,
-        "disclaimer": "Individual results vary. All photos taken at week 0 and week 6–8 of consistent use (10 minutes, three nights a week, ~25 total sessions)."
+        "disclaimer": "Individual results vary. Photos taken at week 0 and week 6–8 of consistent use (10 minutes, three nights a week, ~25 total sessions)."
       },
-      "blocks": {
-        "c1": { "type": "comparison", "settings": { "customer_name": "Anna K.", "customer_age": "47, Sydney", "duration": "8 weeks", "note": "Three nights a week, ten minutes, while I read. That was it." } }
-      },
-      "block_order": ["c1"]
+      "blocks": {},
+      "block_order": []
     },
 
     "review_cards": {

@@ -27,7 +27,7 @@
                   alt: block.settings.name
                 }}
               {%- else -%}
-                {%- assign fallback_imgs = 'woman-mirror-1.jpg,woman-mirror-2.jpg,lifestyle-chaise.jpg,clinic-vs-bedroom.jpg' | split: ',' -%}
+                {%- assign fallback_imgs = 'review-photo-1.png,review-photo-2.png,review-photo-3.png,woman-mirror-1.jpg' | split: ',' -%}
                 {%- assign fb_idx = forloop.index0 | modulo: fallback_imgs.size -%}
                 <img class="review-card__img" src="{{ fallback_imgs[fb_idx] | asset_url }}" width="600" height="600" loading="lazy" alt="{{ block.settings.name }}">
               {%- endif -%}

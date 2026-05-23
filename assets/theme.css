@@ -503,6 +503,20 @@
   .feature-grid__layout {
     grid-template-columns: repeat(5, 1fr);
   }
+  /* When the grid has exactly 3 items, center them with a 3-col layout */
+  .feature-grid__layout:has(.feature-grid__item:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* When exactly 4 items, use 4-col centered */
+  .feature-grid__layout:has(.feature-grid__item:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .feature-grid__item {
@@ -3773,4 +3787,245 @@
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* =========================================================
+   FOUNDER NOTE
+   ========================================================= */
+.founder-note {
+  background-color: var(--color-bg);
+  padding-top: var(--sp-16);
+  padding-bottom: var(--sp-16);
+}
+
+.founder-note__header {
+  text-align: center;
+  margin-bottom: var(--sp-10);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.founder-note__eyebrow {
+  display: inline-block;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  margin-bottom: var(--sp-3);
+}
+
+.founder-note__heading {
+  font-size: clamp(1.6rem, 2.6vw + 0.8rem, 2.4rem);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.founder-note__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .founder-note__grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--sp-12);
+  }
+}
+
+.founder-note__portrait {
+  position: relative;
+}
+
+.founder-note__img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 14px 40px -22px rgba(0, 0, 0, 0.35);
+}
+
+.founder-note__caption {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--sp-3);
+  font-style: italic;
+}
+
+.founder-note__body {
+  position: relative;
+  padding-left: var(--sp-4);
+}
+
+@media (min-width: 768px) {
+  .founder-note__body {
+    padding-left: var(--sp-6);
+  }
+}
+
+.founder-note__rule {
+  width: 48px;
+  height: 3px;
+  background: var(--color-accent);
+  margin-bottom: var(--sp-5);
+  border-radius: 2px;
+}
+
+.founder-note__lead {
+  font-size: clamp(1.15rem, 1.5vw + 0.5rem, 1.4rem);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0 0 var(--sp-4) 0;
+  color: var(--color-text);
+}
+
+.founder-note__quote {
+  font-size: var(--fs-base);
+  line-height: 1.65;
+  margin: 0 0 var(--sp-5) 0;
+  color: var(--color-text-muted);
+  border-left: none;
+  padding-left: 0;
+}
+
+.founder-note__quote p {
+  margin: 0 0 var(--sp-3) 0;
+}
+
+.founder-note__quote p:last-child {
+  margin-bottom: 0;
+}
+
+.founder-note__signoff {
+  margin: var(--sp-4) 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.founder-note__signoff-name {
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+}
+
+.founder-note__signoff-role {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.founder-note__cta {
+  margin-top: var(--sp-6);
+  display: inline-flex;
+  width: auto;
+}
+
+/* =========================================================
+   BUYBOX INSTALLMENTS LINE (Afterpay / Klarna)
+   ========================================================= */
+.buybox__installments {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.buybox__installments-text strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.buybox__installments-brands {
+  display: inline-flex;
+  gap: var(--sp-2);
+  align-items: center;
+}
+
+.buybox__installment-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.buybox__installment-pill--afterpay {
+  background: #b2fce4;
+  color: #000;
+}
+
+.buybox__installment-pill--klarna {
+  background: #ffa8cd;
+  color: #17120f;
+}
+
+/* =========================================================
+   TRUST MINI-STACK (under payment row)
+   ========================================================= */
+.trust-mini-stack {
+  list-style: none;
+  margin: var(--sp-4) 0 0 0;
+  padding: var(--sp-4);
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-3);
+}
+
+@media (min-width: 540px) {
+  .trust-mini-stack {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+  }
+}
+
+.trust-mini-stack__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+
+.trust-mini-stack__icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  color: var(--color-accent);
+  margin-top: 2px;
+}
+
+.trust-mini-stack__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fs-xs);
+  line-height: 1.35;
+}
+
+.trust-mini-stack__text strong {
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: var(--fs-sm);
+}
+
+.trust-mini-stack__text span {
+  color: var(--color-text-muted);
 }
