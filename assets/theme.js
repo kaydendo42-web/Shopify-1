@@ -517,8 +517,20 @@ function initCartDrawer() {
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeCartDrawer();
   });
 
-  // Qty buttons inside drawer (event delegation — buttons are added dynamically)
+  // Delegated handlers — buttons are added dynamically
   drawer.addEventListener('click', (e) => {
+    // Close (dynamically-rendered empty-state button)
+    if (e.target.closest('[data-close-drawer]')) {
+      closeCartDrawer();
+      return;
+    }
+    // Remove line
+    const removeBtn = e.target.closest('.qty-btn--remove');
+    if (removeBtn) {
+      submitCartChange(removeBtn.dataset.key, 0);
+      return;
+    }
+    // Qty +/-
     const btn = e.target.closest('.qty-btn');
     if (!btn) return;
     const key = btn.dataset.key;
@@ -565,31 +577,50 @@ function refreshCartDrawer() {
       // Render line items
       if (linesEl) {
         if (cart.item_count === 0) {
-          linesEl.innerHTML = '<p class="cart-drawer__empty">Your bag is empty.</p>';
+          linesEl.innerHTML = `
+            <div class="cart-drawer__empty">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+                <path d="M3 6h18l-2 13H5L3 6z"/><path d="M8 6V4a4 4 0 0 1 8 0v2"/>
+              </svg>
+              <p>Your bag is quiet.</p>
+              <button class="cart-drawer__empty-btn" data-close-drawer>Start your ritual →</button>
+            </div>`;
         } else {
-          linesEl.innerHTML = cart.items.map(item => `
+          linesEl.innerHTML = cart.items.map(item => {
+            const hasCompare = item.original_line_price && item.original_line_price > item.line_price;
+            const saved = hasCompare ? item.original_line_price - item.line_price : 0;
+            return `
             <div class="cart-drawer__line">
               ${item.image
-                ? `<img class="cart-drawer__line-img" src="${item.image}" alt="${item.product_title}" width="80" height="80" loading="lazy">`
+                ? `<img class="cart-drawer__line-img" src="${item.image}" alt="${item.product_title}" width="88" height="88" loading="lazy">`
                 : '<div class="cart-drawer__line-img"></div>'
               }
               <div class="cart-drawer__line-body">
-                <p class="cart-drawer__line-title">${item.product_title}</p>
+                <div class="cart-drawer__line-top">
+                  <p class="cart-drawer__line-title">${item.product_title}</p>
+                  <button type="button" class="cart-drawer__line-remove qty-btn--remove" data-key="${item.key}" aria-label="Remove item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>
+                  </button>
+                </div>
                 ${item.variant_title && item.variant_title !== 'Default Title'
                   ? `<p class="cart-drawer__line-variant">${item.variant_title}</p>`
                   : ''
                 }
+                ${hasCompare ? `<span class="cart-drawer__line-savings">You save ${formatMoney(saved)}</span>` : ''}
                 <div class="cart-drawer__line-row">
                   <div class="cart-drawer__line-qty">
                     <button type="button" class="qty-btn qty-btn--minus" data-key="${item.key}" aria-label="Decrease quantity">−</button>
                     <input type="text" class="qty-input" value="${item.quantity}" data-key="${item.key}" readonly aria-label="Quantity">
                     <button type="button" class="qty-btn qty-btn--plus" data-key="${item.key}" aria-label="Increase quantity">+</button>
                   </div>
-                  <span class="cart-drawer__line-price">${formatMoney(item.line_price)}</span>
+                  <div class="cart-drawer__line-prices">
+                    ${hasCompare ? `<span class="cart-drawer__line-price-compare">${formatMoney(item.original_line_price)}</span>` : ''}
+                    <span class="cart-drawer__line-price">${formatMoney(item.line_price)}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          `).join('');
+            </div>`;
+          }).join('');
         }
       }
     })
