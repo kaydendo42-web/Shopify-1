@@ -1,5 +1,16 @@
 /* theme.js — core interactions */
 
+function fireAddToCart(variantId, price, name) {
+  if (typeof fbq !== 'function') return;
+  fbq('track', 'AddToCart', {
+    content_ids: [String(variantId)],
+    content_type: 'product',
+    value: price ? (price / 100).toFixed(2) : '0.00',
+    currency: 'AUD',
+    content_name: name || ''
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initCartDrawer();
   initAtcIntercept();
@@ -405,6 +416,7 @@ function initCollectionAtc() {
             if (label) label.textContent = originalText;
           }, 2000);
 
+          fireAddToCart(variantId, null, btn.closest('[data-product-title]') ? btn.closest('[data-product-title]').dataset.productTitle : '');
           window.dispatchEvent(new CustomEvent('cart:updated', { detail: cart }));
         })
         .catch(() => {
@@ -520,6 +532,14 @@ function initCartDrawer() {
 
   // Re-render drawer whenever cart changes (qty +/-, remove, upsell add)
   window.addEventListener('cart:updated', refreshCartDrawer);
+
+  // Fire InitiateCheckout pixel when checkout link clicked
+  const checkoutBtn = document.querySelector('.cart-drawer__checkout');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (typeof fbq === 'function') fbq('track', 'InitiateCheckout');
+    });
+  }
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeCartDrawer();
@@ -745,8 +765,9 @@ function initAtcIntercept() {
         if (!r.ok) return r.json().then(err => Promise.reject(err));
         return r.json();
       })
-      .then(() => {
+      .then(item => {
         setAtcState('success');
+        fireAddToCart(item.variant_id, item.price, item.product_title);
         refreshCartDrawer();
         openCartDrawer();
         setTimeout(() => setAtcState('default'), 2000);
