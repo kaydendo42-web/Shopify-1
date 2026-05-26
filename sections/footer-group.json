@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "t:general.footer",
@@ -5,16 +14,27 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true,
         "about_text": "The Quiet Hour™ — ten minutes. three nights. just you. Designed and supported in Australia for women in the phase.",
         "contact_email": "hello@thequiethour.com.au",
-        "show_contact_email": true
+        "show_contact_email": true,
+        "menu": "",
+        "show_payment_icons": true
       }
     },
     "email_popup": {
       "type": "email-popup",
-      "settings": {}
+      "settings": {
+        "enabled": true,
+        "trigger": "exit",
+        "delay_seconds": 25,
+        "cookie_days": 14,
+        "image": "shopify://shop_images/Woman_reclining_on_chaise_lounge_202605212345.jpg",
+        "eyebrow": "BEFORE YOU GO",
+        "title": "Get $20 off your Quiet Hour.",
+        "subtitle": "Drop your email - we'll send the code, plus the founder's note on why we built this.",
+        "cta": "Send my code",
+        "fine_print": "Single email. No spam. Unsubscribe anytime."
+      }
     }
   },
   "order": [
