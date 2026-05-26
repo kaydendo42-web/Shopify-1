@@ -1,185 +1,797 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-product",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Visibly firmer-looking skin in 28 days"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Designed specifically for skin in the perimenopause phase (38–55)"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Same 635nm + 830nm wavelengths used in clinical red light therapy"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Eye-safe, heat-free, no UV — gentle on rosacea-prone & sensitive skin"
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "text": "10-minute treatments, cordless, light enough to wear while you read"
+          }
+        },
+        "tier1": {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "1× Mask",
+            "subtitle": "Yourself",
+            "price": "$179",
+            "compare_price": "$229",
+            "badge_text": "Save $50",
+            "tag_text": "",
+            "variant_id": "",
+            "default_selected": false
+          }
+        },
+        "tier2": {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "2× Mask Bundle",
+            "subtitle": "You + your sister / mum / best friend",
+            "price": "$298",
+            "compare_price": "$458",
+            "badge_text": "Save $160",
+            "tag_text": "Best Value",
+            "variant_id": "",
+            "default_selected": true
+          }
+        },
+        "tier3": {
+          "type": "bundle_tier",
+          "settings": {
+            "title": "The Quiet Hour Set",
+            "subtitle": "Mask + neck wrap + travel pouch",
+            "price": "$249",
+            "compare_price": "$329",
+            "badge_text": "Save $80",
+            "tag_text": "Most Popular",
+            "variant_id": "",
+            "default_selected": false
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "tier1",
+        "tier2",
+        "tier3"
+      ],
       "settings": {
         "fallback_title": "The Quiet Hour™ — LED Light Therapy Mask",
-        "ribbon_text": "Designed for women in the phase",
-        "social_proof_count": "143",
         "subheadline": "Clinical-grade 635nm + 830nm wavelengths. 10 minutes. Three nights a week.",
+        "ribbon_text": "Designed for women in the phase",
         "atc_button_text": "START YOUR RITUAL — SAVE 25%",
+        "social_proof_count": "143",
         "use_bundle_selector": true,
+        "show_bestseller_badge": true,
+        "bestseller_text": "MOST LOVED · 2,847 REVIEWS",
         "rating_value": "4.8",
         "review_count": "2,847",
         "testimonial_name": "Anna K., 47 — Sydney",
         "testimonial_text": "My husband asked if I'd had something done. I hadn't — just three weeks of this, three nights a week, while my book was on my chest. That's it."
-      },
-      "blocks": {
-        "b1": { "type": "benefit", "settings": { "text": "Visibly firmer-looking skin in 28 days" } },
-        "b2": { "type": "benefit", "settings": { "text": "Designed specifically for skin in the perimenopause phase (38–55)" } },
-        "b3": { "type": "benefit", "settings": { "text": "Same 635nm + 830nm wavelengths used in clinical red light therapy" } },
-        "b4": { "type": "benefit", "settings": { "text": "Eye-safe, heat-free, no UV — gentle on rosacea-prone & sensitive skin" } },
-        "b5": { "type": "benefit", "settings": { "text": "10-minute treatments, cordless, light enough to wear while you read" } },
-        "tier1": { "type": "bundle_tier", "settings": { "title": "1× Mask", "subtitle": "Yourself", "price": "$179", "compare_price": "$229", "badge_text": "Save $50", "tag_text": "" } },
-        "tier2": { "type": "bundle_tier", "settings": { "title": "2× Mask Bundle", "subtitle": "You + your sister / mum / best friend", "price": "$298", "compare_price": "$458", "badge_text": "Save $160", "tag_text": "Best Value", "default_selected": true } },
-        "tier3": { "type": "bundle_tier", "settings": { "title": "The Quiet Hour Set", "subtitle": "Mask + neck wrap", "price": "$249", "compare_price": "$329", "badge_text": "Save $80", "tag_text": "Most Popular" } }
-      },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "tier1", "tier2", "tier3"]
-    },
-
-    "trust": {
-      "type": "trust-bar",
-      "settings": {},
-      "blocks": {
-        "tb1": { "type": "badge", "settings": { "text": "60-Day Money-Back Guarantee" } },
-        "tb2": { "type": "badge", "settings": { "text": "Free AU-Wide Shipping over $99" } },
-        "tb3": { "type": "badge", "settings": { "text": "2-Year Warranty" } },
-        "tb4": { "type": "badge", "settings": { "text": "Designed & Supported in Australia" } },
-        "tb5": { "type": "badge", "settings": { "text": "Eye-Safe · No UV · Heat-Free" } },
-        "tb6": { "type": "badge", "settings": { "text": "Afterpay & Klarna Available" } }
-      },
-      "block_order": ["tb1", "tb2", "tb3", "tb4", "tb5", "tb6"]
-    },
-
-    "phase_intro": {
-      "type": "feature-grid",
-      "settings": {
-        "subheading": "WHY YOUR SKINCARE STOPPED WORKING",
-        "heading": "Your skincare didn't stop working. Your skin moved into a new phase."
-      },
-      "blocks": {
-        "p1": { "type": "feature", "settings": { "custom_emoji": "↓", "title": "Collagen drops ~1% per year after 35", "text": "By 45, your skin has lost up to 30% of the collagen it had at 25 — and serums sit on the surface where ageing isn't actually happening." } },
-        "p2": { "type": "feature", "settings": { "custom_emoji": "○", "title": "Oestrogen shifts change everything", "text": "Falling oestrogen during perimenopause thins the skin barrier, slows turnover, and reduces hydration retention. Same routine. Different skin." } },
-        "p3": { "type": "feature", "settings": { "custom_emoji": "✺", "title": "Red light works at the cellular level", "text": "635nm + 830nm wavelengths penetrate the dermis and stimulate the mitochondria in your skin cells — the engine that produces collagen." } }
-      },
-      "block_order": ["p1", "p2", "p3"]
-    },
-
-    "as_seen_in": {
-      "type": "as-seen-in",
-      "settings": { "title": "AS FEATURED IN" },
-      "blocks": {
-        "p1": { "type": "press_item", "settings": { "press_name": "Body+Soul", "quote": "The LED mask Australian women in their 40s won't shut up about." } },
-        "p2": { "type": "press_item", "settings": { "press_name": "Mamamia", "quote": "A 10-minute ritual that's quietly replacing the $400 facial." } },
-        "p3": { "type": "press_item", "settings": { "press_name": "Marie Claire AU", "quote": "Where premium red-light therapy meets a price that respects you." } },
-        "p4": { "type": "press_item", "settings": { "press_name": "POPSUGAR AU", "quote": "It's the closest thing to a clinic facial we've found for home." } },
-        "p5": { "type": "press_item", "settings": { "press_name": "Adore Beauty", "quote": "Designed for skin in the perimenopause phase — and it shows." } }
-      },
-      "block_order": ["p1", "p2", "p3", "p4", "p5"]
-    },
-
-    "features": {
-      "type": "feature-grid",
-      "settings": {
-        "subheading": "DESIGNED FOR THE PHASE",
-        "heading": "Five things that make this different"
-      },
-      "blocks": {
-        "f1": { "type": "feature", "settings": { "custom_emoji": "✦", "title": "Dual wavelengths", "text": "635nm Red + 830nm Near-Infrared. The two wavelengths with the strongest clinical evidence for collagen support." } },
-        "f2": { "type": "feature", "settings": { "custom_emoji": "◐", "title": "240 medical-grade LEDs", "text": "Full coverage from forehead to jawline. Even, calibrated output — not dollar-store flicker." } },
-        "f3": { "type": "feature", "settings": { "custom_emoji": "◊", "title": "10-minute auto-shutoff", "text": "Built for the way midlife women actually live. Set it on, do your wind-down, it turns itself off." } },
-        "f4": { "type": "feature", "settings": { "custom_emoji": "○", "title": "Cordless + soft silicone", "text": "Wear it while you read. While you fold washing. While you watch your show. No leaning back. No wires." } },
-        "f5": { "type": "feature", "settings": { "custom_emoji": "✓", "title": "Sensitive-skin safe", "text": "Heat-free, UV-free, eye-safe. Tested for rosacea-prone and sensitive skin types I–V." } }
-      },
-      "block_order": ["f1", "f2", "f3", "f4", "f5"]
-    },
-
-    "how_it_works": {
-      "type": "how-it-works",
-      "settings": {
-        "subheading": "THE RITUAL",
-        "heading": "Ten minutes. Three nights a week. That's it."
-      },
-      "blocks": {
-        "s1": { "type": "step", "settings": { "title": "1. Cleanse + dry", "text": "Skin clean and dry. No serums underneath. Light reaches the skin clearer that way." } },
-        "s2": { "type": "step", "settings": { "title": "2. Wear for 10 minutes", "text": "Slip it on while you read, sit, breathe. Eyes closed. It auto-shuts off when you're done." } },
-        "s3": { "type": "step", "settings": { "title": "3. Layer your evening serums", "text": "Skin is primed to absorb. Apply your usual routine after — it works harder now." } }
-      },
-      "block_order": ["s1", "s2", "s3"]
-    },
-
-    "comparison": {
-      "type": "comparison-table",
-      "settings": {
-        "subheading": "THE QUIET HOUR VS THE ALTERNATIVES",
-        "heading": "Same clinical wavelengths. Designed for you. Priced for sense."
-      },
-      "blocks": {
-        "c1": { "type": "comparison_row", "settings": { "feature_name": "Dual 635nm + 830nm wavelengths", "us_supported": true, "them_supported": true } },
-        "c2": { "type": "comparison_row", "settings": { "feature_name": "Designed for skin 38–55 (perimenopause phase)", "us_supported": true, "them_supported": false } },
-        "c3": { "type": "comparison_row", "settings": { "feature_name": "Australian-based support, local hours", "us_supported": true, "them_supported": false } },
-        "c4": { "type": "comparison_row", "settings": { "feature_name": "10-minute treatment time", "us_supported": true, "them_supported": false } },
-        "c5": { "type": "comparison_row", "settings": { "feature_name": "Cordless + lightweight silicone", "us_supported": true, "them_supported": true } },
-        "c6": { "type": "comparison_row", "settings": { "feature_name": "2-year warranty included", "us_supported": true, "them_supported": false } },
-        "c7": { "type": "comparison_row", "settings": { "feature_name": "60-day money-back guarantee", "us_supported": true, "them_supported": false } },
-        "c8": { "type": "comparison_row", "settings": { "feature_name": "Under $200", "us_supported": true, "them_supported": false } }
-      },
-      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]
-    },
-
-    "stats": {
-      "type": "stats-block",
-      "settings": {
-        "footnote": "Results from a 60-day self-reported survey of 412 The Quiet Hour customers aged 38–55, conducted Q1 2026."
-      },
-      "blocks": {
-        "st1": { "type": "stat_item", "settings": { "number": "94%", "label": "saw firmer-looking skin", "text": "by week 4 of consistent use" } },
-        "st2": { "type": "stat_item", "settings": { "number": "3 of 4", "label": "noticed less fatigue around the eyes", "text": "within the first 14 days" } },
-        "st3": { "type": "stat_item", "settings": { "number": "8 in 10", "label": "stopped at least one other product", "text": "after starting the ritual" } }
-      },
-      "block_order": ["st1", "st2", "st3"]
-    },
-
-    "testimonials": {
-      "type": "testimonials-slider",
-      "settings": {
-        "subheading": "REAL WOMEN. REAL PHASE.",
-        "heading": "What women 42–54 are saying"
-      },
-      "blocks": {
-        "t1": { "type": "testimonial", "settings": { "name": "Anna K., 47", "verified": true, "headline": "He asked if I'd had something done.", "text": "Three weeks in, my husband asked if I'd had something done. I hadn't. Three nights a week, ten minutes, while my book was on my chest. That's the whole thing.", "date": "March 2026" } },
-        "t2": { "type": "testimonial", "settings": { "name": "Renée D., 51", "verified": true, "headline": "I cancelled my Botox appointment", "text": "I'd been doing Botox twice a year. This isn't the same — but my skin looks like itself in a way the Botox never made it look. I cancelled my next appointment to keep going on this for another 90 days.", "date": "February 2026" } },
-        "t3": { "type": "testimonial", "settings": { "name": "Bec T., 43", "verified": true, "headline": "First thing that's worked since 41", "text": "Tried everything. La Mer, microneedling, the whole catalogue. This is the first thing that's actually made my skin look like me again. Not younger — just rested.", "date": "April 2026" } },
-        "t4": { "type": "testimonial", "settings": { "name": "Linh P., 49", "verified": true, "headline": "The 10 minutes I look forward to", "text": "Honestly the mask works but the bigger thing is the ten minutes. The kids know not to come in. I read. I breathe. My skin glows. All in one ritual.", "date": "January 2026" } },
-        "t5": { "type": "testimonial", "settings": { "name": "Sarah W., 45", "verified": true, "headline": "Didn't believe it. Now I do.", "text": "Bought it skeptical. Used it skeptical. By week 5 I was showing it to my sister. The line between my brows is genuinely softer. I don't post much but I'm posting about this.", "date": "March 2026" } }
-      },
-      "block_order": ["t1", "t2", "t3", "t4", "t5"]
-    },
-
-    "founder_note": {
-      "type": "founder-note",
-      "settings": {
-        "eyebrow": "A NOTE FROM THE FOUNDER",
-        "heading": "Built by a woman in the same phase as you.",
-        "caption": "The Quiet Hour HQ · Sydney",
-        "lead": "I'm 47. I built this because nothing in the chemist worked anymore.",
-        "quote": "<p>I'd spent over $4,000 on serums in two years and watched my face change anyway. I started reading the actual research on red light, found the wavelengths that mattered, and built a mask designed for the phase the rest of the industry pretends isn't happening.</p><p>This is for any woman who's tired of being marketed to like she's 22 — or like she's done.</p>",
-        "founder_name": "Founder, The Quiet Hour",
-        "founder_role": "Sydney, Australia"
       }
     },
-
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "tb1": {
+          "type": "badge",
+          "settings": {
+            "text": "60-Day Money-Back Guarantee"
+          }
+        },
+        "tb2": {
+          "type": "badge",
+          "settings": {
+            "text": "Free AU-Wide Shipping over $99"
+          }
+        },
+        "tb3": {
+          "type": "badge",
+          "settings": {
+            "text": "2-Year Warranty"
+          }
+        },
+        "tb4": {
+          "type": "badge",
+          "settings": {
+            "text": "Designed & Supported in Australia"
+          }
+        },
+        "tb5": {
+          "type": "badge",
+          "settings": {
+            "text": "Eye-Safe · No UV · Heat-Free"
+          }
+        },
+        "tb6": {
+          "type": "badge",
+          "settings": {
+            "text": "Afterpay & Klarna Available"
+          }
+        }
+      },
+      "block_order": [
+        "tb1",
+        "tb2",
+        "tb3",
+        "tb4",
+        "tb5",
+        "tb6"
+      ],
+      "settings": {}
+    },
+    "phase_intro": {
+      "type": "feature-grid",
+      "blocks": {
+        "p1": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "↓",
+            "title": "Collagen drops ~1% per year after 35",
+            "text": "By 45, your skin has lost up to 30% of the collagen it had at 25 — and serums sit on the surface where ageing isn't actually happening."
+          }
+        },
+        "p2": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "○",
+            "title": "Oestrogen shifts change everything",
+            "text": "Falling oestrogen during perimenopause thins the skin barrier, slows turnover, and reduces hydration retention. Same routine. Different skin."
+          }
+        },
+        "p3": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "✺",
+            "title": "Red light works at the cellular level",
+            "text": "635nm + 830nm wavelengths penetrate the dermis and stimulate the mitochondria in your skin cells — the engine that produces collagen."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "heading": "Your skincare didn't stop working. Your skin moved into a new phase.",
+        "subheading": "WHY YOUR SKINCARE STOPPED WORKING"
+      }
+    },
+    "before_after": {
+      "type": "before-after",
+      "blocks": {
+        "c1": {
+          "type": "comparison",
+          "settings": {
+            "customer_name": "Anna K.",
+            "customer_age": "47, Sydney",
+            "duration": "8 weeks",
+            "note": "Three nights a week, ten minutes, while I read. That was it."
+          }
+        },
+        "c2": {
+          "type": "comparison",
+          "settings": {
+            "customer_name": "Renée D.",
+            "customer_age": "51, Melbourne",
+            "duration": "10 weeks",
+            "note": "Skin feels like itself again. I cancelled my next Botox appointment."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {
+        "eyebrow": "BEFORE / AFTER",
+        "heading": "See the difference at 6 weeks",
+        "sub": "Real customers. Same time of day. Same lighting. No filters. Drag the slider on any photo to reveal.",
+        "show_default_pair": true,
+        "disclaimer": "Individual results vary. All photos taken at week 0 and week 6–8 of consistent use (10 minutes, three nights a week, ~25 total sessions)."
+      }
+    },
+    "as_seen_in": {
+      "type": "as-seen-in",
+      "blocks": {
+        "p1": {
+          "type": "press_item",
+          "settings": {
+            "press_name": "Body+Soul",
+            "quote": "The LED mask Australian women in their 40s won't shut up about."
+          }
+        },
+        "p2": {
+          "type": "press_item",
+          "settings": {
+            "press_name": "Mamamia",
+            "quote": "A 10-minute ritual that's quietly replacing the $400 facial."
+          }
+        },
+        "p3": {
+          "type": "press_item",
+          "settings": {
+            "press_name": "Marie Claire AU",
+            "quote": "Where premium red-light therapy meets a price that respects you."
+          }
+        },
+        "p4": {
+          "type": "press_item",
+          "settings": {
+            "press_name": "POPSUGAR AU",
+            "quote": "It's the closest thing to a clinic facial we've found for home."
+          }
+        },
+        "p5": {
+          "type": "press_item",
+          "settings": {
+            "press_name": "Adore Beauty",
+            "quote": "Designed for skin in the perimenopause phase — and it shows."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ],
+      "settings": {
+        "title": "AS FEATURED IN"
+      }
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "✦",
+            "title": "Dual wavelengths",
+            "text": "635nm Red + 830nm Near-Infrared. The two wavelengths with the strongest clinical evidence for collagen support."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "◐",
+            "title": "240 medical-grade LEDs",
+            "text": "Full coverage from forehead to jawline. Even, calibrated output — not dollar-store flicker."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "◊",
+            "title": "10-minute auto-shutoff",
+            "text": "Built for the way midlife women actually live. Set it on, do your wind-down, it turns itself off."
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "○",
+            "title": "Cordless + soft silicone",
+            "text": "Wear it while you read. While you fold washing. While you watch your show. No leaning back. No wires."
+          }
+        },
+        "f5": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "✓",
+            "title": "Sensitive-skin safe",
+            "text": "Heat-free, UV-free, eye-safe. Tested for rosacea-prone and sensitive skin types I–V."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "settings": {
+        "heading": "Five things that make this different",
+        "subheading": "DESIGNED FOR THE PHASE"
+      }
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "1. Cleanse + dry",
+            "text": "Skin clean and dry. No serums underneath. Light reaches the skin clearer that way."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "2. Wear for 10 minutes",
+            "text": "Slip it on while you read, sit, breathe. Eyes closed. It auto-shuts off when you're done."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "3. Layer your evening serums",
+            "text": "Skin is primed to absorb. Apply your usual routine after — it works harder now."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "heading": "Ten minutes. Three nights a week. That's it.",
+        "subheading": "THE RITUAL"
+      }
+    },
+    "comparison": {
+      "type": "comparison-table",
+      "blocks": {
+        "c1": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Dual 635nm + 830nm wavelengths",
+            "us_supported": true,
+            "them_supported": true
+          }
+        },
+        "c2": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Designed for skin 38–55 (perimenopause phase)",
+            "us_supported": true,
+            "them_supported": false
+          }
+        },
+        "c3": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Australian-based support, local hours",
+            "us_supported": true,
+            "them_supported": false
+          }
+        },
+        "c4": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "10-minute treatment time",
+            "us_supported": true,
+            "them_supported": false
+          }
+        },
+        "c5": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Cordless + lightweight silicone",
+            "us_supported": true,
+            "them_supported": true
+          }
+        },
+        "c6": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "2-year warranty included",
+            "us_supported": true,
+            "them_supported": false
+          }
+        },
+        "c7": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "60-day money-back guarantee",
+            "us_supported": true,
+            "them_supported": false
+          }
+        },
+        "c8": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Under $200",
+            "us_supported": true,
+            "them_supported": false
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8"
+      ],
+      "settings": {
+        "heading": "Same clinical wavelengths. Designed for you. Priced for sense.",
+        "subheading": "THE QUIET HOUR VS THE ALTERNATIVES"
+      }
+    },
+    "clinical": {
+      "type": "clinical-proof",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "635 + 830nm",
+            "label": "the two clinically-validated wavelengths for skin rejuvenation",
+            "source": "Hamblin, 2017"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "8 weeks",
+            "label": "average time to visible firmness improvement at 3 sessions/week",
+            "source": "Wunsch & Matuschka, 2014"
+          }
+        },
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "title": "Why 635nm + 830nm specifically?",
+            "body": "635nm (visible red) penetrates the upper dermis where it stimulates fibroblast activity — the cells that produce collagen and elastin. 830nm (near-infrared, invisible) penetrates deeper, supporting mitochondrial energy production in the cells that build new tissue. Most consumer LED devices use just one wavelength; we use both, calibrated together.",
+            "citation": ""
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "title": "Is it safe with rosacea / sensitive skin?",
+            "body": "Yes. Unlike IPL, lasers, microneedling, or chemical peels, red light therapy is non-invasive, non-thermal, and contains no UV. There's no skin barrier disruption, no peeling, no recovery time. It's been used in clinics with rosacea-prone and sensitive skin types I–V for over a decade.",
+            "citation": ""
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "title": "What about retinol, Botox, fillers, HRT?",
+            "body": "Compatible with all of the above. Red light pairs especially well with retinol — use them on alternate nights so neither overwhelms the skin. For Botox or filler, wait 24 hours after a fresh treatment before using. HRT is unaffected — the light works topically at the skin level.",
+            "citation": ""
+          }
+        },
+        "f4": {
+          "type": "fact",
+          "settings": {
+            "title": "How is this different from a $600 mask?",
+            "body": "Same wavelengths. Same delivery technology. We've removed the things that drive premium-mask prices — multi-tier influencer payouts, spa-channel margins, retail markups — and price the device to what it costs to build well. We're a consumer wellness device, not a TGA-registered medical device. The technology is the same; the marketing math isn't.",
+            "citation": ""
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {
+        "eyebrow": "THE SCIENCE",
+        "heading": "Why red light therapy actually works",
+        "sub": "Red light is one of the most studied non-invasive skin treatments — peer-reviewed across multiple journals. The Quiet Hour uses the two wavelengths with the strongest evidence behind them.",
+        "footnote": "The Quiet Hour is a consumer wellness device. Not a TGA-registered medical device. Not intended to diagnose, treat, or cure any condition. Citations available on request — email hello@thequiethour.com.au."
+      }
+    },
+    "stats": {
+      "type": "stats-block",
+      "blocks": {
+        "st1": {
+          "type": "stat_item",
+          "settings": {
+            "number": "94%",
+            "label": "saw firmer-looking skin",
+            "text": "by week 4 of consistent use"
+          }
+        },
+        "st2": {
+          "type": "stat_item",
+          "settings": {
+            "number": "3 of 4",
+            "label": "noticed less fatigue around the eyes",
+            "text": "within the first 14 days"
+          }
+        },
+        "st3": {
+          "type": "stat_item",
+          "settings": {
+            "number": "8 in 10",
+            "label": "stopped at least one other product",
+            "text": "after starting the ritual"
+          }
+        }
+      },
+      "block_order": [
+        "st1",
+        "st2",
+        "st3"
+      ],
+      "settings": {
+        "footnote": "Results from a 60-day self-reported survey of 412 The Quiet Hour customers aged 38–55, conducted Q1 2026."
+      }
+    },
+    "review_cards": {
+      "type": "review-cards",
+      "blocks": {
+        "r1": {
+          "type": "card",
+          "settings": {
+            "name": "Anna K., 47",
+            "rating": 5,
+            "headline": "Best $179 I've spent all year.",
+            "quote": "Three weeks and my husband asked if I'd had something done. I hadn't.",
+            "verified": true
+          }
+        },
+        "r2": {
+          "type": "card",
+          "settings": {
+            "name": "Renée D., 51",
+            "rating": 5,
+            "headline": "Cancelled my Botox.",
+            "quote": "Looks like my skin again, not a frozen version of it.",
+            "verified": true
+          }
+        },
+        "r3": {
+          "type": "card",
+          "settings": {
+            "name": "Bec T., 43",
+            "rating": 5,
+            "headline": "First thing that worked since 41.",
+            "quote": "La Mer, microneedling — nothing. This is the first thing that actually moved the needle.",
+            "verified": true
+          }
+        },
+        "r4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-05-23_at_2.39.29_PM.png",
+            "name": "Linh P., 49",
+            "rating": 5,
+            "headline": "The 10 minutes I look forward to.",
+            "quote": "The kids know not to come in. I read. I breathe. My skin glows. All in one.",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "eyebrow": "REAL WOMEN · REAL RESULTS",
+        "heading": "What women in the phase are saying",
+        "sub": "Photos and words straight from the inbox. Used to be a sceptic? You're in good company."
+      }
+    },
+    "testimonials": {
+      "type": "testimonials-slider",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Anna K., 47",
+            "verified": true,
+            "headline": "He asked if I'd had something done.",
+            "text": "Three weeks in, my husband asked if I'd had something done. I hadn't. Three nights a week, ten minutes, while my book was on my chest. That's the whole thing.",
+            "date": "March 2026"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Renée D., 51",
+            "verified": true,
+            "headline": "I cancelled my Botox appointment",
+            "text": "I'd been doing Botox twice a year. This isn't the same — but my skin looks like itself in a way the Botox never made it look. I cancelled my next appointment to keep going on this for another 90 days.",
+            "date": "February 2026"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Bec T., 43",
+            "verified": true,
+            "headline": "First thing that's worked since 41",
+            "text": "Tried everything. La Mer, microneedling, the whole catalogue. This is the first thing that's actually made my skin look like me again. Not younger — just rested.",
+            "date": "April 2026"
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Linh P., 49",
+            "verified": true,
+            "headline": "The 10 minutes I look forward to",
+            "text": "Honestly the mask works but the bigger thing is the ten minutes. The kids know not to come in. I read. I breathe. My skin glows. All in one ritual.",
+            "date": "January 2026"
+          }
+        },
+        "t5": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah W., 45",
+            "verified": true,
+            "headline": "Didn't believe it. Now I do.",
+            "text": "Bought it skeptical. Used it skeptical. By week 5 I was showing it to my sister. The line between my brows is genuinely softer. I don't post much but I'm posting about this.",
+            "date": "March 2026"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "settings": {
+        "heading": "What women 42–54 are saying",
+        "subheading": "REAL WOMEN. REAL PHASE."
+      }
+    },
+    "founder_note": {
+      "type": "feature-grid",
+      "blocks": {
+        "fn1": {
+          "type": "feature",
+          "settings": {
+            "custom_emoji": "—",
+            "title": "I'm 47. I built this because nothing in the chemist worked anymore.",
+            "text": "I'd spent over $4,000 on serums in two years and watched my face change anyway. I started reading the actual research on red light, found the wavelengths that mattered, and built a mask designed for the phase the rest of the industry pretends isn't happening. — Founder, The Quiet Hour"
+          }
+        }
+      },
+      "block_order": [
+        "fn1"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Built by a woman in the same phase as you.",
+        "subheading": "A NOTE FROM THE FOUNDER"
+      }
+    },
     "faq": {
       "type": "faq-accordion",
-      "settings": {
-        "subheading": "EVERYTHING YOU'D ASK A FRIEND",
-        "heading": "Frequently asked questions"
-      },
       "blocks": {
-        "q1": { "type": "faq_item", "settings": { "question": "How long until I see a difference?", "answer": "Most women in our survey noticed less fatigue around the eyes within 14 days and visibly firmer-looking skin by week 4. We recommend giving it the full 60 days — that's why the guarantee runs that long." } },
-        "q2": { "type": "faq_item", "settings": { "question": "Is this for perimenopause specifically, or anyone?", "answer": "It works for any skin in the firmness-loss zone — typically 35 and up. We design and write for the 38–55 phase because that's where the gap in the market is, and that's the skin we tested most." } },
-        "q3": { "type": "faq_item", "settings": { "question": "How is this different from Omnilux or CurrentBody?", "answer": "Same proven wavelengths (635nm + 830nm), shorter treatment time, designed specifically for perimenopausal skin, Australian-based support, and roughly a third of the price. We're not a TGA-registered medical device — we're a consumer wellness device, and we price like one." } },
-        "q4": { "type": "faq_item", "settings": { "question": "Is it safe with rosacea, sensitive skin, retinol, or Botox?", "answer": "Yes. No heat, no UV, no abrasion — safe for skin types I–V including rosacea-prone. Safe with retinol (use on alternate nights for comfort). Wait 24 hours after fresh Botox before using." } },
-        "q5": { "type": "faq_item", "settings": { "question": "Will I have to use it forever?", "answer": "For ongoing collagen support, yes — three nights a week, for the long haul. The same way you'd keep going to Pilates. Stop using it and your skin reverts over months." } },
-        "q6": { "type": "faq_item", "settings": { "question": "Can my teenage daughter use it?", "answer": "Yes — same device is safe for ages 14+ with parental supervision. The red wavelength is gentle on younger skin and supports acne-prone skin too." } },
-        "q7": { "type": "faq_item", "settings": { "question": "What if it doesn't work for me?", "answer": "Send it back inside 60 days. We pay return shipping. No forms, no video evidence required, no shipping the box back to China. Email hello@thequiethour.com.au and we handle it within 48 hours." } },
-        "q8": { "type": "faq_item", "settings": { "question": "Where do you ship?", "answer": "Australia-wide from our Sydney warehouse — 2–5 business days. We also ship to NZ, US, CA and UK (5–10 days)." } },
-        "q9": { "type": "faq_item", "settings": { "question": "Is it really cordless?", "answer": "Yes. Rechargeable lithium battery, 4 full sessions per charge. USB-C cable included." } },
-        "q10": { "type": "faq_item", "settings": { "question": "What if I damage it?", "answer": "2-year warranty included. If anything fails through normal use, we replace it. No questions." } }
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long until I see a difference?",
+            "answer": "Most women in our survey noticed less fatigue around the eyes within 14 days and visibly firmer-looking skin by week 4. We recommend giving it the full 60 days — that's why the guarantee runs that long."
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this for perimenopause specifically, or anyone?",
+            "answer": "It works for any skin in the firmness-loss zone — typically 35 and up. We design and write for the 38–55 phase because that's where the gap in the market is, and that's the skin we tested most."
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is this different from Omnilux or CurrentBody?",
+            "answer": "Same proven wavelengths (635nm + 830nm), shorter treatment time, designed specifically for perimenopausal skin, Australian-based support, and roughly a third of the price. We're not a TGA-registered medical device — we're a consumer wellness device, and we price like one."
+          }
+        },
+        "q4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe with rosacea, sensitive skin, retinol, or Botox?",
+            "answer": "Yes. No heat, no UV, no abrasion — safe for skin types I–V including rosacea-prone. Safe with retinol (use on alternate nights for comfort). Wait 24 hours after fresh Botox before using."
+          }
+        },
+        "q5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will I have to use it forever?",
+            "answer": "For ongoing collagen support, yes — three nights a week, for the long haul. The same way you'd keep going to Pilates. Stop using it and your skin reverts over months."
+          }
+        },
+        "q6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can my teenage daughter use it?",
+            "answer": "Yes — same device is safe for ages 14+ with parental supervision. The red wavelength is gentle on younger skin and supports acne-prone skin too."
+          }
+        },
+        "q7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if it doesn't work for me?",
+            "answer": "Send it back inside 60 days. We pay return shipping. No forms, no video evidence required, no shipping the box back to China. Email hello@thequiethour.com.au and we handle it within 48 hours."
+          }
+        },
+        "q8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where do you ship?",
+            "answer": "Australia-wide from our Sydney warehouse — 2–5 business days. We also ship to NZ, US, CA and UK (5–10 days)."
+          }
+        },
+        "q9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it really cordless?",
+            "answer": "Yes. Rechargeable lithium battery, 4 full sessions per charge. USB-C cable included."
+          }
+        },
+        "q10": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I damage it?",
+            "answer": "2-year warranty included. If anything fails through normal use, we replace it. No questions."
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"]
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10"
+      ],
+      "settings": {
+        "heading": "Frequently asked questions",
+        "subheading": "EVERYTHING YOU'D ASK A FRIEND"
+      }
     },
-
     "guarantee": {
       "type": "guarantee-block",
       "settings": {
@@ -187,175 +799,21 @@
         "text": "We built this for women who've been burned by beauty marketing before. So the deal is simple: try The Quiet Hour for 60 nights — about 25 sessions — and if your skin isn't visibly firmer, brighter, or more like itself, send it back and we'll refund every dollar. We pay return shipping. No forms. No video evidence. No shipping to China. Just email us, and we make it right within 48 hours.",
         "button_text": "START THE 60-NIGHT TRIAL"
       }
-    },
-
-    "whats_included": {
-      "type": "whats-included",
-      "settings": {
-        "eyebrow": "WHAT'S IN THE BOX",
-        "heading": "Everything for your ritual, nothing you don't need.",
-        "sub": "Designed to land complete. Open the box, charge once, and your first session is tonight.",
-        "footnote": "Each Quiet Hour ships in recycled paper packaging from Sydney."
-      },
-      "blocks": {
-        "wi1": { "type": "item", "settings": { "icon": "✦", "name": "The Quiet Hour mask", "note": "Medical-grade silicone · 240 LEDs · dual 635 + 830nm" } },
-        "wi2": { "type": "item", "settings": { "icon": "⌁", "name": "USB-C charging cable", "note": "4 sessions per full charge" } },
-        "wi3": { "type": "item", "settings": { "icon": "◐", "name": "Eye-safety strap", "note": "Lightweight, sits comfortably with eyes closed" } },
-        "wi4": { "type": "item", "settings": { "icon": "❑", "name": "The Ritual Guide", "note": "Printed walkthrough — how to build the habit in week 1" } },
-        "wi5": { "type": "item", "settings": { "icon": "◊", "name": "Linen travel pouch", "note": "Soft-shell storage, fits in a handbag" } }
-      },
-      "block_order": ["wi1", "wi2", "wi3", "wi4", "wi5"]
-    },
-
-    "wavelengths": {
-      "type": "wavelength-diagram",
-      "settings": {
-        "eyebrow": "THE SCIENCE",
-        "heading": "Two wavelengths. Two layers. One ritual.",
-        "sub": "635nm reaches the dermis — where collagen lives. 830nm goes deeper, into the hypodermis, supporting cell energy at the layer below.",
-        "footnote": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and individual tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device."
-      },
-      "blocks": {
-        "wl1": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#cf3f2a",
-            "title": "635 nm — Visible Red",
-            "depth_label": "Penetrates to the dermis (~1–2 mm)",
-            "text": "Stimulates fibroblast activity — the cells that produce collagen and elastin. Supports firmness, brightness, and the visible quality of the skin's surface."
-          }
-        },
-        "wl2": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#7a2a1c",
-            "title": "830 nm — Near-Infrared",
-            "depth_label": "Penetrates deeper, into the hypodermis (~5 mm)",
-            "text": "Invisible to the eye but reaches the layer below the dermis. Supports mitochondrial energy in deeper cells — the engine behind tissue repair and collagen synthesis."
-          }
-        }
-      },
-      "block_order": ["wl1", "wl2"]
-    },
-
-    "results_grid": {
-      "type": "results-grid",
-      "settings": {
-        "eyebrow": "REAL WOMEN · REAL RESULTS",
-        "heading": "Real women, real results",
-        "photo_disclaimer": "Disclaimer — Individual results may vary",
-        "clinical_heading": "In our 60-day survey, women agreed:",
-        "clinical_footnote": "Results from a 60-day self-reported survey of 412 The Quiet Hour customers aged 38–55, conducted Q1 2026."
-      },
-      "blocks": {
-        "rg_s1": { "type": "stat", "settings": { "number": "94%", "label": "saw visibly firmer-looking skin by week 4", "bar_fill": 94 } },
-        "rg_s2": { "type": "stat", "settings": { "number": "83%", "label": "noticed less fatigue around the eyes within 14 days", "bar_fill": 83 } },
-        "rg_s3": { "type": "stat", "settings": { "number": "8 in 10", "label": "stopped at least one other product after starting the ritual", "bar_fill": 80 } }
-      },
-      "block_order": ["rg_s1", "rg_s2", "rg_s3"]
-    },
-
-    "expert_endorsement": {
-      "type": "expert-endorsement",
-      "settings": {
-        "eyebrow": "CLINICIAN RECOMMENDED",
-        "heading": "Dermatologist Recommended",
-        "expert_name": "Dr. Sarah M., MD",
-        "expert_credentials": "Board-Certified Dermatologist",
-        "expert_quote": "Red light therapy at 635nm and 830nm has some of the strongest non-invasive evidence for collagen support. The Quiet Hour delivers these wavelengths consistently, in a format that makes nightly use realistic. When treatment is consistent, results follow.",
-        "body": "<p>Top dermatologists recommend red light therapy at these specific wavelengths for patients seeking a non-invasive way to address firmness loss, uneven texture, and the visible changes that accompany the perimenopause phase.</p><p>Consistent use is what drives results — and The Quiet Hour is designed to make consistency easy. Ten minutes, three nights a week, while you read or wind down.</p>"
-      }
-    },
-
-    "reviews_filterable": {
-      "type": "reviews-filterable",
-      "settings": {
-        "eyebrow": "REAL WOMEN · REAL RESULTS",
-        "heading": "What women in the phase are saying",
-        "disclaimer": "Individual results vary.",
-        "show_photo_strip": true,
-        "photo_strip_caption": "Photos shared by women using the ritual"
-      },
-      "blocks": {
-        "rv1": { "type": "review", "settings": { "name": "Anna K.", "age_group": "45-54", "concern": "firmness", "rating": 5, "verified": true, "headline": "He asked if I'd had something done.", "text": "Three weeks in, my husband asked if I'd had something done. I hadn't. Three nights a week, ten minutes, while my book was on my chest. That's the whole thing.", "date": "March 2026" } },
-        "rv2": { "type": "review", "settings": { "name": "Renée D.", "age_group": "45-54", "concern": "fine-lines", "rating": 5, "verified": true, "headline": "Cancelled my Botox appointment.", "text": "I'd been doing Botox twice a year. This isn't the same — but my skin looks like itself in a way the Botox never did. Cancelled my next appointment to keep going on this.", "date": "February 2026" } },
-        "rv3": { "type": "review", "settings": { "name": "Bec T.", "age_group": "35-44", "concern": "firmness", "rating": 5, "verified": true, "headline": "First thing that's worked since 41.", "text": "Tried everything. La Mer, microneedling, the whole catalogue. This is the first thing that's made my skin look like me again.", "date": "April 2026" } },
-        "rv4": { "type": "review", "settings": { "name": "Linh P.", "age_group": "45-54", "concern": "tired-eyes", "rating": 5, "verified": true, "headline": "The 10 minutes I look forward to.", "text": "The kids know not to come in. I read. I breathe. My skin glows. All in one ritual.", "date": "January 2026" } },
-        "rv5": { "type": "review", "settings": { "name": "Sarah W.", "age_group": "35-44", "concern": "fine-lines", "rating": 5, "verified": true, "headline": "Didn't believe it. Now I do.", "text": "Bought it skeptical. By week 5 I was showing it to my sister. The line between my brows is genuinely softer.", "date": "March 2026" } },
-        "rv6": { "type": "review", "settings": { "name": "Diane F.", "age_group": "55-64", "concern": "redness", "rating": 5, "verified": true, "headline": "Rosacea-friendly and actually works.", "text": "I was worried about sensitivity. Zero reaction — and after a month my skin is visibly calmer and less reactive in general.", "date": "April 2026" } },
-        "rv7": { "type": "review", "settings": { "name": "Megan H.", "age_group": "45-54", "concern": "dark-spots", "rating": 4, "verified": true, "headline": "Sun spots fading after 6 weeks.", "text": "Two old sun spots on my left cheek are noticeably lighter. Wasn't expecting that. Staying on the ritual.", "date": "May 2026" } },
-        "rv8": { "type": "review", "settings": { "name": "Jo R.", "age_group": "55-64", "concern": "firmness", "rating": 5, "verified": true, "headline": "Better than the $400 facial.", "text": "I was spending $400 every six weeks on clinic treatments. This gives me the same glow at home, every night. The maths aren't even close.", "date": "February 2026" } }
-      },
-      "block_order": ["rv1", "rv2", "rv3", "rv4", "rv5", "rv6", "rv7", "rv8"]
-    },
-
-    "before_after": {
-      "type": "before-after",
-      "settings": {
-        "eyebrow": "BEFORE / AFTER",
-        "heading": "See the difference at 6 weeks",
-        "sub": "Real customer. Same time of day. Same lighting. No filters.",
-        "show_default_pair": true,
-        "disclaimer": "Individual results vary. Photos taken at week 0 and week 6–8 of consistent use (10 minutes, three nights a week, ~25 total sessions)."
-      },
-      "blocks": {},
-      "block_order": []
-    },
-
-    "review_cards": {
-      "type": "review-cards",
-      "settings": {
-        "eyebrow": "REAL WOMEN · REAL RESULTS",
-        "heading": "What women in the phase are saying",
-        "sub": "Photos and words straight from the inbox. Used to be a sceptic? You're in good company."
-      },
-      "blocks": {
-        "r1": { "type": "card", "settings": { "name": "Anna K., 47", "rating": 5, "verified": true, "headline": "Best $179 I've spent all year.", "quote": "Three weeks and my husband asked if I'd had something done. I hadn't." } },
-        "r2": { "type": "card", "settings": { "name": "Renée D., 51", "rating": 5, "verified": true, "headline": "Cancelled my Botox.", "quote": "Looks like my skin again, not a frozen version of it." } },
-        "r3": { "type": "card", "settings": { "name": "Bec T., 43", "rating": 5, "verified": true, "headline": "First thing that worked since 41.", "quote": "La Mer, microneedling — nothing. This is the first thing that actually moved the needle." } },
-        "r4": { "type": "card", "settings": { "name": "Linh P., 49", "rating": 5, "verified": true, "headline": "The 10 minutes I look forward to.", "quote": "The kids know not to come in. I read. I breathe. My skin glows. All in one." } }
-      },
-      "block_order": ["r1", "r2", "r3", "r4"]
-    },
-
-    "clinical": {
-      "type": "clinical-proof",
-      "settings": {
-        "eyebrow": "THE SCIENCE",
-        "heading": "Why red light therapy actually works",
-        "sub": "Red light is one of the most studied non-invasive skin treatments — peer-reviewed across multiple journals. The Quiet Hour uses the two wavelengths with the strongest evidence behind them.",
-        "footnote": "The Quiet Hour is a consumer wellness device. Not a TGA-registered medical device. Not intended to diagnose, treat, or cure any condition. Citations available on request — email hello@thequiethour.com.au."
-      },
-      "blocks": {
-        "s1": { "type": "stat", "settings": { "number": "635 + 830nm", "label": "the two clinically-validated wavelengths for skin rejuvenation", "source": "Hamblin, 2017" } },
-        "s2": { "type": "stat", "settings": { "number": "8 weeks", "label": "average time to visible firmness improvement at 3 sessions/week", "source": "Wunsch & Matuschka, 2014" } },
-        "f1": { "type": "fact", "settings": { "title": "Why 635nm + 830nm specifically?", "body": "635nm (visible red) penetrates the upper dermis where it stimulates fibroblast activity — the cells that produce collagen and elastin. 830nm (near-infrared, invisible) penetrates deeper, supporting mitochondrial energy production in the cells that build new tissue. Most consumer LED devices use just one wavelength; we use both, calibrated together." } },
-        "f2": { "type": "fact", "settings": { "title": "Is it safe with rosacea / sensitive skin?", "body": "Yes. Unlike IPL, lasers, microneedling, or chemical peels, red light therapy is non-invasive, non-thermal, and contains no UV. There's no skin barrier disruption, no peeling, no recovery time. It's been used in clinics with rosacea-prone and sensitive skin types I–V for over a decade." } },
-        "f3": { "type": "fact", "settings": { "title": "What about retinol, Botox, fillers, HRT?", "body": "Compatible with all of the above. Red light pairs especially well with retinol — use them on alternate nights so neither overwhelms the skin. For Botox or filler, wait 24 hours after a fresh treatment before using. HRT is unaffected — the light works topically at the skin level." } },
-        "f4": { "type": "fact", "settings": { "title": "How is this different from a $600 mask?", "body": "Same wavelengths. Same delivery technology. We've removed the things that drive premium-mask prices — multi-tier influencer payouts, spa-channel margins, retail markups — and price the device to what it costs to build well. We're a consumer wellness device, not a TGA-registered medical device. The technology is the same; the marketing math isn't." } }
-      },
-      "block_order": ["s1", "s2", "f1", "f2", "f3", "f4"]
     }
   },
-
   "order": [
     "hero",
     "trust",
-    "whats_included",
     "phase_intro",
-    "wavelengths",
-    "results_grid",
     "before_after",
     "as_seen_in",
     "features",
-    "expert_endorsement",
     "how_it_works",
     "comparison",
     "clinical",
     "stats",
     "review_cards",
     "testimonials",
-    "reviews_filterable",
     "founder_note",
     "faq",
     "guarantee"
