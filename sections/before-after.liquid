@@ -35,50 +35,19 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'comparison' -%}
           <figure class="ba-card" {{ block.shopify_attributes }}>
-            <div class="ba-slider"
-                 data-ba-slider
-                 role="figure"
-                 aria-label="{{ block.settings.label | default: 'Before and after comparison' }}">
-
-              <div class="ba-slider__before">
-                {%- if block.settings.before_image != blank -%}
-                  {{ block.settings.before_image | image_url: width: 1200 | image_tag:
-                    class: 'ba-slider__img',
-                    loading: 'lazy',
-                    widths: '600, 900, 1200, 1600',
-                    sizes: '(min-width: 990px) 50vw, 100vw',
-                    alt: 'Before'
-                  }}
-                {%- else -%}
-                  <img class="ba-slider__img" src="{{ 'before-after-1.jpg' | asset_url }}" width="1200" height="1500" loading="lazy" alt="Before">
-                {%- endif -%}
-                <span class="ba-slider__tag ba-slider__tag--before">Before</span>
-              </div>
-
-              <div class="ba-slider__after" data-ba-after>
-                {%- if block.settings.after_image != blank -%}
-                  {{ block.settings.after_image | image_url: width: 1200 | image_tag:
-                    class: 'ba-slider__img',
-                    loading: 'lazy',
-                    widths: '600, 900, 1200, 1600',
-                    sizes: '(min-width: 990px) 50vw, 100vw',
-                    alt: 'After'
-                  }}
-                {%- else -%}
-                  <img class="ba-slider__img" src="{{ 'before-after-2.jpg' | asset_url }}" width="1200" height="1500" loading="lazy" alt="After">
-                {%- endif -%}
-                <span class="ba-slider__tag ba-slider__tag--after">After</span>
-              </div>
-
-              <button type="button" class="ba-slider__handle" data-ba-handle aria-label="Drag to compare">
-                <span class="ba-slider__handle-line"></span>
-                <span class="ba-slider__handle-grip">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"/>
-                    <polyline points="9 6 15 12 9 18" transform="translate(6 0)"/>
-                  </svg>
-                </span>
-              </button>
+            <div class="ba-static">
+              {%- assign ba_img = block.settings.after_image | default: block.settings.before_image -%}
+              {%- if ba_img != blank -%}
+                {{ ba_img | image_url: width: 1600 | image_tag:
+                  class: 'ba-static__img',
+                  loading: 'lazy',
+                  widths: '600, 900, 1200, 1600',
+                  sizes: '(min-width: 990px) 50vw, 100vw',
+                  alt: block.settings.label | default: 'Before and after comparison'
+                }}
+              {%- else -%}
+                <img class="ba-static__img" src="{{ 'before-after-2.jpg' | asset_url }}" width="1200" height="1500" loading="lazy" alt="Before and after comparison">
+              {%- endif -%}
             </div>
 
             <figcaption class="ba-card__caption">
@@ -99,23 +68,12 @@
 
       {%- if section.blocks.size == 0 -%}
         <figure class="ba-card">
-          <div class="ba-slider" data-ba-slider>
-            <div class="ba-slider__before">
-              <div class="ba-slider__img ba-slider__img--placeholder ba-slider__img--before-ph">Before</div>
-              <span class="ba-slider__tag ba-slider__tag--before">Before</span>
-            </div>
-            <div class="ba-slider__after" data-ba-after>
-              <div class="ba-slider__img ba-slider__img--placeholder ba-slider__img--after-ph">After</div>
-              <span class="ba-slider__tag ba-slider__tag--after">After</span>
-            </div>
-            <button type="button" class="ba-slider__handle" data-ba-handle aria-label="Drag to compare">
-              <span class="ba-slider__handle-line"></span>
-              <span class="ba-slider__handle-grip">‹›</span>
-            </button>
+          <div class="ba-static">
+            <div class="ba-static__img ba-static__img--placeholder">Before / After</div>
           </div>
           <figcaption class="ba-card__caption">
             <div class="ba-card__meta"><strong>Add a Comparison block</strong></div>
-            <p class="ba-card__note">Upload before / after photos in the theme editor.</p>
+            <p class="ba-card__note">Upload a before/after image in the theme editor.</p>
           </figcaption>
         </figure>
       {%- endif -%}

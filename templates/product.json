@@ -799,6 +799,83 @@
         "text": "We built this for women who've been burned by beauty marketing before. So the deal is simple: try The Quiet Hour for 60 nights — about 25 sessions — and if your skin isn't visibly firmer, brighter, or more like itself, send it back and we'll refund every dollar. We pay return shipping. No forms. No video evidence. No shipping to China. Just email us, and we make it right within 48 hours.",
         "button_text": "START THE 60-NIGHT TRIAL"
       }
+    },
+
+    "wavelengths": {
+      "type": "wavelength-diagram",
+      "settings": {
+        "eyebrow": "THE SCIENCE",
+        "heading": "One Mask, 7 Wavelengths",
+        "heading_accent": "7 Wavelengths",
+        "sub": "Each wavelength reaches a different layer of the skin. Together they address the full picture — firmness, tone, glow, sensitivity, and surface clarity — in one ten-minute ritual.",
+        "footnote": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device."
+      },
+      "blocks": {
+        "wl_red": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#ec5a47",
+            "name": "Red",
+            "nm_label": "633 nm",
+            "text": "The one your skin actually needs. 633nm penetrates to the dermis where collagen and elastin live — stimulating production at the layer no serum can reach. The wavelength behind firmer, more lifted-looking skin in 28 days."
+          }
+        },
+        "wl_amber": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#f0a850",
+            "name": "Amber",
+            "nm_label": "610 nm",
+            "text": "For the dullness that crept in without asking. Amber light improves circulation and oxygenation within the skin cells — restoring the glow that used to be there on a good morning."
+          }
+        },
+        "wl_green": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#7ee27d",
+            "name": "Green",
+            "nm_label": "525 nm",
+            "text": "Perimenopausal skin often brings uneven tone and sun spots years in the making. Green light works at the dermis to calm pigmentation and even out complexion — quietly, without irritation."
+          }
+        },
+        "wl_white": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#f3eedd",
+            "name": "White",
+            "nm_label": "510 nm",
+            "text": "Works across all skin layers simultaneously — improving overall cell metabolism and softening the appearance of fine lines. Think of it as the full-reset setting."
+          }
+        },
+        "wl_cyan": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#5dd6f0",
+            "name": "Cyan",
+            "nm_label": "490 nm",
+            "text": "For skin that runs hot, red, or reactive. Cyan soothes inflamed capillaries and calms surface sensitivity — the setting for nights when your skin needs less, not more."
+          }
+        },
+        "wl_blue": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#5d8df0",
+            "name": "Blue",
+            "nm_label": "465 nm",
+            "text": "Targets surface congestion and the breakouts that resurface with hormonal shifts. Works at the epidermis to keep pores clear without stripping the skin barrier."
+          }
+        },
+        "wl_purple": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#9d6df5",
+            "name": "Purple",
+            "nm_label": "435 nm",
+            "text": "Supports cell regeneration while keeping the surface clear — the setting that works on renewal and congestion at the same time."
+          }
+        }
+      },
+      "block_order": ["wl_red", "wl_amber", "wl_green", "wl_white", "wl_cyan", "wl_blue", "wl_purple"]
     }
   },
   "order": [
@@ -810,6 +887,7 @@
     "features",
     "how_it_works",
     "comparison",
+    "wavelengths",
     "clinical",
     "stats",
     "review_cards",

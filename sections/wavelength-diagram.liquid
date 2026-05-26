@@ -1,100 +1,131 @@
-<section class="section wavelength-diagram" style="background-color: var(--color-bg);">
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'THE SCIENCE'
+  assign heading = section.settings.heading | default: 'One Mask, 7 Wavelengths'
+  assign heading_accent = section.settings.heading_accent | default: '7 Wavelengths'
+  assign sub = section.settings.sub
+-%}
+
+<section class="section wld">
   <div class="container">
-    <div class="text-center" style="margin-bottom: var(--sp-8);">
-      {%- if section.settings.eyebrow != blank -%}
-        <span class="wld__eyebrow">{{ section.settings.eyebrow }}</span>
+
+    <header class="wld__header">
+      {%- if eyebrow != blank -%}
+        <span class="wld__eyebrow">{{ eyebrow }}</span>
       {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h2 style="margin-top: var(--sp-2);">{{ section.settings.heading }}</h2>
+      {%- if heading != blank -%}
+        {%- if heading_accent != blank and heading contains heading_accent -%}
+          {%- capture wrapped_accent -%}<em class="wld__heading-accent">{{ heading_accent }}</em>{%- endcapture -%}
+          {%- assign rendered_heading = heading | replace: heading_accent, wrapped_accent -%}
+        {%- else -%}
+          {%- assign rendered_heading = heading -%}
+        {%- endif -%}
+        <h2 class="wld__heading">{{ rendered_heading }}</h2>
       {%- endif -%}
-      {%- if section.settings.sub != blank -%}
-        <p class="wld__sub">{{ section.settings.sub }}</p>
+      {%- if sub != blank -%}
+        <p class="wld__sub">{{ sub }}</p>
       {%- endif -%}
-    </div>
+    </header>
 
-    <div class="wld__layout">
+    <div class="wld__grid">
 
-      <!-- SVG cross-section -->
-      <div class="wld__diagram-wrap">
-        <svg class="wld__diagram" viewBox="0 0 520 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="635nm and 830nm penetration through skin layers">
-          <!-- Background skin gradient -->
-          <defs>
-            <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#f6e4d4"/>
-              <stop offset="50%" stop-color="#e9c8a8"/>
-              <stop offset="100%" stop-color="#c79974"/>
-            </linearGradient>
-            <linearGradient id="red635" x1="0.5" y1="0" x2="0.5" y2="1">
-              <stop offset="0%" stop-color="#cf3f2a" stop-opacity="0.85"/>
-              <stop offset="70%" stop-color="#cf3f2a" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#cf3f2a" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="nir830" x1="0.5" y1="0" x2="0.5" y2="1">
-              <stop offset="0%" stop-color="#7a2a1c" stop-opacity="0.8"/>
-              <stop offset="80%" stop-color="#7a2a1c" stop-opacity="0.45"/>
-              <stop offset="100%" stop-color="#7a2a1c" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Skin block -->
-          <rect x="100" y="40" width="320" height="400" fill="url(#skinGrad)" rx="6"/>
-
-          <!-- Layer separators -->
-          <line x1="100" y1="120" x2="420" y2="120" stroke="#a87752" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
-          <line x1="100" y1="300" x2="420" y2="300" stroke="#a87752" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
-
-          <!-- 635nm beam (shorter penetration, into dermis) -->
-          <path d="M 175 40 L 235 320 L 215 320 L 195 40 Z" fill="url(#red635)" opacity="0.9"/>
-
-          <!-- 830nm beam (deeper, into hypodermis) -->
-          <path d="M 305 40 L 365 440 L 345 440 L 325 40 Z" fill="url(#nir830)" opacity="0.85"/>
-
-          <!-- Wavelength labels -->
-          <g font-family="Inter, sans-serif" font-weight="700" font-size="14" fill="#2a201c">
-            <text x="185" y="28" text-anchor="middle">635 nm</text>
-            <text x="335" y="28" text-anchor="middle">830 nm</text>
-          </g>
-          <g font-family="Inter, sans-serif" font-size="11" fill="#7a6b62">
-            <text x="185" y="448" text-anchor="middle">Red light</text>
-            <text x="335" y="458" text-anchor="middle">Near-infrared</text>
-          </g>
-
-          <!-- Layer labels -->
-          <g font-family="Inter, sans-serif" font-size="12" fill="#2a201c" font-weight="600">
-            <text x="430" y="84">Epidermis</text>
-            <text x="430" y="210">Dermis</text>
-            <text x="430" y="370">Hypodermis</text>
-          </g>
-          <g font-family="Inter, sans-serif" font-size="10" fill="#7a6b62">
-            <text x="430" y="100">surface</text>
-            <text x="430" y="226">collagen + elastin</text>
-            <text x="430" y="386">deeper tissue</text>
-          </g>
-
-          <!-- Depth tick labels -->
-          <g font-family="Inter, sans-serif" font-size="10" fill="#7a6b62" text-anchor="end">
-            <text x="92" y="62">0 mm</text>
-            <text x="92" y="124">0.1 mm</text>
-            <text x="92" y="304">2 mm</text>
-            <text x="92" y="444">~5 mm</text>
-          </g>
-        </svg>
-      </div>
-
-      <!-- Right column: per-wavelength explainers -->
-      <div class="wld__columns">
+      <!-- Left: wavelength explainer cards -->
+      <div class="wld__cards">
         {%- for block in section.blocks -%}
           {%- if block.type == 'wavelength' -%}
-            <div class="wld-card" {{ block.shopify_attributes }}>
-              <div class="wld-card__chip" style="background-color: {{ block.settings.swatch_color }};"></div>
-              <div class="wld-card__body">
-                <h3 class="wld-card__title">{{ block.settings.title }}</h3>
-                <p class="wld-card__depth">{{ block.settings.depth_label }}</p>
-                <p class="wld-card__text">{{ block.settings.text }}</p>
+            <article class="wld-card" {{ block.shopify_attributes }}>
+              <div class="wld-card__head">
+                <span class="wld-card__dot" style="background-color: {{ block.settings.swatch_color }}; box-shadow: 0 0 16px {{ block.settings.swatch_color }};"></span>
+                <h3 class="wld-card__title">
+                  <span class="wld-card__name">{{ block.settings.name }}</span>
+                  <span class="wld-card__nm">{{ block.settings.nm_label }}</span>
+                </h3>
               </div>
-            </div>
+              <p class="wld-card__text">{{ block.settings.text }}</p>
+            </article>
           {%- endif -%}
         {%- endfor -%}
+      </div>
+
+      <!-- Right: spectrum diagram -->
+      <div class="wld__diagram-wrap">
+        <svg class="wld__diagram" viewBox="0 0 600 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Seven wavelengths and their penetration through epidermis, dermis, and hyperdermis">
+          <defs>
+            {%- assign beam_colors = 'purple|#9d6df5,blue|#5d8df0,cyan|#5dd6f0,white|#f3eedd,green|#7ee27d,amber|#f0a850,red|#ec5a47' -%}
+            {%- assign beam_list = beam_colors | split: ',' -%}
+            {%- for entry in beam_list -%}
+              {%- assign parts = entry | split: '|' -%}
+              {%- assign cname = parts[0] -%}
+              {%- assign chex = parts[1] -%}
+              <linearGradient id="beam-{{ cname }}" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stop-color="{{ chex }}" stop-opacity="0.95"/>
+                <stop offset="35%" stop-color="{{ chex }}" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="{{ chex }}" stop-opacity="0"/>
+              </linearGradient>
+              <radialGradient id="glow-{{ cname }}" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0%" stop-color="{{ chex }}" stop-opacity="0.9"/>
+                <stop offset="60%" stop-color="{{ chex }}" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="{{ chex }}" stop-opacity="0"/>
+              </radialGradient>
+            {%- endfor -%}
+            <pattern id="wld-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(245,237,224,0.06)" stroke-width="1"/>
+            </pattern>
+          </defs>
+
+          <!-- Legend row -->
+          {%- assign legend = 'Purple|9d6df5|435,Blue|5d8df0|465,Cyan|5dd6f0|490,White|f3eedd|510,Green|7ee27d|525,Amber|f0a850|610,Red|ec5a47|633' | split: ',' -%}
+          {%- assign lx = 75 -%}
+          {%- for item in legend -%}
+            {%- assign lparts = item | split: '|' -%}
+            <g font-family="Inter, sans-serif" text-anchor="middle">
+              <text x="{{ lx }}" y="32" font-size="11" font-weight="700" letter-spacing="1.2" fill="#{{ lparts[1] }}">{{ lparts[0] | upcase }}</text>
+              <text x="{{ lx }}" y="50" font-size="10" letter-spacing="1" fill="rgba(245,237,224,0.55)">{{ lparts[2] }} NM</text>
+            </g>
+            {%- assign lx = lx | plus: 75 -%}
+          {%- endfor -%}
+
+          <!-- Skin panel frame -->
+          <rect x="40" y="200" width="540" height="500" fill="rgba(245,237,224,0.02)" stroke="rgba(245,237,224,0.18)" stroke-width="1"/>
+          <rect x="40" y="200" width="540" height="500" fill="url(#wld-grid)"/>
+
+          <!-- Layer dividers -->
+          <line x1="40" y1="320" x2="580" y2="320" stroke="rgba(245,237,224,0.28)" stroke-width="1"/>
+          <line x1="40" y1="540" x2="580" y2="540" stroke="rgba(245,237,224,0.28)" stroke-width="1"/>
+
+          <!-- Layer labels (right side) -->
+          <g font-family="Inter, sans-serif" font-size="12" fill="rgba(245,237,224,0.78)" font-weight="500">
+            <text x="56" y="222">Epidermis</text>
+            <text x="56" y="342">Dermis</text>
+            <text x="56" y="562">Hyperdermis</text>
+          </g>
+
+          <!-- Vertical "SKIN LAYER" label -->
+          <text x="22" y="450" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="rgba(245,237,224,0.45)" font-weight="600" transform="rotate(-90 22 450)">SKIN LAYER</text>
+
+          <!-- Beams: top glow + tapered shaft to penetration depth -->
+          {%- comment -%} format: x | colorName | depthY {%- endcomment -%}
+          {%- assign beams = '110|purple|360,180|blue|330,250|cyan|400,320|white|700,390|green|450,460|amber|530,530|red|620' | split: ',' -%}
+          {%- for b in beams -%}
+            {%- assign bp = b | split: '|' -%}
+            {%- assign bx = bp[0] -%}
+            {%- assign bname = bp[1] -%}
+            {%- assign bdepth = bp[2] -%}
+            <!-- Top radial glow -->
+            <ellipse cx="{{ bx }}" cy="200" rx="38" ry="60" fill="url(#glow-{{ bname }})"/>
+            <!-- Tapered beam shaft -->
+            <path d="M {{ bx | minus: 7 }} 200 L {{ bx | plus: 7 }} 200 L {{ bx | plus: 2 }} {{ bdepth }} L {{ bx | minus: 2 }} {{ bdepth }} Z" fill="url(#beam-{{ bname }})"/>
+            <!-- Bright core line -->
+            <line x1="{{ bx }}" y1="200" x2="{{ bx }}" y2="{{ bdepth }}" stroke="url(#beam-{{ bname }})" stroke-width="1.5" stroke-linecap="round"/>
+          {%- endfor -%}
+
+          <!-- Depth ticks (left axis) -->
+          <g font-family="Inter, sans-serif" font-size="9" fill="rgba(245,237,224,0.4)" text-anchor="end">
+            <text x="35" y="206">0 mm</text>
+            <text x="35" y="324">~0.1</text>
+            <text x="35" y="544">~2 mm</text>
+            <text x="35" y="704">~5 mm</text>
+          </g>
+        </svg>
       </div>
 
     </div>
@@ -110,19 +141,20 @@
   "name": "Wavelength Diagram",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE SCIENCE" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Two wavelengths. Two layers. One ritual." },
-    { "type": "textarea", "id": "sub", "label": "Sub copy", "default": "635nm reaches the dermis — where collagen lives. 830nm goes deeper, into the hypodermis, supporting cell energy at the layer below." },
-    { "type": "textarea", "id": "footnote", "label": "Footnote", "default": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and individual tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device." }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One Mask, 7 Wavelengths" },
+    { "type": "text", "id": "heading_accent", "label": "Accent phrase (italicised in heading)", "default": "7 Wavelengths" },
+    { "type": "textarea", "id": "sub", "label": "Sub copy", "default": "Each wavelength reaches a different layer of the skin. Together they address the full picture — firmness, tone, glow, sensitivity, and surface clarity — in one ten-minute ritual." },
+    { "type": "textarea", "id": "footnote", "label": "Footnote", "default": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device." }
   ],
   "blocks": [
     {
       "type": "wavelength",
       "name": "Wavelength card",
       "settings": [
-        { "type": "color", "id": "swatch_color", "label": "Swatch colour", "default": "#cf3f2a" },
-        { "type": "text", "id": "title", "label": "Title", "default": "635 nm — Visible Red" },
-        { "type": "text", "id": "depth_label", "label": "Depth label", "default": "Penetrates to the dermis (~1–2 mm)" },
-        { "type": "textarea", "id": "text", "label": "Body text", "default": "Stimulates fibroblast activity — the cells that produce collagen and elastin. Supports firmness, brightness, and the visible quality of the skin's surface." }
+        { "type": "color", "id": "swatch_color", "label": "Swatch colour", "default": "#ec5a47" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Red" },
+        { "type": "text", "id": "nm_label", "label": "Wavelength label", "default": "633 nm" },
+        { "type": "textarea", "id": "text", "label": "Body text", "default": "The one your skin actually needs. 633nm penetrates to the dermis where collagen and elastin live — stimulating production at the layer no serum can reach. The wavelength behind firmer, more lifted-looking skin in 28 days." }
       ]
     }
   ],
