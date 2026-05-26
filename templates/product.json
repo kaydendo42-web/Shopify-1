@@ -96,13 +96,14 @@
         "fallback_title": "The Quiet Hour™ — LED Light Therapy Mask",
         "subheadline": "Clinical-grade 635nm + 830nm wavelengths. 10 minutes. Three nights a week.",
         "ribbon_text": "Designed for women in the phase",
-        "atc_button_text": "START YOUR RITUAL — SAVE 25%",
+        "atc_button_text": "USE QUIET20 — 20% OFF TODAY",
+        "discount_code": "QUIET20",
         "social_proof_count": "143",
         "use_bundle_selector": true,
         "show_bestseller_badge": true,
-        "bestseller_text": "MOST LOVED · 2,847 REVIEWS",
-        "rating_value": "4.8",
-        "review_count": "2,847",
+        "bestseller_text": "MOST LOVED · 847 REVIEWS",
+        "rating_value": "4.9",
+        "review_count": "847",
         "testimonial_name": "Anna K., 47 — Sydney",
         "testimonial_text": "My husband asked if I'd had something done. I hadn't — just three weeks of this, three nights a week, while my book was on my chest. That's it."
       }
@@ -876,6 +877,41 @@
         }
       },
       "block_order": ["wl_red", "wl_amber", "wl_green", "wl_white", "wl_cyan", "wl_blue", "wl_purple"]
+    },
+    "ugc_videos": {
+      "type": "ugc-videos",
+      "blocks": {
+        "v1": {
+          "type": "video",
+          "settings": {
+            "video_asset": "ugc-1.mp4",
+            "name": "Anna, 47",
+            "caption": "Ten minutes while I read. That's the whole ritual."
+          }
+        },
+        "v2": {
+          "type": "video",
+          "settings": {
+            "video_asset": "ugc-2.mp4",
+            "name": "Sarah, 52",
+            "caption": "First thing my husband noticed in months."
+          }
+        },
+        "v3": {
+          "type": "video",
+          "settings": {
+            "video_asset": "ugc-3.mp4",
+            "name": "Mel, 44",
+            "caption": "Quiet, calm, easy. The opposite of my morning."
+          }
+        }
+      },
+      "block_order": ["v1", "v2", "v3"],
+      "settings": {
+        "eyebrow": "REAL RITUALS",
+        "heading": "Worn by women in the phase",
+        "sub": "Ten minutes. Three nights a week. From the women who've kept it."
+      }
     }
   },
   "order": [
@@ -891,6 +927,7 @@
     "clinical",
     "stats",
     "review_cards",
+    "ugc_videos",
     "testimonials",
     "founder_note",
     "faq",

@@ -56,7 +56,7 @@
           </button>
         </div>
 
-        <div class="free-ship cart-drawer__freeship" data-threshold="{{ 99 | times: 100 }}">
+        <div class="free-ship cart-drawer__freeship" data-threshold="{{ settings.free_shipping_threshold | default: 99 | times: 100 }}">
           <p class="free-ship__text" id="cart-drawer-ship-text">Add items to unlock free AU-wide shipping.</p>
           <div class="free-ship__bar"><span class="free-ship__bar-fill" id="cart-drawer-ship-fill" style="width:0%"></span></div>
         </div>
@@ -72,6 +72,11 @@
         </div>
 
         <div class="cart-drawer__footer">
+          <div class="cart-drawer__savings" id="cart-drawer-savings" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12l-8 8-8-8M12 20V4"/></svg>
+            You're saving <strong data-savings-amount>$0.00</strong> today
+          </div>
+
           <div class="cart-drawer__subtotal">
             <div class="cart-drawer__subtotal-label">
               <span>Subtotal</span>
@@ -104,7 +109,12 @@
             {%- endfor -%}
           </div>
 
-          <button class="cart-drawer__continue" data-close-drawer>Continue shopping</button>
+          <div class="cart-drawer__rating">
+            <span aria-hidden="true">★★★★★</span>
+            <span>4.9 from 847 women in the phase</span>
+          </div>
+
+          <button class="cart-drawer__continue" data-close-drawer>Keep browsing</button>
         </div>
 
       </div>

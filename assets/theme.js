@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCollectionSort();
   initCollectionAtc();
   initBeforeAfter();
+  initUgcVideos();
 });
 
 /**
@@ -192,7 +193,10 @@ function initCartQty() {
     const input = form.querySelector(`.qty-input[data-key="${key}"]`);
     if (!input) return;
     const current = parseInt(input.value, 10) || 0;
-    const next = btn.classList.contains('qty-btn--plus') ? current + 1 : Math.max(0, current - 1);
+    const next = btn.classList.contains('qty-btn--plus')
+      ? Math.min(10, current + 1)
+      : Math.max(0, current - 1);
+    if (next === current) return;
     input.value = next;
     submitCartChange(key, next);
   });
@@ -200,7 +204,8 @@ function initCartQty() {
   form.addEventListener('change', (e) => {
     const input = e.target.closest('.qty-input');
     if (!input) return;
-    const next = Math.max(0, parseInt(input.value, 10) || 0);
+    const next = Math.min(10, Math.max(0, parseInt(input.value, 10) || 0));
+    input.value = next;
     submitCartChange(input.dataset.key, next);
   });
 }
@@ -540,7 +545,10 @@ function initCartDrawer() {
     const input = drawer.querySelector(`.qty-input[data-key="${key}"]`);
     if (!input) return;
     const current = parseInt(input.value, 10) || 0;
-    const next = btn.classList.contains('qty-btn--plus') ? current + 1 : Math.max(0, current - 1);
+    const next = btn.classList.contains('qty-btn--plus')
+      ? Math.min(10, current + 1)
+      : Math.max(0, current - 1);
+    if (next === current) return;
     input.value = next;
     submitCartChange(key, next);
   });
@@ -577,6 +585,29 @@ function refreshCartDrawer() {
       // Global cart icon count (header bubble)
       updateCartCount(cart.item_count);
 
+      // Compute total savings across cart for footer display
+      let totalSavings = 0;
+      cart.items.forEach(it => {
+        if (it.original_line_price && it.original_line_price > it.line_price) {
+          totalSavings += (it.original_line_price - it.line_price);
+        }
+      });
+      const savingsEl = document.getElementById('cart-drawer-savings');
+      if (savingsEl) {
+        if (totalSavings > 0) {
+          savingsEl.hidden = false;
+          savingsEl.querySelector('[data-savings-amount]').textContent = formatMoney(totalSavings);
+        } else {
+          savingsEl.hidden = true;
+        }
+      }
+
+      // Rewrite checkout link with auto-discount code if configured
+      const checkoutLink = document.querySelector('.cart-drawer__checkout');
+      if (checkoutLink && window.__autoDiscountCode) {
+        checkoutLink.setAttribute('href', `/discount/${encodeURIComponent(window.__autoDiscountCode)}?redirect=/checkout`);
+      }
+
       // Render line items
       if (linesEl) {
         if (cart.item_count === 0) {
@@ -592,10 +623,12 @@ function refreshCartDrawer() {
           linesEl.innerHTML = cart.items.map(item => {
             const hasCompare = item.original_line_price && item.original_line_price > item.line_price;
             const saved = hasCompare ? item.original_line_price - item.line_price : 0;
+            const mapped = (window.__bundleImageMap && window.__bundleImageMap[item.variant_id]) || null;
+            const imgSrc = mapped || item.image;
             return `
             <div class="cart-drawer__line">
-              ${item.image
-                ? `<img class="cart-drawer__line-img" src="${item.image}" alt="${item.product_title}" width="88" height="88" loading="lazy">`
+              ${imgSrc
+                ? `<img class="cart-drawer__line-img" src="${imgSrc}" alt="${item.product_title}" width="88" height="88" loading="lazy">`
                 : '<div class="cart-drawer__line-img"></div>'
               }
               <div class="cart-drawer__line-body">
@@ -722,5 +755,60 @@ function initAtcIntercept() {
         const msg = (err && err.description) ? err.description : 'Something went wrong — please try again.';
         showAtcError(msg);
       });
+  });
+}
+
+/**
+ * UGC Videos — autoplay on viewport, click play/pause, click unmute
+ */
+function initUgcVideos() {
+  const cards = document.querySelectorAll('.ugc-card');
+  if (!cards.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target.querySelector('[data-ugc-video]');
+      if (!video) return;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  cards.forEach(card => {
+    const video = card.querySelector('[data-ugc-video]');
+    const playBtn = card.querySelector('.ugc-card__play');
+    const muteBtn = card.querySelector('[data-ugc-mute]');
+    if (!video) return;
+
+    io.observe(card);
+
+    const syncPlayUi = () => {
+      if (!playBtn) return;
+      playBtn.classList.toggle('is-playing', !video.paused);
+    };
+    video.addEventListener('play', syncPlayUi);
+    video.addEventListener('pause', syncPlayUi);
+
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        if (video.paused) video.play(); else video.pause();
+      });
+    }
+    video.addEventListener('click', () => {
+      if (video.paused) video.play(); else video.pause();
+    });
+
+    if (muteBtn) {
+      muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        muteBtn.style.background = video.muted
+          ? 'rgba(42, 32, 28, 0.55)'
+          : 'rgba(139, 74, 58, 0.85)';
+      });
+    }
   });
 }
