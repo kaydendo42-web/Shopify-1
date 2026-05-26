@@ -513,6 +513,9 @@ function initCartDrawer() {
     el.addEventListener('click', closeCartDrawer);
   });
 
+  // Re-render drawer whenever cart changes (qty +/-, remove, upsell add)
+  window.addEventListener('cart:updated', refreshCartDrawer);
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeCartDrawer();
   });
