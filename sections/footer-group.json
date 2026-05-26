@@ -24,7 +24,7 @@
     "email_popup": {
       "type": "email-popup",
       "settings": {
-        "enabled": true,
+        "enabled": false,
         "trigger": "exit",
         "delay_seconds": 25,
         "cookie_days": 14,
