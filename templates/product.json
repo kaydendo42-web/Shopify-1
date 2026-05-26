@@ -45,6 +45,7 @@
         "tier1": {
           "type": "bundle_tier",
           "settings": {
+            "cart_image": "shopify://shop_images/Add_product_design_to_mask_202605261609.jpg",
             "title": "1× Mask",
             "subtitle": "Yourself",
             "price": "$179",
@@ -58,6 +59,7 @@
         "tier2": {
           "type": "bundle_tier",
           "settings": {
+            "cart_image": "shopify://shop_images/Add_product_design_to_mask_202605261610.jpg",
             "title": "2× Mask Bundle",
             "subtitle": "You + your sister / mum / best friend",
             "price": "$298",
@@ -71,6 +73,7 @@
         "tier3": {
           "type": "bundle_tier",
           "settings": {
+            "cart_image": "shopify://shop_images/Add_product_design_to_mask_202605261627.jpg",
             "title": "The Quiet Hour Set",
             "subtitle": "Mask + neck wrap + travel pouch",
             "price": "$249",
@@ -93,7 +96,7 @@
         "tier3"
       ],
       "settings": {
-        "fallback_title": "The Quiet Hour™ — LED Light Therapy Mask",
+        "fallback_title": "The Quiet Hour™  LED Light Therapy Mask",
         "subheadline": "Clinical-grade 635nm + 830nm wavelengths. 10 minutes. Three nights a week.",
         "ribbon_text": "Designed for women in the phase",
         "atc_button_text": "USE QUIET20 — 20% OFF TODAY",
@@ -454,6 +457,90 @@
         "subheading": "THE QUIET HOUR VS THE ALTERNATIVES"
       }
     },
+    "wavelengths": {
+      "type": "wavelength-diagram",
+      "blocks": {
+        "wl_red": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#ec5a47",
+            "name": "Red",
+            "nm_label": "633 nm",
+            "text": "The one your skin actually needs. 633nm penetrates to the dermis where collagen and elastin live — stimulating production at the layer no serum can reach. The wavelength behind firmer, more lifted-looking skin in 28 days."
+          }
+        },
+        "wl_amber": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#f0a850",
+            "name": "Amber",
+            "nm_label": "610 nm",
+            "text": "For the dullness that crept in without asking. Amber light improves circulation and oxygenation within the skin cells — restoring the glow that used to be there on a good morning."
+          }
+        },
+        "wl_green": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#7ee27d",
+            "name": "Green",
+            "nm_label": "525 nm",
+            "text": "Perimenopausal skin often brings uneven tone and sun spots years in the making. Green light works at the dermis to calm pigmentation and even out complexion — quietly, without irritation."
+          }
+        },
+        "wl_white": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#f3eedd",
+            "name": "White",
+            "nm_label": "510 nm",
+            "text": "Works across all skin layers simultaneously — improving overall cell metabolism and softening the appearance of fine lines. Think of it as the full-reset setting."
+          }
+        },
+        "wl_cyan": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#5dd6f0",
+            "name": "Cyan",
+            "nm_label": "490 nm",
+            "text": "For skin that runs hot, red, or reactive. Cyan soothes inflamed capillaries and calms surface sensitivity — the setting for nights when your skin needs less, not more."
+          }
+        },
+        "wl_blue": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#5d8df0",
+            "name": "Blue",
+            "nm_label": "465 nm",
+            "text": "Targets surface congestion and the breakouts that resurface with hormonal shifts. Works at the epidermis to keep pores clear without stripping the skin barrier."
+          }
+        },
+        "wl_purple": {
+          "type": "wavelength",
+          "settings": {
+            "swatch_color": "#9d6df5",
+            "name": "Purple",
+            "nm_label": "435 nm",
+            "text": "Supports cell regeneration while keeping the surface clear — the setting that works on renewal and congestion at the same time."
+          }
+        }
+      },
+      "block_order": [
+        "wl_red",
+        "wl_amber",
+        "wl_green",
+        "wl_white",
+        "wl_cyan",
+        "wl_blue",
+        "wl_purple"
+      ],
+      "settings": {
+        "eyebrow": "THE SCIENCE",
+        "heading": "One Mask, 7 Wavelengths",
+        "heading_accent": "7 Wavelengths",
+        "sub": "Each wavelength reaches a different layer of the skin. Together they address the full picture — firmness, tone, glow, sensitivity, and surface clarity — in one ten-minute ritual.",
+        "footnote": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device."
+      }
+    },
     "clinical": {
       "type": "clinical-proof",
       "blocks": {
@@ -613,6 +700,45 @@
         "eyebrow": "REAL WOMEN · REAL RESULTS",
         "heading": "What women in the phase are saying",
         "sub": "Photos and words straight from the inbox. Used to be a sceptic? You're in good company."
+      }
+    },
+    "ugc_videos": {
+      "type": "ugc-videos",
+      "blocks": {
+        "v1": {
+          "type": "video",
+          "settings": {
+            "video_asset": "ugc-1.mp4",
+            "name": "Anna, 47",
+            "caption": "Ten minutes while I read. That's the whole ritual."
+          }
+        },
+        "v2": {
+          "type": "video",
+          "settings": {
+            "video_asset": "ugc-2.mp4",
+            "name": "Sarah, 52",
+            "caption": "First thing my husband noticed in months."
+          }
+        },
+        "v3": {
+          "type": "video",
+          "settings": {
+            "video_asset": "ugc-3.mp4",
+            "name": "Mel, 44",
+            "caption": "Quiet, calm, easy. The opposite of my morning."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "settings": {
+        "eyebrow": "REAL RITUALS",
+        "heading": "Worn by women in the phase",
+        "sub": "Ten minutes. Three nights a week. From the women who've kept it."
       }
     },
     "testimonials": {
@@ -799,118 +925,6 @@
         "heading": "Try it for 60 nights. Send it back if it didn't earn its place.",
         "text": "We built this for women who've been burned by beauty marketing before. So the deal is simple: try The Quiet Hour for 60 nights — about 25 sessions — and if your skin isn't visibly firmer, brighter, or more like itself, send it back and we'll refund every dollar. We pay return shipping. No forms. No video evidence. No shipping to China. Just email us, and we make it right within 48 hours.",
         "button_text": "START THE 60-NIGHT TRIAL"
-      }
-    },
-
-    "wavelengths": {
-      "type": "wavelength-diagram",
-      "settings": {
-        "eyebrow": "THE SCIENCE",
-        "heading": "One Mask, 7 Wavelengths",
-        "heading_accent": "7 Wavelengths",
-        "sub": "Each wavelength reaches a different layer of the skin. Together they address the full picture — firmness, tone, glow, sensitivity, and surface clarity — in one ten-minute ritual.",
-        "footnote": "Penetration depths are illustrative. Actual penetration varies with skin tone, hydration, and tissue density. The Quiet Hour is a consumer wellness device — not a TGA-registered medical device."
-      },
-      "blocks": {
-        "wl_red": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#ec5a47",
-            "name": "Red",
-            "nm_label": "633 nm",
-            "text": "The one your skin actually needs. 633nm penetrates to the dermis where collagen and elastin live — stimulating production at the layer no serum can reach. The wavelength behind firmer, more lifted-looking skin in 28 days."
-          }
-        },
-        "wl_amber": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#f0a850",
-            "name": "Amber",
-            "nm_label": "610 nm",
-            "text": "For the dullness that crept in without asking. Amber light improves circulation and oxygenation within the skin cells — restoring the glow that used to be there on a good morning."
-          }
-        },
-        "wl_green": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#7ee27d",
-            "name": "Green",
-            "nm_label": "525 nm",
-            "text": "Perimenopausal skin often brings uneven tone and sun spots years in the making. Green light works at the dermis to calm pigmentation and even out complexion — quietly, without irritation."
-          }
-        },
-        "wl_white": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#f3eedd",
-            "name": "White",
-            "nm_label": "510 nm",
-            "text": "Works across all skin layers simultaneously — improving overall cell metabolism and softening the appearance of fine lines. Think of it as the full-reset setting."
-          }
-        },
-        "wl_cyan": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#5dd6f0",
-            "name": "Cyan",
-            "nm_label": "490 nm",
-            "text": "For skin that runs hot, red, or reactive. Cyan soothes inflamed capillaries and calms surface sensitivity — the setting for nights when your skin needs less, not more."
-          }
-        },
-        "wl_blue": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#5d8df0",
-            "name": "Blue",
-            "nm_label": "465 nm",
-            "text": "Targets surface congestion and the breakouts that resurface with hormonal shifts. Works at the epidermis to keep pores clear without stripping the skin barrier."
-          }
-        },
-        "wl_purple": {
-          "type": "wavelength",
-          "settings": {
-            "swatch_color": "#9d6df5",
-            "name": "Purple",
-            "nm_label": "435 nm",
-            "text": "Supports cell regeneration while keeping the surface clear — the setting that works on renewal and congestion at the same time."
-          }
-        }
-      },
-      "block_order": ["wl_red", "wl_amber", "wl_green", "wl_white", "wl_cyan", "wl_blue", "wl_purple"]
-    },
-    "ugc_videos": {
-      "type": "ugc-videos",
-      "blocks": {
-        "v1": {
-          "type": "video",
-          "settings": {
-            "video_asset": "ugc-1.mp4",
-            "name": "Anna, 47",
-            "caption": "Ten minutes while I read. That's the whole ritual."
-          }
-        },
-        "v2": {
-          "type": "video",
-          "settings": {
-            "video_asset": "ugc-2.mp4",
-            "name": "Sarah, 52",
-            "caption": "First thing my husband noticed in months."
-          }
-        },
-        "v3": {
-          "type": "video",
-          "settings": {
-            "video_asset": "ugc-3.mp4",
-            "name": "Mel, 44",
-            "caption": "Quiet, calm, easy. The opposite of my morning."
-          }
-        }
-      },
-      "block_order": ["v1", "v2", "v3"],
-      "settings": {
-        "eyebrow": "REAL RITUALS",
-        "heading": "Worn by women in the phase",
-        "sub": "Ten minutes. Three nights a week. From the women who've kept it."
       }
     }
   },
